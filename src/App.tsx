@@ -16,7 +16,6 @@ import {
   Compass,
   ClipboardList,
   User,
-  RotateCcw,
   X,
   Plus,
   Minus,
@@ -33,13 +32,18 @@ import {
   Zap,
   ChevronRight,
   AlertTriangle,
-  Flame,
   Check,
   Percent,
-  Heart
+  Heart,
+  Play,
+  Flame,
+  Cake,
+  Soup,
+  Pizza
 } from 'lucide-react';
 
 import { CATEGORY_THEMES, CategoryTheme } from './theme/colors';
+import { SpotlightNav, SpotlightNavItem, SpotlightFilter, SpotlightFilterButton, LeverFilterToggle, MultiOrderIcon } from './components/ui/spotlight-button';
 import {
   STORES_BY_CATEGORY,
   MENU_ITEMS_BY_CATEGORY,
@@ -78,6 +82,44 @@ const SPIN_WHEEL_REWARDS: SpinReward[] = [
   { code: 'GOLDSPIN', title: '1-MO GOLD FREE', desc: 'Free 4Kit Gold membership with zero delivery fees!', discountAmount: 75, color: '#D97706' }
 ];
 
+export interface VectorSymbol {
+  id: string;
+  type: 'spicy' | 'sweet' | 'chicken' | 'noodles' | 'burgers';
+  name: string;
+  bgColor: string;
+  icon: React.ElementType;
+}
+
+const SYMBOL_PRESETS: Record<string, VectorSymbol> = {
+  spicy: { id: 'spicy', type: 'spicy', name: 'Spicy Chili', bgColor: '#DC2626', icon: Flame },
+  sweet: { id: 'sweet', type: 'sweet', name: 'Sugar Cake', bgColor: '#EC4899', icon: Cake },
+  chicken: { id: 'chicken', type: 'chicken', name: 'Biriyani', bgColor: '#D97706', icon: Utensils },
+  noodles: { id: 'noodles', type: 'noodles', name: 'Noodles', bgColor: '#0284C7', icon: Soup },
+  burgers: { id: 'burgers', type: 'burgers', name: 'Burgers', bgColor: '#EAB308', icon: Pizza }
+};
+
+const KERALA_DISH_REEL = [
+  { name: 'Spicy Kerala Biriyani', symbol: SYMBOL_PRESETS.spicy },
+  { name: 'Sugar Sweet Cake', symbol: SYMBOL_PRESETS.sweet },
+  { name: 'Fiery Chicken Alfaham', symbol: SYMBOL_PRESETS.chicken },
+  { name: 'Hot Noodle Soup', symbol: SYMBOL_PRESETS.noodles },
+  { name: 'Gourmet Burger Combo', symbol: SYMBOL_PRESETS.burgers }
+];
+
+const KERALA_SIDE_REEL = [
+  { name: 'Sugar Cake', symbol: SYMBOL_PRESETS.sweet },
+  { name: 'Spicy Chili', symbol: SYMBOL_PRESETS.spicy },
+  { name: 'Chicken Roast', symbol: SYMBOL_PRESETS.chicken },
+  { name: 'Ramen Noodles', symbol: SYMBOL_PRESETS.noodles }
+];
+
+const KERALA_PERK_REEL = [
+  { name: 'Hot Noodles', symbol: SYMBOL_PRESETS.noodles },
+  { name: 'Cheesy Burgers', symbol: SYMBOL_PRESETS.burgers },
+  { name: 'Spicy Chili', symbol: SYMBOL_PRESETS.spicy },
+  { name: 'Sweet Cake', symbol: SYMBOL_PRESETS.sweet }
+];
+
 const BUBBLE_CATEGORIES = [
   { id: 'food', name: 'Food', icon: Utensils, theme: CATEGORY_THEMES.food },
   { id: 'supermarket', name: 'Groceries', icon: ShoppingBag, theme: CATEGORY_THEMES.supermarket },
@@ -85,6 +127,74 @@ const BUBBLE_CATEGORIES = [
 ];
 
 const SAMPLE_SEARCHES = ['Biriyani', 'Porotta', 'Fish Nirvana', 'Alfaham', 'Beef', 'Puttu', 'Dosa'];
+
+const CommunityFooterWatermark = ({ 
+  activeCategory = 'food',
+  primaryColor = '#DC2626' 
+}: { 
+  activeCategory?: string; 
+  primaryColor?: string; 
+}) => {
+  const contentMap: Record<string, { title1: string; title2: string; item1: string; item2: string; item3: string }> = {
+    food: {
+      title1: 'A better place',
+      title2: 'for everyone',
+      item1: 'Happy Customers',
+      item2: 'Rider Safety & Fair Pay',
+      item3: 'Empowering Local Restaurants'
+    },
+    supermarket: {
+      title1: 'Fresh essentials',
+      title2: 'for every home',
+      item1: 'Instant 10-Min Pantry',
+      item2: 'Rider Safety & Fair Pay',
+      item3: 'Empowering Local Kiranas'
+    },
+    pharmacy: {
+      title1: 'Care & wellness',
+      title2: 'when you need it',
+      item1: '24/7 Express First Aid',
+      item2: 'Rider Safety & Fair Pay',
+      item3: 'Empowering Local Chemists'
+    }
+  };
+
+  const content = contentMap[activeCategory] || contentMap.food;
+
+  return (
+    <div className="community-footer-watermark" style={{ textAlign: 'center', padding: '48px 20px 110px', background: 'transparent', width: '100%', userSelect: 'none' }}>
+      {/* Category-Adaptive Soft Watermark Tagline */}
+      <div 
+        style={{ 
+          fontSize: 34, 
+          fontWeight: 900, 
+          fontFamily: "'Space Grotesk', 'Outfit', var(--font-title), sans-serif", 
+          letterSpacing: '-0.04em', 
+          color: '#CBD5E1', 
+          lineHeight: 1.15,
+          marginBottom: 14,
+          opacity: 0.85
+        }}
+      >
+        {content.title1} <br />
+        <span style={{ color: primaryColor, opacity: 0.9 }}>{content.title2}</span>
+      </div>
+
+      {/* 3 Pillars rendered in Indie Flower handwritten font */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, margin: '8px auto 0' }}>
+        <span style={{ fontSize: 22, fontFamily: "'Indie Flower', cursive, sans-serif", fontWeight: 700, color: '#64748B', letterSpacing: '0.2px' }}>
+          {content.item1}
+        </span>
+        <span style={{ fontSize: 22, fontFamily: "'Indie Flower', cursive, sans-serif", fontWeight: 700, color: '#64748B', letterSpacing: '0.2px' }}>
+          {content.item2}
+        </span>
+        <span style={{ fontSize: 22, fontFamily: "'Indie Flower', cursive, sans-serif", fontWeight: 700, color: '#64748B', letterSpacing: '0.2px' }}>
+          {content.item3}
+        </span>
+      </div>
+    </div>
+  );
+};
 
 const TVM_AREAS = [
   'Palayam',
@@ -138,6 +248,7 @@ export default function App() {
   const [filterDiet, setFilterDiet] = useState<string>('All'); // 'All' | 'veg' | 'non-veg' | 'vegan' | 'keto' | 'high-protein'
   const [filterSugar, setFilterSugar] = useState<string>('All'); // 'All' | 'sugar-free' | 'low-sugar' | 'sweet' | 'diabetic-friendly'
   const [sortBy, setSortBy] = useState<'default' | 'rating' | 'eta' | 'price_low' | 'price_high' | 'dist'>('default');
+  const [activeQuickFilterId, setActiveQuickFilterId] = useState<string>('all');
 
   // Multi-Store Order Builder State (Within 5km constraint & scoped to category)
   const [showCustomStoreBuilder, setShowCustomStoreBuilder] = useState<boolean>(false);
@@ -151,10 +262,30 @@ export default function App() {
   const [wonReward, setWonReward] = useState<SpinReward | null>(null);
   const [appliedCoupon, setAppliedCoupon] = useState<SpinReward | null>(null);
 
-  // Cravings Roulette State
-  const [rouletteMood, setRouletteMood] = useState<string | null>(null);
+  // Cravings Roulette / Kerala Slot Machine State
+  const [showSlotMachineModal, setShowSlotMachineModal] = useState<boolean>(false);
+  const [isLeverPulled, setIsLeverPulled] = useState<boolean>(false);
+  const [rouletteMood, setRouletteMood] = useState<string | null>('spicy');
   const [rouletteDish, setRouletteDish] = useState<MenuItem | null>(null);
   const [isRouletteSpinning, setIsRouletteSpinning] = useState<boolean>(false);
+  const [slotReel1, setSlotReel1] = useState<VectorSymbol>(SYMBOL_PRESETS.spicy);
+  const [slotReel2, setSlotReel2] = useState<VectorSymbol>(SYMBOL_PRESETS.chicken);
+  const [slotReel3, setSlotReel3] = useState<VectorSymbol>(SYMBOL_PRESETS.sweet);
+  const [slotSpinningReel1, setSlotSpinningReel1] = useState<boolean>(false);
+  const [slotSpinningReel2, setSlotSpinningReel2] = useState<boolean>(false);
+  const [slotSpinningReel3, setSlotSpinningReel3] = useState<boolean>(false);
+  const [useVideoMode, setUseVideoMode] = useState<boolean>(true);
+  const [horizontalOffsetX, setHorizontalOffsetX] = useState<number>(0);
+  const slotVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  const horizontalTrackDishes = useMemo(() => {
+    return [
+      ...ALL_TRIVANDRUM_FOOD_DISHES,
+      ...ALL_TRIVANDRUM_FOOD_DISHES,
+      ...ALL_TRIVANDRUM_FOOD_DISHES,
+      ...ALL_TRIVANDRUM_FOOD_DISHES
+    ];
+  }, []);
 
   // Discover Screen Budget Filter State
   const [discoverMaxPrice, setDiscoverMaxPrice] = useState<number>(99);
@@ -184,33 +315,55 @@ export default function App() {
     }, 3600);
   };
 
-  const triggerCravingsRoulette = (moodTag: string) => {
+  const triggerCravingsRoulette = (moodTag: string = 'spicy') => {
+    if (isRouletteSpinning) return;
     setRouletteMood(moodTag);
     setIsRouletteSpinning(true);
+    setIsLeverPulled(true);
+    setTimeout(() => setIsLeverPulled(false), 450);
     setRouletteDish(null);
 
-    let candidates = ALL_TRIVANDRUM_FOOD_DISHES;
-    if (moodTag === 'spicy') {
-      candidates = ALL_TRIVANDRUM_FOOD_DISHES.filter((d) => d.name.toLowerCase().includes('biriyani') || d.name.toLowerCase().includes('beef') || d.name.toLowerCase().includes('alfaham'));
-    } else if (moodTag === 'snack') {
-      candidates = ALL_TRIVANDRUM_FOOD_DISHES.filter((d) => d.price <= 99 || d.category === 'Breads' || d.category === 'Street Food');
-    } else if (moodTag === 'sweet') {
-      candidates = ALL_TRIVANDRUM_FOOD_DISHES.filter((d) => d.sugar === 'sweet' || d.category.includes('Dessert') || d.category.includes('Beverage'));
+    // Pick a random winning card index in the track array (e.g. index 24 to 38)
+    const winIndex = 24 + Math.floor(Math.random() * 15);
+    const finalDish = horizontalTrackDishes[winIndex];
+
+    // Reset offset first if far right to allow repeated spins smoothly
+    if (Math.abs(horizontalOffsetX) > 3000) {
+      setHorizontalOffsetX(0);
     }
 
-    if (candidates.length === 0) candidates = ALL_TRIVANDRUM_FOOD_DISHES;
-    const picked = candidates[Math.floor(Math.random() * candidates.length)];
+    // Each card is 130px wide + 12px gap = 142px total step.
+    // Center indicator line is at ~170px from left inside the 380px container.
+    const targetOffset = -(winIndex * 142 - 125);
+    setTimeout(() => {
+      setHorizontalOffsetX(targetOffset);
+    }, 50);
 
     setTimeout(() => {
       setIsRouletteSpinning(false);
-      setRouletteDish(picked);
-    }, 1000);
+      setRouletteDish(finalDish);
+      try {
+        confetti({ particleCount: 140, spread: 95, origin: { y: 0.6 } });
+      } catch (e) {}
+    }, 6500);
   };
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const activeTheme: CategoryTheme = CATEGORY_THEMES[activeCategory] || CATEGORY_THEMES.food;
   const currentStores: Store[] = STORES_BY_CATEGORY[activeCategory] || STORES_BY_CATEGORY.food;
+
+  const activeNavIndex = useMemo(() => {
+    switch (currentScreen) {
+      case 'home': return 0;
+      case 'discover': return 1;
+      case 'multiorder': return 2;
+      case 'cart':
+      case 'tracker': return 3;
+      case 'profile': return 4;
+      default: return 0;
+    }
+  }, [currentScreen]);
 
   const categoryPlaceholders = useMemo(() => {
     if (activeCategory === 'supermarket') {
@@ -321,6 +474,197 @@ export default function App() {
     setSortBy('default');
   };
 
+  const renderSectionList = (sections: { id: string; title: string; subtitle: string; icon: string; badgeColor: string; stores: (Store & { distKm?: number })[] }[]) => {
+    return sections.map((sec) => (
+      <div key={sec.id} className="store-section-group" style={{ marginBottom: 28 }}>
+        <div className="store-section-header" style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14, padding: '0 4px' }}>
+          <div style={{
+            fontSize: 20,
+            width: 42,
+            height: 42,
+            borderRadius: 14,
+            background: `${sec.badgeColor}18`,
+            border: `1.5px solid ${sec.badgeColor}40`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: `0 4px 12px ${sec.badgeColor}25`
+          }}>
+            {sec.icon}
+          </div>
+          <div>
+            <div style={{
+              fontFamily: 'var(--font-title)',
+              fontSize: 17,
+              fontWeight: 800,
+              color: 'var(--text-primary)',
+              lineHeight: 1.2
+            }}>
+              {sec.title}
+            </div>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, marginTop: 3 }}>
+              {sec.subtitle}
+            </div>
+          </div>
+        </div>
+
+        <div className="store-cards-list" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {sec.stores.map((store) => (
+            <motion.div
+              key={store.id}
+              className="swiggy-rest-card"
+              whileHover={{ y: -3 }}
+              onClick={() => {
+                setSelectedStore(store);
+                setCurrentScreen('menu');
+              }}
+            >
+              <div className="swiggy-rest-img-col">
+                <img src={store.image} alt={store.name} className="swiggy-rest-img" />
+                <button
+                  className={`swiggy-fav-btn ${favorites.includes(store.id) ? 'favorited' : ''}`}
+                  onClick={(e) => toggleFavorite(store.id, e)}
+                >
+                  <Heart size={14} fill={favorites.includes(store.id) ? '#FFFFFF' : 'none'} />
+                </button>
+                {store.discountTag && (
+                  <div className="swiggy-discount-ribbon">{store.discountTag}</div>
+                )}
+              </div>
+
+              <div className="swiggy-rest-info-col">
+                <div className="swiggy-rest-title-row">
+                  <div className="swiggy-rest-name">{store.name}</div>
+                </div>
+
+                <div className="swiggy-rating-row">
+                  <Star size={13} fill="#F59E0B" color="#F59E0B" style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
+                  <span>{store.rating} ({store.reviewCount || '1.2K+'}) • {store.eta}</span>
+                </div>
+
+                <div className="swiggy-cuisines-text">
+                  {store.categoryTag.split('•').slice(1).join('•').trim() || 'South Indian, Biriyani'}
+                </div>
+
+                <div className="swiggy-loc-dist">
+                  {store.locality || store.categoryTag.split('•')[0].trim()} • {store.distKm} km from {userLocation}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    ));
+  };
+
+  const renderCategorizedStoreSections = (storesList: (Store & { distKm?: number })[]) => {
+    if (activeCategory === 'supermarket') {
+      const freshStores = storesList.filter(s => /dairy|fresh|bread|milk|produce|fruit/i.test(s.name + ' ' + s.categoryTag));
+      const budgetStores = storesList.filter(s => !freshStores.includes(s) && (/margin|pothys|spices|under|200|budget/i.test(s.name + ' ' + s.categoryTag) || s.discountTag));
+      const remainingStores = storesList.filter(s => !freshStores.includes(s) && !budgetStores.includes(s));
+
+      const sections = [
+        { id: 'fresh', title: 'Daily Fresh & Dairy Nest!', subtitle: 'Farm Fresh Milk, Organic Produce & Breads', icon: '🥛', badgeColor: '#10B981', stores: freshStores },
+        { id: 'budget', title: 'Pocket-Friendly Pantry Deals Under ₹200!', subtitle: 'Essential staples & snacks at unbeatable prices', icon: '💰', badgeColor: '#F59E0B', stores: budgetStores },
+        { id: 'mega', title: 'Mega Supermarkets & Big Savings!', subtitle: 'Hypermarket imports & all-in-one store deals', icon: '🛒', badgeColor: '#3B82F6', stores: remainingStores }
+      ].filter(s => s.stores.length > 0);
+
+      if (sections.length === 0) {
+        sections.push({ id: 'all', title: 'All Supermarket Merchants', subtitle: 'Fresh groceries delivered to your door', icon: '🛒', badgeColor: activeTheme.primary, stores: storesList });
+      }
+
+      return renderSectionList(sections);
+    }
+
+    if (activeCategory === 'pharmacy') {
+      const fitnessStores = storesList.filter(s => /vitamin|fitness|protein|wellness|dermat/i.test(s.name + ' ' + s.categoryTag));
+      const budgetStores = storesList.filter(s => !fitnessStores.includes(s) && (/aid|first aid|hygiene|under|200|care/i.test(s.name + ' ' + s.categoryTag) || s.discountTag));
+      const remainingStores = storesList.filter(s => !fitnessStores.includes(s) && !budgetStores.includes(s));
+
+      const sections = [
+        { id: 'fitness', title: 'Health Boosters & Fitness Rewards!', subtitle: 'Vitamins, Protein Supplements & Skincare', icon: '💊', badgeColor: '#3B82F6', stores: fitnessStores },
+        { id: 'budget', title: 'Pocket-Friendly Care Under ₹200!', subtitle: 'First Aid, Daily Hygiene & Care Products', icon: '💰', badgeColor: '#10B981', stores: budgetStores },
+        { id: 'express', title: '24/7 Express Meds & Pharmacy Care!', subtitle: 'Emergency medicines & fast delivery', icon: '🚑', badgeColor: '#EC4899', stores: remainingStores }
+      ].filter(s => s.stores.length > 0);
+
+      if (sections.length === 0) {
+        sections.push({ id: 'all', title: 'All Pharmacy Merchants', subtitle: 'Health & medical supplies delivered fast', icon: '💊', badgeColor: activeTheme.primary, stores: storesList });
+      }
+
+      return renderSectionList(sections);
+    }
+
+    // Default / Food category: 4 themed sections
+    const sweetsStores = storesList.filter(s =>
+      /sweet|ice cream|creamery|bakery|cake|waffle|dessert|baskin|donut|pastry|paul/i.test(s.name + ' ' + s.categoryTag)
+    );
+
+    const budgetStores = storesList.filter(s =>
+      !sweetsStores.includes(s) && (
+        /under|99|budget|pocket|ambiswamy|saravana|margin|buhari|tiffin|veg/i.test(s.name + ' ' + s.categoryTag) ||
+        (s.discountTag && (s.discountTag.includes('FLAT') || s.discountTag.includes('40%') || s.discountTag.includes('50%') || s.discountTag.includes('60%')))
+      )
+    );
+
+    const biriyaniSpicyStores = storesList.filter(s =>
+      !sweetsStores.includes(s) && !budgetStores.includes(s) && (
+        /biriyani|spicy|dum|halais|paragon|imperial|kebab|tandoori|grill|chicken|meat|fish|coastal/i.test(s.name + ' ' + s.categoryTag)
+      )
+    );
+
+    const remainingStores = storesList.filter(s =>
+      !sweetsStores.includes(s) && !budgetStores.includes(s) && !biriyaniSpicyStores.includes(s)
+    );
+
+    const sections = [
+      {
+        id: 'sweets',
+        title: 'Craving Sweets & Tasty Treats?',
+        subtitle: 'Artisanal Ice Creams, Bakery, Waffles & Desserts',
+        icon: '🧁',
+        badgeColor: '#EC4899',
+        stores: sweetsStores
+      },
+      {
+        id: 'budget',
+        title: 'Pocket-Friendly Eats Under ₹200!',
+        subtitle: 'Delicious local meals that love your wallet',
+        icon: '💰',
+        badgeColor: '#10B981',
+        stores: budgetStores
+      },
+      {
+        id: 'spicy',
+        title: 'Trivandrum Biriyani & Spicy Feasts!',
+        subtitle: 'Aromatic Dum Biriyanis, Malabar Spices & Fiery Curries',
+        icon: '🍲',
+        badgeColor: '#EF4444',
+        stores: biriyaniSpicyStores
+      },
+      {
+        id: 'quick',
+        title: 'Lightning Fast & Quick Delights!',
+        subtitle: 'Delivered in 15 mins or less right to your door',
+        icon: '⚡',
+        badgeColor: '#3B82F6',
+        stores: remainingStores
+      }
+    ].filter(s => s.stores.length > 0);
+
+    if (sections.length === 0) {
+      sections.push({
+        id: 'all',
+        title: 'All Merchants Near You',
+        subtitle: 'Top rated stores delivered fast',
+        icon: '🛍️',
+        badgeColor: activeTheme.primary,
+        stores: storesList
+      });
+    }
+
+    return renderSectionList(sections);
+  };
+
   // Filter dishes by diet, sugar, price, search
   const currentStoreDishes: MenuItem[] = useMemo(() => {
     const baseDishes = (selectedStore && TRIVANDRUM_FOOD_MENU_ITEMS[selectedStore.id])
@@ -345,6 +689,14 @@ export default function App() {
   const totalCartCount = useMemo(() => {
     return cartItems.reduce((acc, i) => acc + i.qty, 0);
   }, [cartItems]);
+
+  const spotlightNavItems: SpotlightNavItem[] = useMemo(() => [
+    { id: 'home', label: 'Home', icon: Home, onClick: () => setCurrentScreen('home') },
+    { id: 'discover', label: 'Discover', icon: Compass, onClick: () => setCurrentScreen('discover') },
+    { id: 'multiorder', label: 'Multi-Order', icon: MultiOrderIcon, badge: 'New', onClick: () => setCurrentScreen('multiorder') },
+    { id: 'orders', label: 'Orders', icon: ShoppingBag, badge: totalCartCount > 0 ? totalCartCount : undefined, onClick: () => setCurrentScreen('cart') },
+    { id: 'profile', label: 'Profile', icon: User, onClick: () => setCurrentScreen('profile') },
+  ], [totalCartCount]);
 
   const cartSubtotal = useMemo(() => {
     return cartItems.reduce((acc, i) => acc + i.price * i.qty, 0);
@@ -379,11 +731,7 @@ export default function App() {
       setSearchQuery('');
       return;
     }
-    if (currentScreen === 'menu') {
-      setCurrentScreen('stores');
-    } else {
-      setCurrentScreen('home');
-    }
+    setCurrentScreen('home');
   };
 
   const getItemQty = (id: string) => {
@@ -494,10 +842,9 @@ export default function App() {
 
   const selectCategory = (catId: string) => {
     setActiveCategory(catId);
-    setCurrentScreen('stores');
   };
 
-  // Category promotional specials banners tailored in 4Kit colors
+  // Category promotional specials banners tailored in 4Kit colors with smooth color loop ending on Full White
   const categorySpecials = useMemo(() => {
     if (activeCategory === 'supermarket') {
       return [
@@ -505,17 +852,69 @@ export default function App() {
           id: 'spec_groc_1',
           title: 'Fresh Farm Specials',
           subtitle: 'Up to 40% OFF Daily Groceries & Fruits',
-          bg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+          bg: 'linear-gradient(135deg, #FFFFFF 0%, #E6F4EA 100%)',
           cta: 'SHOP FRESH',
-          image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=320&h=220&fit=crop'
+          image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=320&h=220&fit=crop',
+          textColor: '#022C22',
+          btnBg: '#022C22',
+          btnColor: '#FFFFFF'
         },
         {
           id: 'spec_groc_2',
           title: 'Dairy & Breads Fast',
           subtitle: 'Farm Milk & Sourdough in 15 mins',
-          bg: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+          bg: 'linear-gradient(135deg, #6EE7B7 0%, #34D399 100%)',
           cta: 'ORDER NOW',
-          image: 'https://images.unsplash.com/photo-1528751014936-863e6e7a319c?w=320&h=220&fit=crop'
+          image: 'https://images.unsplash.com/photo-1528751014936-863e6e7a319c?w=320&h=220&fit=crop',
+          textColor: '#022C22',
+          btnBg: '#022C22',
+          btnColor: '#FFFFFF'
+        },
+        {
+          id: 'spec_groc_3',
+          title: 'Organic Pantry Essentials',
+          subtitle: 'FLAT ₹100 Cashback on Grains & Pulses',
+          bg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+          cta: 'EXPLORE',
+          image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=320&h=220&fit=crop',
+          textColor: '#FFFFFF',
+          btnBg: '#FFFFFF',
+          btnColor: '#047857'
+        },
+        {
+          id: 'spec_groc_4',
+          title: 'Exotic Fruits & Berries',
+          subtitle: 'Imported Avocados, Kiwis & Strawberries',
+          bg: 'linear-gradient(135deg, #065F46 0%, #022C22 100%)',
+          cta: 'GRAB DEALS',
+          image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=320&h=220&fit=crop',
+          textColor: '#FFFFFF',
+          btnBg: '#FFFFFF',
+          btnColor: '#022C22'
+        },
+        {
+          id: 'spec_groc_5',
+          title: 'Snacks & Beverages Zone',
+          subtitle: 'Buy 1 Get 1 Free on Artisan Chips & Drinks',
+          bg: 'linear-gradient(135deg, #34D399 0%, #6EE7B7 100%)',
+          cta: 'VIEW SNACKS',
+          image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=320&h=220&fit=crop',
+          textColor: '#022C22',
+          btnBg: '#022C22',
+          btnColor: '#FFFFFF'
+        },
+        {
+          id: 'spec_groc_6',
+          title: 'Household & Cleaning',
+          subtitle: 'Up to 50% OFF Top Hygiene Brands',
+          bg: '#FFFFFF',
+          cta: 'STOCK UP',
+          image: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=320&h=220&fit=crop',
+          textColor: '#022C22',
+          btnBg: '#022C22',
+          btnColor: '#FFFFFF',
+          isAnimatedLoop: true,
+          loopDarkColor: '#022C22'
         }
       ];
     }
@@ -525,17 +924,69 @@ export default function App() {
           id: 'spec_pharm_1',
           title: 'Health & Wellness Specials',
           subtitle: 'Up to 50% OFF Vitamins & Supplements',
-          bg: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
+          bg: 'linear-gradient(135deg, #FFFFFF 0%, #E8F0FE 100%)',
           cta: 'ORDER MEDS',
-          image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=320&h=220&fit=crop'
+          image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=320&h=220&fit=crop',
+          textColor: '#172554',
+          btnBg: '#172554',
+          btnColor: '#FFFFFF'
         },
         {
           id: 'spec_pharm_2',
           title: '24/7 First Aid Express',
           subtitle: 'Delivered in 10 mins to your doorstep',
-          bg: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
+          bg: 'linear-gradient(135deg, #93C5FD 0%, #60A5FA 100%)',
           cta: 'EXPLORE',
-          image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=320&h=220&fit=crop'
+          image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=320&h=220&fit=crop',
+          textColor: '#172554',
+          btnBg: '#172554',
+          btnColor: '#FFFFFF'
+        },
+        {
+          id: 'spec_pharm_3',
+          title: 'Personal Care & Skincare',
+          subtitle: 'Dermatologist Recommended Essentials',
+          bg: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
+          cta: 'SHOP CARE',
+          image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=320&h=220&fit=crop',
+          textColor: '#FFFFFF',
+          btnBg: '#FFFFFF',
+          btnColor: '#1D4ED8'
+        },
+        {
+          id: 'spec_pharm_4',
+          title: 'Baby Care & Nutrition',
+          subtitle: 'Diapers, Formulas & Baby Foods',
+          bg: 'linear-gradient(135deg, #1E40AF 0%, #172554 100%)',
+          cta: 'VIEW BABY',
+          image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=320&h=220&fit=crop',
+          textColor: '#FFFFFF',
+          btnBg: '#FFFFFF',
+          btnColor: '#172554'
+        },
+        {
+          id: 'spec_pharm_5',
+          title: 'Fitness & Sports Health',
+          subtitle: 'Protein Powders, Shakers & Hydration',
+          bg: 'linear-gradient(135deg, #60A5FA 0%, #93C5FD 100%)',
+          cta: 'GET FIT',
+          image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=320&h=220&fit=crop',
+          textColor: '#172554',
+          btnBg: '#172554',
+          btnColor: '#FFFFFF'
+        },
+        {
+          id: 'spec_pharm_6',
+          title: 'Senior Care & Monitors',
+          subtitle: 'BP Monitors, Glucometers & Wellness Tools',
+          bg: '#FFFFFF',
+          cta: 'CARE NOW',
+          image: 'https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=320&h=220&fit=crop',
+          textColor: '#172554',
+          btnBg: '#172554',
+          btnColor: '#FFFFFF',
+          isAnimatedLoop: true,
+          loopDarkColor: '#172554'
         }
       ];
     }
@@ -544,28 +995,131 @@ export default function App() {
         id: 'spec_food_1',
         title: 'Dinner & Chef Specials',
         subtitle: 'Up to 60% OFF Top Trivandrum Kitchens',
-        bg: 'linear-gradient(135deg, #DC2626 0%, #991B1B 100%)',
+        bg: 'linear-gradient(135deg, #FFFFFF 0%, #FEE2E2 100%)',
         cta: 'ORDER NOW',
-        image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=320&h=220&fit=crop'
+        image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=320&h=220&fit=crop',
+        textColor: '#7F1D1D',
+        btnBg: '#7F1D1D',
+        btnColor: '#FFFFFF'
       },
       {
         id: 'spec_food_2',
         title: 'Malabar Dum Biriyani Feast',
         subtitle: 'FLAT ₹50 OFF + Free Delivery',
-        bg: 'linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)',
+        bg: 'linear-gradient(135deg, #FCA5A5 0%, #F87171 100%)',
         cta: 'GRAB DEAL',
-        image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=320&h=220&fit=crop'
+        image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=320&h=220&fit=crop',
+        textColor: '#7F1D1D',
+        btnBg: '#7F1D1D',
+        btnColor: '#FFFFFF'
       },
       {
         id: 'spec_food_3',
         title: 'Multi-Store Express',
         subtitle: 'Combine 2 Stores in 1 Order (5km Radius)',
-        bg: 'linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%)',
+        bg: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
         cta: 'BUILD BUNDLE',
-        image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=320&h=220&fit=crop'
+        image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=320&h=220&fit=crop',
+        textColor: '#FFFFFF',
+        btnBg: '#FFFFFF',
+        btnColor: '#DC2626'
+      },
+      {
+        id: 'spec_food_4',
+        title: 'Late Night Cravings 24/7',
+        subtitle: 'Burgers, Pizzas & Shakes Delivered Hot',
+        bg: 'linear-gradient(135deg, #991B1B 0%, #7F1D1D 100%)',
+        cta: 'ORDER LATE',
+        image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=320&h=220&fit=crop',
+        textColor: '#FFFFFF',
+        btnBg: '#FFFFFF',
+        btnColor: '#7F1D1D'
+      },
+      {
+        id: 'spec_food_5',
+        title: 'Dessert & Ice Cream Heaven',
+        subtitle: 'Buy 2 Get 1 Free on Sundaes & Cakes',
+        bg: 'linear-gradient(135deg, #F87171 0%, #FCA5A5 100%)',
+        cta: 'TREAT YOURSELF',
+        image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=320&h=220&fit=crop',
+        textColor: '#7F1D1D',
+        btnBg: '#7F1D1D',
+        btnColor: '#FFFFFF'
+      },
+      {
+        id: 'spec_food_6',
+        title: 'Healthy Bowls & Salads',
+        subtitle: 'Keto, Vegan & High-Protein Meal Kits',
+        bg: '#FFFFFF',
+        cta: 'EAT CLEAN',
+        image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=320&h=220&fit=crop',
+        btnColor: '#FFFFFF',
+        isAnimatedLoop: true,
+        loopDarkColor: '#7F1D1D'
       }
     ];
   }, [activeCategory]);
+
+  const promoCarouselRef = useRef<HTMLDivElement | null>(null);
+  const isMouseDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+
+  // Triple duplicated list for seamless infinite horizontal scrolling (left and right)
+  const infiniteSpecials = useMemo(() => {
+    return [
+      ...categorySpecials.map((item) => ({ ...item, uniqueKey: `set0_${item.id}` })),
+      ...categorySpecials.map((item) => ({ ...item, uniqueKey: `set1_${item.id}` })),
+      ...categorySpecials.map((item) => ({ ...item, uniqueKey: `set2_${item.id}` })),
+    ];
+  }, [categorySpecials]);
+
+  // Center scroll position on middle set when activeCategory changes
+  useEffect(() => {
+    const container = promoCarouselRef.current;
+    if (container) {
+      const setWidth = container.scrollWidth / 3;
+      if (setWidth > 0) {
+        container.scrollLeft = setWidth;
+      }
+    }
+  }, [activeCategory, categorySpecials]);
+
+  const handleCarouselScroll = () => {
+    const container = promoCarouselRef.current;
+    if (!container) return;
+    const setWidth = container.scrollWidth / 3;
+    if (setWidth <= 0) return;
+
+    if (container.scrollLeft >= setWidth * 2 - 10) {
+      container.scrollLeft -= setWidth;
+    } else if (container.scrollLeft <= 10) {
+      container.scrollLeft += setWidth;
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = promoCarouselRef.current;
+    if (!container) return;
+    isMouseDownRef.current = true;
+    startXRef.current = e.pageX - container.offsetLeft;
+    scrollLeftRef.current = container.scrollLeft;
+  };
+
+  const handleMouseLeaveOrUp = () => {
+    isMouseDownRef.current = false;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDownRef.current) return;
+    const container = promoCarouselRef.current;
+    if (!container) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startXRef.current) * 1.5;
+    container.scrollLeft = scrollLeftRef.current - walk;
+    handleCarouselScroll();
+  };
 
   useEffect(() => {
     const root = document.documentElement;
@@ -663,56 +1217,44 @@ export default function App() {
           <span>9:41</span>
           <span>100%</span>
         </div>
-        <div className="kit4-logo-row">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            {canGoBack && (
-              <motion.button
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                whileTap={{ scale: 0.9 }}
-                className="header-back-circle-btn"
-                onClick={handleGoBack}
-                title="Go Back"
-              >
-                <ChevronLeft size={20} color="var(--text-primary)" />
-              </motion.button>
-            )}
-            <div className="kit4-brand-logo" onClick={() => { setCurrentScreen('home'); setSearchQuery(''); }} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div 
-                className="kit4-brand-logo-img"
-                style={{ 
-                  height: 38, 
-                  width: 62, 
-                  backgroundColor: activeTheme.primary,
-                  WebkitMaskImage: 'url(/4kit_logo.png)',
-                  maskImage: 'url(/4kit_logo.png)',
-                  WebkitMaskSize: 'contain',
-                  maskSize: 'contain',
-                  WebkitMaskRepeat: 'no-repeat',
-                  maskRepeat: 'no-repeat',
-                  WebkitMaskPosition: 'center',
-                  maskPosition: 'center',
-                  transition: 'background-color 0.35s ease, transform 0.2s ease',
-                  display: 'block'
-                }} 
-                title="4Kit Logo"
-              />
-              <div>
-                <div className="kit4-tagline" style={{ color: activeTheme.primary, fontWeight: 700, fontSize: '11px', letterSpacing: '0.5px' }}>{activeTheme.name} Mode</div>
-              </div>
-            </div>
-          </div>
-          <div style={{ display: 'flex', gap: 6 }}>
-            <button
-              className="quick-filter-btn"
-              style={{ padding: '6px 12px', borderColor: activeTheme.primary, color: activeTheme.primary }}
-              onClick={() => setShowFilterModal(true)}
+        <div className="kit4-logo-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', width: '100%' }}>
+          {canGoBack && (
+            <motion.button
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              whileTap={{ scale: 0.9 }}
+              className="header-back-circle-btn"
+              onClick={handleGoBack}
+              title="Go Back"
+              style={{ position: 'absolute', left: 0 }}
             >
-              <SlidersHorizontal size={13} /> Filters {activeFilterCount > 0 ? `(${activeFilterCount})` : ''}
-            </button>
-            <button className="kit4-hero-badge-pill" style={{ cursor: 'pointer', border: 'none' }} onClick={() => setIsLoading(true)}>
-              <RotateCcw size={12} color={activeTheme.primary} style={{ marginRight: 4 }} /> Replay
-            </button>
+              <ChevronLeft size={20} color="var(--text-primary)" />
+            </motion.button>
+          )}
+          <div 
+            className="kit4-brand-logo" 
+            onClick={() => { setCurrentScreen('home'); setSearchQuery(''); }} 
+            style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <div 
+              className="kit4-brand-logo-img"
+              style={{ 
+                height: 38, 
+                width: 62, 
+                backgroundColor: activeTheme.primary,
+                WebkitMaskImage: 'url(/4kit_logo.png)',
+                maskImage: 'url(/4kit_logo.png)',
+                WebkitMaskSize: 'contain',
+                maskSize: 'contain',
+                WebkitMaskRepeat: 'no-repeat',
+                maskRepeat: 'no-repeat',
+                WebkitMaskPosition: 'center',
+                maskPosition: 'center',
+                transition: 'background-color 0.35s ease, transform 0.2s ease',
+                display: 'block'
+              }} 
+              title="4Kit Logo"
+            />
           </div>
         </div>
 
@@ -765,18 +1307,6 @@ export default function App() {
                     </button>
                   )}
                 </div>
-                <div className="sample-chips-row">
-                  <span className="sample-chip-label">Samples:</span>
-                  {SAMPLE_SEARCHES.map((sample) => (
-                    <button
-                      key={sample}
-                      className={`sample-chip ${searchQuery.toLowerCase() === sample.toLowerCase() ? 'active' : ''}`}
-                      onClick={() => setSearchQuery(sample)}
-                    >
-                      {sample}
-                    </button>
-                  ))}
-                </div>
               </div>
 
               {/* 3 DISTINCT CATEGORIES: Red Food, Green Groceries, Blue Pharmacy */}
@@ -805,13 +1335,8 @@ export default function App() {
                           }}
                         >
                           <IconComp size={28} />
-                          {isActive && (
-                            <div className="bubble-active-dot" style={{ background: cat.theme.primary }}>
-                              <Check size={12} color="#FFFFFF" />
-                            </div>
-                          )}
                         </div>
-                        <div className="bubble-name" style={{ color: isActive ? cat.theme.primary : 'var(--text-primary)', fontWeight: 900 }}>
+                        <div className="bubble-name" style={{ color: cat.theme.primary, opacity: isActive ? 1 : 0.75 }}>
                           {cat.name}
                         </div>
                       </motion.div>
@@ -824,14 +1349,15 @@ export default function App() {
                 /* Dynamic Search Results Feed */
                 <div style={{ padding: '0 16px 24px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 900, color: 'var(--text-primary)' }}>
+                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: activeTheme.primary }}>
                       Search Results for "{searchQuery}"
                     </div>
                     <span style={{ fontSize: 12, fontWeight: 800, color: activeTheme.primary }}>
                       {
-                        [...Object.values(MENU_ITEMS_BY_CATEGORY).flat(), ...DIET_ITEMS, ...CRAVINGS_ITEMS].filter(
+                        [...Object.values(MENU_ITEMS_BY_CATEGORY).flat(), ...CRAVINGS_ITEMS].filter(
                           (item, idx, self) =>
                             self.findIndex((x) => x.id === item.id) === idx &&
+                            item.diet !== 'keto' &&
                             (item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                              item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
                              item.category.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -840,9 +1366,10 @@ export default function App() {
                     </span>
                   </div>
                   {
-                    [...Object.values(MENU_ITEMS_BY_CATEGORY).flat(), ...DIET_ITEMS, ...CRAVINGS_ITEMS].filter(
+                    [...Object.values(MENU_ITEMS_BY_CATEGORY).flat(), ...CRAVINGS_ITEMS].filter(
                       (item, idx, self) =>
                         self.findIndex((x) => x.id === item.id) === idx &&
+                        item.diet !== 'keto' &&
                         (item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.category.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -866,21 +1393,21 @@ export default function App() {
                               </span>
                             )}
                           </div>
-                          <div style={{ fontFamily: 'var(--font-display)', fontSize: 15, fontWeight: 900, color: 'var(--text-primary)' }}>
+                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 15, color: activeTheme.primary }}>
                             {item.name}
                           </div>
                           <div style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '2px 0 6px' }}>{item.desc}</div>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span style={{ fontWeight: 900, color: activeTheme.primary, fontSize: 16 }}>₹{item.price}</span>
                             <button
-                              className="counter-btn-trigger"
-                              style={{ width: 32, height: 32, background: activeTheme.primary }}
+                              className="add-item-btn"
+                              style={{ padding: '6px 14px', fontSize: '12px' }}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 updateItemQty(item, 1);
                               }}
                             >
-                              <Plus size={15} />
+                              Add item
                             </button>
                           </div>
                         </div>
@@ -892,97 +1419,177 @@ export default function App() {
                 <>
                   {/* ─── GAMIFIED SPIN THE WHEEL WIDGET BANNER ─── */}
                   <div style={{ padding: '0 16px', marginTop: 12 }}>
-                    <div className="spin-wheel-card-banner" style={{ background: activeTheme.gradient, boxShadow: activeTheme.glow, transition: 'all 0.4s ease' }}>
+                    <div className="spin-wheel-card-banner" style={{ background: activeTheme.gradient }}>
                       <div className="spin-wheel-title">
-                        Spin the Wheel for a Discount!
+                        Spin &amp; Win Deals
                       </div>
                       <div className="spin-wheel-sub">
-                        Win up to 50% OFF, Free Delivery &amp; Mystery Food Deals!
+                        Spin IT &amp; let US randomly pick the perfect  dish for your cravings!
                       </div>
                       <button className="spin-wheel-cta-btn" onClick={() => setShowSpinWheelModal(true)}>
-                        Spin Now &amp; Claim Coupon
+                        SPIN THE WHEEL
                       </button>
                     </div>
                   </div>
 
-                  {/* ─── FOOD MOOD & CRAVINGS ROULETTE WIDGET ─── */}
-                  <div style={{ padding: '0 16px', marginBottom: 16 }}>
-                    <div style={{ background: '#FFFFFF', borderRadius: 20, padding: 18, border: '1.5px solid var(--food-border)', boxShadow: '0 4px 16px rgba(0,0,0,0.05)' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                        <Flame size={18} color={activeTheme.primary} />
-                        <span style={{ fontSize: 16, fontWeight: 900, fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                           Food Mood &amp; Mystery Dish Spinner
-                        </span>
-                      </div>
-                      <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 12, fontWeight: 600 }}>
-                        Can't decide what to eat? Tap a mood to roll a random Trivandrum mystery recommendation!
-                      </p>
-                      <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 6 }} className="no-scrollbar">
-                        {[
-                          { id: 'spicy', label: ' Spicy Kerala' },
-                          { id: 'snack', label: ' Quick Snack' },
-                          { id: 'sweet', label: ' Sweet Treat' }
-                        ].map((mood) => (
-                          <button
-                            key={mood.id}
-                            className="quick-filter-btn"
-                            style={{ padding: '8px 14px', fontSize: 12 }}
-                            onClick={() => triggerCravingsRoulette(mood.id)}
-                          >
-                            {mood.label}
-                          </button>
-                        ))}
-                      </div>
-
-                      {isRouletteSpinning && (
-                        <div style={{ textAlign: 'center', padding: 16, color: activeTheme.primary, fontWeight: 800 }}>
-                           Rolling the Trivandrum Cravings Wheel...
-                        </div>
-                      )}
-
-                      {rouletteDish && !isRouletteSpinning && (
-                        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ background: '#F8FAFC', borderRadius: 16, padding: 12, marginTop: 12, display: 'flex', gap: 12, alignItems: 'center', border: '1px solid #E2E8F0' }}>
-                          <img src={rouletteDish.image} alt={rouletteDish.name} style={{ width: 64, height: 64, borderRadius: 12, objectFit: 'cover' }} />
-                          <div style={{ flex: 1 }}>
-                            <div style={{ fontSize: 13, fontWeight: 900, color: '#1F2937' }}>{rouletteDish.name}</div>
-                            <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{rouletteDish.storeName} • ₹{rouletteDish.price}</div>
+                  {/* ─── 4KIT CATEGORY SPECIALS PROMO CAROUSEL (Infinite Seamless Horizontal Scrolling Left & Right) ─── */}
+                  <div
+                    ref={promoCarouselRef}
+                    className="category-promo-carousel"
+                    onScroll={handleCarouselScroll}
+                    onMouseDown={handleMouseDown}
+                    onMouseLeave={handleMouseLeaveOrUp}
+                    onMouseUp={handleMouseLeaveOrUp}
+                    onMouseMove={handleMouseMove}
+                  >
+                    {infiniteSpecials.map((banner) => {
+                      const isAnimatedLoop = banner.isAnimatedLoop;
+                      const darkCol = banner.loopDarkColor || '#7F1D1D';
+                      return (
+                        <motion.div
+                          key={banner.uniqueKey}
+                          className="category-promo-card"
+                          style={{
+                            background: isAnimatedLoop ? undefined : banner.bg,
+                            border: isAnimatedLoop ? '2px solid rgba(0, 0, 0, 0.08)' : 'none',
+                            color: banner.textColor || '#FFFFFF'
+                          }}
+                          animate={
+                            isAnimatedLoop
+                              ? {
+                                  backgroundColor: ['#FFFFFF', darkCol, '#FFFFFF'],
+                                  color: [darkCol, '#FFFFFF', darkCol]
+                                }
+                              : undefined
+                          }
+                          transition={
+                            isAnimatedLoop
+                              ? {
+                                  duration: 6,
+                                  repeat: Infinity,
+                                  ease: 'easeInOut'
+                                }
+                              : undefined
+                          }
+                          whileHover={{ scale: 1.02 }}
+                          onClick={() => {
+                            if (banner.id.includes('food_3')) {
+                              setCurrentScreen('multiorder');
+                            } else {
+                              setCurrentScreen('home');
+                            }
+                          }}
+                        >
+                          <div className="category-promo-left">
+                            <motion.div
+                              className="category-promo-title"
+                              animate={
+                                isAnimatedLoop
+                                  ? { color: [darkCol, '#FFFFFF', darkCol] }
+                                  : undefined
+                              }
+                              transition={
+                                isAnimatedLoop
+                                  ? { duration: 6, repeat: Infinity, ease: 'easeInOut' }
+                                  : undefined
+                              }
+                              style={{ color: banner.textColor || '#FFFFFF' }}
+                            >
+                              {banner.title}
+                            </motion.div>
+                            <motion.div
+                              className="category-promo-sub"
+                              animate={
+                                isAnimatedLoop
+                                  ? { color: [darkCol, '#FFFFFF', darkCol] }
+                                  : undefined
+                              }
+                              transition={
+                                isAnimatedLoop
+                                  ? { duration: 6, repeat: Infinity, ease: 'easeInOut' }
+                                  : undefined
+                              }
+                              style={{ color: banner.textColor || '#FFFFFF' }}
+                            >
+                              {banner.subtitle}
+                            </motion.div>
+                            <motion.button
+                              className="category-promo-cta-btn"
+                              animate={
+                                isAnimatedLoop
+                                  ? {
+                                      backgroundColor: [darkCol, '#FFFFFF', darkCol],
+                                      color: ['#FFFFFF', darkCol, '#FFFFFF']
+                                    }
+                                  : undefined
+                              }
+                              transition={
+                                isAnimatedLoop
+                                  ? { duration: 6, repeat: Infinity, ease: 'easeInOut' }
+                                  : undefined
+                              }
+                              style={{
+                                background: banner.btnBg || '#FFFFFF',
+                                color: banner.btnColor || '#1F2937'
+                              }}
+                            >
+                              {banner.cta} &gt;
+                            </motion.button>
                           </div>
-                          <button className="quick-filter-btn active" style={{ background: activeTheme.primary, borderColor: activeTheme.primary }} onClick={() => updateItemQty(rouletteDish, 1)}>
-                            + Add
-                          </button>
+                          <img src={banner.image} alt={banner.title} className="category-promo-img" />
                         </motion.div>
+                      );
+                    })}
+                  </div>
+
+                  {/* ─── FOOD MOOD & CRAVINGS ROULETTE SLOT MACHINE BANNER ─── */}
+                  <div style={{ padding: '0 16px', margin: '18px 0' }}>
+                    <div style={{ background: 'linear-gradient(135deg, #DC2626 0%, #991B1B 100%)', borderRadius: 26, padding: '24px 22px 22px', border: '1.5px solid rgba(255, 255, 255, 0.25)', boxShadow: '0 12px 32px rgba(0,0,0,0.18)', color: '#FFFFFF', textAlign: 'center' }}>
+                      <div style={{ fontSize: 21, fontFamily: 'var(--font-caacupe)', color: '#FFE600', letterSpacing: '0.4px', lineHeight: 1.25, filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))', marginBottom: 6 }}>
+                        Can't decide what to eat? Let's make a Gamble
+                      </div>
+                      
+                      {/* Description of what we do in clean white fonts */}
+                      <div style={{ fontSize: 13, color: 'rgba(255, 255, 255, 0.92)', fontWeight: 600, fontFamily: "'Plus Jakarta Sans', sans-serif", lineHeight: 1.4, maxWidth: 360, margin: '0 auto 16px' }}>
+                        Spin IT &amp; let US randomly pick the perfect  dish for your cravings!
+                      </div>
+
+                      {/* WIDE FULL-WIDTH YELLOW GAMBLE BUTTON (NO PLAY SYMBOL) */}
+                      <button
+                        className="quick-filter-btn"
+                        style={{
+                          width: '100%',
+                          padding: '15px',
+                          fontSize: 16,
+                          fontWeight: 900,
+                          background: '#FFE600',
+                          color: '#000000',
+                          border: 'none',
+                          borderRadius: 18,
+                          boxShadow: '0 6px 20px rgba(255, 230, 0, 0.45)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer'
+                        }}
+                        onClick={() => {
+                          setShowSlotMachineModal(true);
+                          triggerCravingsRoulette('spicy');
+                        }}
+                      >
+                        GAMBLE
+                      </button>
+
+                      {isRouletteSpinning && !showSlotMachineModal && (
+                        <div style={{ textAlign: 'center', padding: '12px 0 0', color: '#FFE600', fontWeight: 900, textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                           Rolling the Trivandrum Cravings Gamble Slot...
+                        </div>
                       )}
                     </div>
                   </div>
 
-                  {/* ─── 4KIT CATEGORY SPECIALS PROMO CAROUSEL ─── */}
-                  <div className="category-promo-carousel">
-                    {categorySpecials.map((banner) => (
-                      <motion.div
-                        key={banner.id}
-                        className="category-promo-card"
-                        style={{ background: banner.bg }}
-                        whileHover={{ scale: 1.02 }}
-                        onClick={() => {
-                          if (banner.id.includes('food_3')) {
-                            setCurrentScreen('multiorder');
-                          } else {
-                            setCurrentScreen('stores');
-                          }
-                        }}
-                      >
-                        <div className="category-promo-left">
-                          <div className="category-promo-title">{banner.title}</div>
-                          <div className="category-promo-sub">{banner.subtitle}</div>
-                          <button className="category-promo-cta-btn">{banner.cta} &gt;</button>
-                        </div>
-                        <img src={banner.image} alt={banner.title} className="category-promo-img" />
-                      </motion.div>
-                    ))}
-                  </div>
-
                   {/* ─── "WHAT'S ON YOUR MIND?" CIRCULAR DISHES ─── */}
-                  <div className="swiggy-mind-section" style={{ borderTop: '1px solid #F3F4F6', borderBottom: '1px solid #F3F4F6' }}>
+                  <div className="swiggy-mind-section" style={{ borderTop: '1px solid #F3F4F6', borderBottom: '1px solid #F3F4F6', margin: '8px 0 16px' }}>
                     <div className="swiggy-mind-header">Popular Cravings in Trivandrum</div>
                     <div className="swiggy-mind-scroll">
                       {SWIGGY_MIND_DISHES.map((dish) => (
@@ -1000,10 +1607,74 @@ export default function App() {
                     </div>
                   </div>
 
+                  {/* ─── MERCHANTS & STORES FEED (FOOD / ACTIVE CATEGORY) ON MAIN SCREEN ─── */}
+                  <div className="stores-section" style={{ paddingTop: 16 }}>
+                    <div className="section-header-row" style={{ marginBottom: 12 }}>
+                      <div>
+                        <h2 className="section-h2">{activeTheme.name} Stores</h2>
+                        <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 700, marginTop: 2 }}>
+                          {filteredStores.length} merchants near {userLocation}
+                        </div>
+                      </div>
+                      <LeverFilterToggle
+                        isOn={showFilterModal || activeFilterCount > 0}
+                        onToggle={() => setShowFilterModal(true)}
+                        accentColor={activeTheme.primary}
+                        darkColor={activeTheme.dark}
+                        count={activeFilterCount}
+                      />
+                    </div>
+
+                    {/* Category-Adaptive Spotlight Filter */}
+                    <div style={{ marginBottom: 16 }}>
+                      <SpotlightFilter
+                        activeId={activeQuickFilterId}
+                        accentColor={activeTheme.primary}
+                        items={[
+                          { id: 'all', label: 'All', icon: Sparkles },
+                          { id: 'rating', label: '4.8+ Star', icon: Star, badge: filterRating48 ? 'On' : undefined },
+                          { id: 'fast', label: '< 15 mins', icon: Clock, badge: filterFastETA ? 'On' : undefined },
+                          { id: 'free_delivery', label: 'Free Delivery', icon: Truck, badge: filterFreeDelivery ? 'On' : undefined },
+                          { id: 'distance', label: '< 5km', icon: MapPin, badge: filterMaxDistKm <= 5 ? '5km' : undefined },
+                          { id: 'more', label: 'Filter', icon: SlidersHorizontal, badge: activeFilterCount > 0 ? activeFilterCount : undefined },
+                        ]}
+                        onSelect={(id) => {
+                          if (id === 'all') {
+                            setFilterRating48(false);
+                            setFilterFastETA(false);
+                            setFilterFreeDelivery(false);
+                            setFilterMaxDistKm(15);
+                            setActiveQuickFilterId('all');
+                          } else if (id === 'rating') {
+                            const next = !filterRating48;
+                            setFilterRating48(next);
+                            setActiveQuickFilterId(next ? 'rating' : 'all');
+                          } else if (id === 'fast') {
+                            const next = !filterFastETA;
+                            setFilterFastETA(next);
+                            setActiveQuickFilterId(next ? 'fast' : 'all');
+                          } else if (id === 'free_delivery') {
+                            const next = !filterFreeDelivery;
+                            setFilterFreeDelivery(next);
+                            setActiveQuickFilterId(next ? 'free_delivery' : 'all');
+                          } else if (id === 'distance') {
+                            const nextDist = filterMaxDistKm <= 5 ? 15 : 5;
+                            setFilterMaxDistKm(nextDist);
+                            setActiveQuickFilterId(nextDist <= 5 ? 'distance' : 'all');
+                          } else if (id === 'more') {
+                            setShowFilterModal(true);
+                          }
+                        }}
+                      />
+                    </div>
+
+                    {renderCategorizedStoreSections(filteredStores)}
+                  </div>
+
                   {/* ─── GLOBAL CUISINE EXPLORER ─── */}
                   <div style={{ margin: '18px 0 16px', padding: '0 16px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-                      <div style={{ fontSize: 16, fontWeight: 900, fontFamily: 'var(--font-display)' }}>
+                      <div style={{ fontSize: 16, fontFamily: 'var(--font-title)', color: activeTheme.primary }}>
                         Cuisine Explorer (Trivandrum)
                       </div>
                       <span style={{ fontSize: 12, fontWeight: 800, color: activeTheme.primary, cursor: 'pointer' }} onClick={() => setCurrentScreen('stores')}>
@@ -1028,41 +1699,11 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* ─── DIETARY & HEALTHY LIFESTYLE SPOTLIGHT (INR) ─── */}
-                  <div style={{ padding: '0 16px', marginBottom: 20 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                      <div style={{ fontSize: 16, fontWeight: 900, fontFamily: 'var(--font-display)' }}>
-                        Dietary &amp; Healthy Lifestyle
-                      </div>
-                      <span className="distance-pill-badge within-range">Keto • Vegan • High-Protein</span>
-                    </div>
-                    {DIET_ITEMS.map((item) => (
-                      <motion.div
-                        key={item.id}
-                        whileHover={{ y: -4, scale: 1.01 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="diet-card"
-                        onClick={() => setSelectedDish(item)}
-                      >
-                        <img src={item.image} alt={item.name} className="diet-img" />
-                        <div style={{ flex: 1 }}>
-                          <span className="diet-badge-pill">{item.badge}</span>
-                          <div style={{ fontFamily: 'var(--font-display)', fontSize: 15, fontWeight: 900, color: 'var(--text-primary)' }}>{item.name}</div>
-                          <div style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '2px 0 6px' }}>{item.desc}</div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span className="diet-macros-tag">{item.macros}</span>
-                            <span style={{ fontWeight: 900, color: '#059669', fontSize: 16 }}>₹{item.price}</span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* ─── SUGAR & SWEET CRAVINGS COLLECTION (INR) ─── */}
+                  {/* ─── POPULAR DESSERTS & SWEET TREATS (INR) ─── */}
                   <div style={{ padding: '0 16px', marginBottom: 24 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                      <div style={{ fontSize: 16, fontWeight: 900, fontFamily: 'var(--font-display)' }}>
-                        Sugar &amp; Sweet Cravings Collection
+                      <div style={{ fontSize: 16, fontFamily: 'var(--font-title)', color: activeTheme.primary }}>
+                        Popular Desserts &amp; Sweet Treats
                       </div>
                       <span className="distance-pill-badge" style={{ color: '#BE185D', borderColor: '#FBCFE8' }}>Desserts</span>
                     </div>
@@ -1077,7 +1718,7 @@ export default function App() {
                         <img src={item.image} alt={item.name} className="cravings-img" />
                         <div style={{ flex: 1 }}>
                           <span className="cravings-badge-pink">{item.badge}</span>
-                          <div style={{ fontFamily: 'var(--font-display)', fontSize: 15, fontWeight: 900, color: 'var(--text-primary)' }}>{item.name}</div>
+                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 15, color: activeTheme.primary }}>{item.name}</div>
                           <div style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '2px 0 6px' }}>{item.desc}</div>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span style={{ fontSize: 11, color: '#BE185D', fontWeight: 800 }}>Hot Sweet Craving</span>
@@ -1130,7 +1771,7 @@ export default function App() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <SlidersHorizontal size={18} color={activeTheme.primary} />
-                    <span style={{ fontSize: 14, fontWeight: 800, fontFamily: "'Space Grotesk', 'Outfit', sans-serif", color: 'var(--text-primary)' }}>
+                    <span style={{ fontSize: 14, fontFamily: 'var(--font-title)', color: activeTheme.primary }}>
                       Filter Dishes by Price &amp; Preference
                     </span>
                   </div>
@@ -1186,7 +1827,7 @@ export default function App() {
               {/* Dedicated Snacks Under ₹49 & ₹99 Section */}
               <div style={{ marginBottom: 24 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                  <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--text-primary)', fontFamily: "'Space Grotesk', 'Outfit', sans-serif" }}>
+                  <div style={{ fontSize: 15, color: activeTheme.primary, fontFamily: 'var(--font-title)' }}>
                     Popular Teatime &amp; Evening Snacks Under ₹99
                   </div>
                   <span className="rating-green-pill" style={{ background: '#FEF3C7', color: '#B45309', fontWeight: 800 }}>Trivandrum Favorites</span>
@@ -1201,7 +1842,7 @@ export default function App() {
                     .map((snack) => (
                       <motion.div key={snack.id} whileHover={{ y: -3 }} style={{ background: '#FFFFFF', borderRadius: 16, border: '1px solid #E2E8F0', padding: 10, position: 'relative' }}>
                         <img src={snack.image} alt={snack.name} style={{ width: '100%', height: 100, borderRadius: 12, objectFit: 'cover', marginBottom: 8 }} />
-                        <div style={{ fontSize: 13, fontWeight: 800, color: '#1F2937', height: 36, overflow: 'hidden', lineHeight: 1.3, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{snack.name}</div>
+                        <div style={{ fontSize: 13, color: activeTheme.primary, height: 36, overflow: 'hidden', lineHeight: 1.3, fontFamily: 'var(--font-title)' }}>{snack.name}</div>
                         <div style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, margin: '4px 0' }}>{snack.storeName}</div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
                           <span style={{ fontSize: 15, fontWeight: 900, color: activeTheme.primary, fontFamily: "'Space Grotesk', sans-serif" }}>₹{snack.price}</span>
@@ -1220,7 +1861,7 @@ export default function App() {
 
               {/* Full Budget Items Grid */}
               <div style={{ marginBottom: 16 }}>
-                <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 12, fontFamily: "'Space Grotesk', 'Outfit', sans-serif" }}>
+                <div style={{ fontSize: 15, color: activeTheme.primary, marginBottom: 12, fontFamily: 'var(--font-title)' }}>
                   All Trivandrum Items {discoverMaxPrice >= 500 ? '' : `Under ₹${discoverMaxPrice}`} ({
                     ALL_TRIVANDRUM_FOOD_DISHES
                       .filter((d) => d.price <= discoverMaxPrice)
@@ -1245,7 +1886,7 @@ export default function App() {
                             </span>
                             <span style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600 }}>{dish.category}</span>
                           </div>
-                          <div style={{ fontSize: 14, fontWeight: 800, color: '#1F2937', marginBottom: 2, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{dish.name}</div>
+                          <div style={{ fontSize: 14, color: activeTheme.primary, marginBottom: 2, fontFamily: 'var(--font-title)' }}>{dish.name}</div>
                           <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{dish.storeName} • {dish.storeLoc || 'Palayam'}</div>
                           <div style={{ fontSize: 15, fontWeight: 900, color: activeTheme.primary, marginTop: 4, fontFamily: "'Space Grotesk', sans-serif" }}>₹{dish.price}</div>
                         </div>
@@ -1339,13 +1980,13 @@ export default function App() {
                     {filteredStores.length} merchants near {userLocation}
                   </div>
                 </div>
-                <button
-                  className="border-beam-btn"
-                  style={{ borderColor: activeTheme.primary, color: activeTheme.primary, background: '#FFFFFF' }}
-                  onClick={() => setShowFilterModal(true)}
-                >
-                  <SlidersHorizontal size={14} /> Filters {activeFilterCount > 0 ? `(${activeFilterCount})` : ''}
-                </button>
+                <LeverFilterToggle
+                  isOn={showFilterModal || activeFilterCount > 0}
+                  onToggle={() => setShowFilterModal(true)}
+                  accentColor={activeTheme.primary}
+                  darkColor={activeTheme.dark}
+                  count={activeFilterCount}
+                />
               </div>
 
               {/* Quick Filter Chips Bar */}
@@ -1390,58 +2031,7 @@ export default function App() {
                 ))}
               </div>
 
-              {filteredStores.map((store) => (
-                <motion.div
-                  key={store.id}
-                  className="swiggy-rest-card"
-                  whileHover={{ y: -3 }}
-                  onClick={() => {
-                    setSelectedStore(store);
-                    setCurrentScreen('menu');
-                  }}
-                >
-                  <div className="swiggy-rest-img-col">
-                    <img src={store.image} alt={store.name} className="swiggy-rest-img" />
-                    <button
-                      className={`swiggy-fav-btn ${favorites.includes(store.id) ? 'favorited' : ''}`}
-                      onClick={(e) => toggleFavorite(store.id, e)}
-                    >
-                      <Heart size={14} fill={favorites.includes(store.id) ? '#FFFFFF' : 'none'} />
-                    </button>
-                    {store.discountTag && (
-                      <div className="swiggy-discount-ribbon">{store.discountTag}</div>
-                    )}
-                  </div>
-
-                  <div className="swiggy-rest-info-col">
-                    <div className="swiggy-rest-title-row">
-                      <div className="swiggy-rest-name">{store.name}</div>
-                    </div>
-
-                    <div className="swiggy-rating-row">
-                      <span className="swiggy-star-circle" style={{ background: activeTheme.primary }}></span>
-                      <span>{store.rating} ({store.reviewCount || '1.2K+'}) • {store.eta}</span>
-                    </div>
-
-                    <div className="swiggy-cuisines-text">
-                      {store.categoryTag.split('•').slice(1).join('•').trim() || 'South Indian, Biriyani'}
-                    </div>
-
-                    <div className="swiggy-loc-dist">
-                      {store.locality || store.categoryTag.split('•')[0].trim()} • {store.distKm} km from {userLocation}
-                    </div>
-
-                    <div className="swiggy-benefits-row">
-                      <span className="swiggy-free-del-text" style={{ color: activeTheme.primary }}>FREE DELIVERY</span>
-                      {store.hasOneBenefit && (
-                        <span className="swiggy-one-pill" style={{ background: activeTheme.lightBg, color: activeTheme.primary, borderColor: activeTheme.primary }}>
-                          4KIT GOLD
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+              {renderCategorizedStoreSections(filteredStores)}
             </div>
           )}
 
@@ -1478,39 +2068,23 @@ export default function App() {
                 return (
                   <motion.div key={item.id} className="dish-menu-item">
                     <div className="dish-left" onClick={() => setSelectedDish(item)} style={{ cursor: 'pointer' }}>
-                      <div style={{ display: 'flex', gap: 6, marginBottom: 4, alignItems: 'center' }}>
-                        <span className="diet-badge-pill" style={{ fontSize: 9, padding: '2px 6px', textTransform: 'uppercase' }}>
-                          {item.category}
-                        </span>
-                        {item.diet && (
-                          <span style={{ fontSize: 10, fontWeight: 800, color: item.diet === 'veg' ? '#059669' : '#DC2626' }}>
-                            ● {item.diet.toUpperCase()}
-                          </span>
-                        )}
-                        {item.sugar === 'sugar-free' && (
-                          <span style={{ fontSize: 10, fontWeight: 800, color: '#2563EB' }}>
-                            [Sugar-Free]
-                          </span>
-                        )}
-                      </div>
                       <div className="dish-name">{item.name}</div>
                       <div className="dish-desc">{item.desc}</div>
                       <div className="dish-price" style={{ color: activeTheme.primary }}>₹{item.price}</div>
                     </div>
                     {qty === 0 ? (
                       <motion.button
-                        whileTap={{ scale: 0.88 }}
-                        className="counter-btn-trigger"
-                        style={{ background: activeTheme.primary, width: 34, height: 34 }}
+                        whileTap={{ scale: 0.94 }}
+                        className="add-item-btn"
                         onClick={() => updateItemQty(item, 1)}
                       >
-                        <Plus size={16} />
+                        Add item
                       </motion.button>
                     ) : (
-                      <div className="dev21-counter-pill" style={{ borderColor: activeTheme.primary }}>
-                        <button className="counter-btn-trigger" style={{ background: activeTheme.primary }} onClick={() => updateItemQty(item, -1)}><Minus size={14} /></button>
-                        <span className="counter-qty-val" style={{ color: activeTheme.primary }}>{qty}</span>
-                        <button className="counter-btn-trigger" style={{ background: activeTheme.primary }} onClick={() => updateItemQty(item, 1)}><Plus size={14} /></button>
+                      <div className="dev21-counter-pill" style={{ borderColor: '#000000' }}>
+                        <button className="counter-btn-trigger" style={{ background: '#000000' }} onClick={() => updateItemQty(item, -1)}><Minus size={14} /></button>
+                        <span className="counter-qty-val" style={{ color: '#000000', fontWeight: 900 }}>{qty}</span>
+                        <button className="counter-btn-trigger" style={{ background: '#000000' }} onClick={() => updateItemQty(item, 1)}><Plus size={14} /></button>
                       </div>
                     )}
                   </motion.div>
@@ -1606,7 +2180,7 @@ export default function App() {
                 <motion.div animate={{ x: [-12, 12, -12] }} transition={{ duration: 1.6, repeat: Infinity }} style={{ display: 'inline-block', marginBottom: 12 }}>
                   <Truck size={56} color={activeTheme.primary} />
                 </motion.div>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 20, color: '#1F2937' }}>Nikhil is on the way to {userLocation}!</div>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 18, color: activeTheme.primary }}>Nikhil is on the way to {userLocation}!</div>
                 <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 8, fontWeight: 600 }}>Location: 0.8 km away • Arriving in 11 minutes</div>
               </div>
               <button className="shimmer-btn" style={{ width: '100%', padding: 16, background: activeTheme.gradient }} onClick={() => setCurrentScreen('home')}>
@@ -1624,7 +2198,7 @@ export default function App() {
                     RK
                   </div>
                   <div>
-                    <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 900, color: 'var(--text-primary)' }}>Rahul Kumar</h2>
+                    <h2 style={{ fontFamily: 'var(--font-title)', fontSize: 20, color: activeTheme.primary }}>Rahul Kumar</h2>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#FEF3C7', color: '#B45309', padding: '4px 12px', borderRadius: 9999, fontSize: 12, fontWeight: 800, marginTop: 4 }}>
                       <Award size={14} /> 4Kit Gold • {userLocation}
                     </div>
@@ -1661,6 +2235,9 @@ export default function App() {
               </div>
             </div>
           )}
+
+          {/* ─── COMMUNITY FOOTER WATERMARK AT THE VERY END OF EVERY TAB ─── */}
+          <CommunityFooterWatermark activeCategory={activeCategory} primaryColor={activeTheme.primary} />
         </motion.div>
       </AnimatePresence>
 
@@ -1795,7 +2372,6 @@ export default function App() {
                     { label: ' Pure Veg', val: 'veg' },
                     { label: ' Non-Veg', val: 'non-veg' },
                     { label: ' 100% Vegan', val: 'vegan' },
-                    { label: ' Keto Friendly', val: 'keto' },
                     { label: ' High Protein', val: 'high-protein' }
                   ].map((dt) => (
                     <button
@@ -1805,31 +2381,6 @@ export default function App() {
                       onClick={() => setFilterDiet(dt.val)}
                     >
                       {dt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 4. Sugar Filter */}
-              <div style={{ marginBottom: 20 }}>
-                <div className="filter-section-title">
-                  <span>Sugar &amp; Sweetness Preference</span>
-                </div>
-                <div className="filter-chips-grid">
-                  {[
-                    { label: 'All', val: 'All' },
-                    { label: ' Sugar-Free', val: 'sugar-free' },
-                    { label: ' Diabetic Friendly', val: 'diabetic-friendly' },
-                    { label: ' Low Sugar', val: 'low-sugar' },
-                    { label: ' Sweet Cravings', val: 'sweet' }
-                  ].map((sg) => (
-                    <button
-                      key={sg.label}
-                      className={`filter-chip-option ${filterSugar === sg.val ? 'active' : ''}`}
-                      style={filterSugar === sg.val ? { background: activeTheme.primary, borderColor: activeTheme.primary, color: '#FFFFFF' } : {}}
-                      onClick={() => setFilterSugar(sg.val)}
-                    >
-                      {sg.label}
                     </button>
                   ))}
                 </div>
@@ -1862,7 +2413,7 @@ export default function App() {
             <motion.div initial={{ y: 280 }} animate={{ y: 0 }} exit={{ y: 280 }} className="dev21-modal-drawer" onClick={(e) => e.stopPropagation()}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 900, color: 'var(--text-primary)' }}>Multi-Store Order Builder (5km Limit)</h3>
+                  <h3 style={{ fontSize: 17, fontFamily: 'var(--font-title)', color: activeTheme.primary, letterSpacing: '-0.2px' }}>Multi-Store Order Builder (5km Limit)</h3>
                   <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
                     Combine 2 {activeCategory.toUpperCase()} merchants within 5km radius
                   </div>
@@ -1932,7 +2483,7 @@ export default function App() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="dev21-modal-overlay" onClick={() => setSelectedDish(null)}>
             <motion.div initial={{ y: 250 }} animate={{ y: 0 }} exit={{ y: 250 }} className="dev21-modal-drawer" onClick={(e) => e.stopPropagation()}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-                <div><h3 style={{ fontSize: 20, fontWeight: 900 }}>{selectedDish.name}</h3></div>
+                <div><h3 style={{ fontSize: 18, fontFamily: 'var(--font-title)', color: activeTheme.primary, letterSpacing: '-0.2px' }}>{selectedDish.name}</h3></div>
                 <button style={{ background: 'none', border: 'none', cursor: 'pointer' }} onClick={() => setSelectedDish(null)}><X size={20} /></button>
               </div>
               <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 18 }}>{selectedDish.desc}</p>
@@ -2037,30 +2588,38 @@ export default function App() {
       <AnimatePresence>
         {showSpinWheelModal && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="spin-modal-overlay" onClick={() => !isSpinning && setShowSpinWheelModal(false)}>
-            <motion.div initial={{ scale: 0.8, y: 30 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.8, y: 30 }} className="spin-modal-card" onClick={(e) => e.stopPropagation()}>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 24 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.92, opacity: 0, y: 24 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              className="spin-modal-card"
+              onClick={(e) => e.stopPropagation()}
+            >
               <button
-                style={{ position: 'absolute', top: 16, right: 16, background: '#F3F4F6', border: 'none', borderRadius: '50%', width: 32, height: 32, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ position: 'absolute', top: 18, right: 18, background: '#F3F4F6', border: 'none', borderRadius: '50%', width: 36, height: 36, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s ease' }}
                 onClick={() => !isSpinning && setShowSpinWheelModal(false)}
+                aria-label="Close"
               >
                 <X size={18} color="#4B5563" />
               </button>
 
-              <h3 style={{ fontSize: 20, fontWeight: 900, fontFamily: 'var(--font-display)', color: '#1F2937', marginBottom: 4 }}>
+              <h3 style={{ fontSize: 25, fontFamily: 'var(--font-caacupe)', color: activeTheme.primary, marginBottom: 8, letterSpacing: '0.4px', lineHeight: 1.25 }}>
                 Spin the Wheel for a Discount!
               </h3>
-              <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 12, fontWeight: 600 }}>
-                Tap SPIN below to reveal your randomized surprise coupon!
+              <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 20, fontWeight: 600, lineHeight: 1.4 }}>
+                Spin IT &amp; let US randomly pick the perfect  dish for your cravings!
               </p>
 
               {/* Wheel Graphic */}
               <div className="spin-wheel-wrapper">
-                <div className="spin-wheel-pointer" />
+                <div className={`spin-wheel-pointer ${isSpinning ? 'spinning' : ''}`} />
                 <svg
                   className="spin-wheel-svg"
                   viewBox="0 0 200 200"
                   style={{
                     transform: `rotate(${wheelRotation}deg)`,
-                    transition: isSpinning ? 'transform 3.5s cubic-bezier(0.15, 0.9, 0.2, 1)' : 'none'
+                    transition: isSpinning ? 'transform 3.6s cubic-bezier(0.18, 0.92, 0.2, 1)' : 'none'
                   }}
                 >
                   {SPIN_WHEEL_REWARDS.map((rew, i) => {
@@ -2101,7 +2660,11 @@ export default function App() {
                   })}
                 </svg>
 
-                <button className="spin-wheel-center-btn" onClick={triggerSpinWheel} disabled={isSpinning}>
+                <button
+                  className={`spin-wheel-center-btn ${!isSpinning ? 'idle-pulse' : ''}`}
+                  onClick={triggerSpinWheel}
+                  disabled={isSpinning}
+                >
                   {isSpinning ? 'SPINNING...' : 'SPIN!'}
                 </button>
               </div>
@@ -2132,43 +2695,180 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* ─── 4KIT 5-TAB BOTTOM NAVIGATION DOCK ─── */}
-      <div className="glovo-bottom-dock">
-        <button
-          className={`dock-tab-btn ${currentScreen === 'home' ? 'active' : ''}`}
-          style={currentScreen === 'home' ? { background: activeTheme.gradient, boxShadow: activeTheme.glow } : {}}
-          onClick={() => setCurrentScreen('home')}
-        >
-          <Home size={18} className="dock-tab-icon" /> <span>Home</span>
-        </button>
-        <button
-          className={`dock-tab-btn ${currentScreen === 'discover' ? 'active' : ''}`}
-          style={currentScreen === 'discover' ? { background: activeTheme.gradient, boxShadow: activeTheme.glow } : {}}
-          onClick={() => setCurrentScreen('discover')}
-        >
-          <Compass size={18} className="dock-tab-icon" /> <span>Discover</span>
-        </button>
-        <button
-          className={`dock-tab-btn ${currentScreen === 'multiorder' ? 'active' : ''}`}
-          style={currentScreen === 'multiorder' ? { background: activeTheme.gradient, boxShadow: activeTheme.glow } : {}}
-          onClick={() => setCurrentScreen('multiorder')}
-        >
-          <Zap size={18} className="dock-tab-icon" /> <span>Multi-Order</span>
-        </button>
-        <button
-          className={`dock-tab-btn ${currentScreen === 'cart' || currentScreen === 'tracker' ? 'active' : ''}`}
-          style={(currentScreen === 'cart' || currentScreen === 'tracker') ? { background: activeTheme.gradient, boxShadow: activeTheme.glow } : {}}
-          onClick={() => setCurrentScreen('cart')}
-        >
-          <ClipboardList size={18} className="dock-tab-icon" /> <span>Orders</span>
-        </button>
-        <button
-          className={`dock-tab-btn ${currentScreen === 'profile' ? 'active' : ''}`}
-          style={currentScreen === 'profile' ? { background: activeTheme.gradient, boxShadow: activeTheme.glow } : {}}
-          onClick={() => setCurrentScreen('profile')}
-        >
-          <User size={18} className="dock-tab-icon" /> <span>Profile</span>
-        </button>
+      {/* ─── TRIVANDRUM CRAVINGS SLOT MACHINE INTERACTIVE MODAL ─── */}
+      <AnimatePresence>
+        {showSlotMachineModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="spin-modal-overlay"
+            style={{ zIndex: 9999 }}
+            onClick={() => !isRouletteSpinning && setShowSlotMachineModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.85, y: 30 }}
+              className="slot-machine-modal-card"
+              style={{
+                background: 'linear-gradient(145deg, #1C0505 0%, #380A0A 50%, #170404 100%)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: 28,
+                padding: '24px 0 20px',
+                width: 'calc(100% - 32px)',
+                maxWidth: 420,
+                position: 'relative',
+                boxShadow: '0 30px 80px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
+                color: '#FFFFFF',
+                overflow: 'hidden'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                style={{
+                  position: 'absolute',
+                  top: 16,
+                  right: 16,
+                  background: 'rgba(255, 255, 255, 0.14)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: 34,
+                  height: 34,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#FFFFFF',
+                  zIndex: 40
+                }}
+                onClick={() => !isRouletteSpinning && setShowSlotMachineModal(false)}
+              >
+                <X size={18} color="#FFFFFF" />
+              </button>
+
+              {/* ─── FULL-BLEED EDGE-TO-EDGE SCROLLING REEL TRACK ─── */}
+              <div style={{ position: 'relative', width: '100%', height: 165, overflow: 'hidden', margin: '20px 0' }}>
+                {/* Center Golden Laser Pointer Line */}
+                <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', transform: 'translateX(-50%)', width: 2, background: '#FFE600', boxShadow: '0 0 12px #FFE600', zIndex: 30, pointerEvents: 'none' }} />
+
+                {/* Left & Right Seamless Gradient Fades into Modal Container */}
+                <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: 45, background: 'linear-gradient(90deg, #1C0505 0%, rgba(28,5,5,0) 100%)', zIndex: 20, pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 45, background: 'linear-gradient(270deg, #170404 0%, rgba(23,4,4,0) 100%)', zIndex: 20, pointerEvents: 'none' }} />
+
+                {/* HORIZONTAL SCROLLING TAPE TRACK */}
+                <motion.div
+                  animate={{ x: horizontalOffsetX }}
+                  transition={{ duration: 6.5, ease: [0.08, 0.82, 0.17, 1.0] }}
+                  style={{ display: 'flex', gap: 12, padding: '10px 16px', alignItems: 'center', height: '100%' }}
+                >
+                  {horizontalTrackDishes.map((dish, idx) => {
+                    return (
+                      <div
+                        key={`${dish.id}_${idx}`}
+                        style={{
+                          width: 130,
+                          height: 135,
+                          flexShrink: 0,
+                          background: 'rgba(255, 255, 255, 0.08)',
+                          border: '1px solid rgba(255, 255, 255, 0.12)',
+                          borderRadius: 20,
+                          padding: 10,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textAlign: 'center',
+                          position: 'relative',
+                          boxShadow: '0 4px 14px rgba(0,0,0,0.3)',
+                          transition: 'all 0.3s'
+                        }}
+                      >
+                        {/* Clean Circular Food Image Avatar */}
+                        <div style={{ position: 'relative', width: 68, height: 68, borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)', marginBottom: 8, boxShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
+                          <img src={dish.image} alt={dish.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        </div>
+
+                        {/* Clean Title Only (No Price Rate) */}
+                        <div style={{ fontSize: 12, fontWeight: 800, color: '#FFFFFF', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', maxWidth: 115, lineHeight: 1.15, textAlign: 'center' }}>
+                          {dish.name}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </motion.div>
+              </div>
+
+              {/* ACTION BUTTON: GAMBLE AGAIN */}
+              <div style={{ padding: '0 20px' }}>
+                <button
+                  className="shimmer-btn"
+                  style={{
+                    width: '100%',
+                    padding: 15,
+                    fontSize: 16,
+                    fontWeight: 900,
+                    borderRadius: 16,
+                    background: isRouletteSpinning ? '#334155' : 'linear-gradient(135deg, #FFE600 0%, #F59E0B 100%)',
+                    boxShadow: isRouletteSpinning ? 'none' : '0 8px 24px rgba(255,230,0,0.35)',
+                    color: '#000000',
+                    border: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 10,
+                    cursor: isRouletteSpinning ? 'not-allowed' : 'pointer'
+                  }}
+                  disabled={isRouletteSpinning}
+                  onClick={() => triggerCravingsRoulette(rouletteMood || 'spicy')}
+                >
+                  {isRouletteSpinning ? 'GAMBLING...' : 'GAMBLE AGAIN'}
+                </button>
+
+                {/* WINNING DISH RESULT DISPLAY CARD */}
+                {rouletteDish && !isRouletteSpinning && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    style={{ background: 'rgba(255, 255, 255, 0.98)', borderRadius: 18, padding: 14, marginTop: 16, display: 'flex', gap: 14, alignItems: 'center', border: '1.5px solid #FFE600', boxShadow: '0 10px 30px rgba(0,0,0,0.35)' }}
+                  >
+                    <img src={rouletteDish.image} alt={rouletteDish.name} style={{ width: 64, height: 64, borderRadius: 14, objectFit: 'cover' }} />
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: 14, fontWeight: 900, color: '#0F172A', marginBottom: 2, lineHeight: 1.2 }}>{rouletteDish.name}</div>
+                      <div style={{ fontSize: 12, color: '#64748B', fontWeight: 600 }}>{rouletteDish.storeName} • ₹{rouletteDish.price}</div>
+                    </div>
+                    <button
+                      className="quick-filter-btn active"
+                      style={{ padding: '10px 16px', background: '#FFE600', color: '#000000', borderColor: '#FFE600', fontWeight: 900, borderRadius: 14, boxShadow: '0 4px 12px rgba(255,230,0,0.4)', cursor: 'pointer' }}
+                      onClick={() => {
+                        updateItemQty(rouletteDish, 1);
+                        setShowSlotMachineModal(false);
+                      }}
+                    >
+                      + Add to Cart
+                    </button>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ─── 4KIT 5-TAB SPOTLIGHT NAVIGATION DOCK ─── */}
+      <div className="glovo-bottom-dock" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, width: '100%', maxWidth: '440px' }}>
+        <SpotlightNav
+          items={spotlightNavItems}
+          activeIndex={activeNavIndex}
+          onTabChange={(index) => {
+            const screens: ScreenType[] = ['home', 'discover', 'multiorder', 'cart', 'profile'];
+            if (screens[index]) setCurrentScreen(screens[index]);
+          }}
+          theme="white"
+          size="md"
+          accentColor={activeTheme.primary}
+        />
       </div>
     </div>
   );

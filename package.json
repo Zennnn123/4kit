@@ -25,14 +25,21 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^3.0.2",
     "@supabase/supabase-js": "^2.103.0",
+    "clsx": "^2.1.1",
     "framer-motion": "^13.2.0",
-    "react-native-url-polyfill": "^3.0.0"
+    "react-native-url-polyfill": "^3.0.0",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "@types/canvas-confetti": "^1.9.0",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "autoprefixer": "^10.5.5",
     "canvas-confetti": "^1.9.4",
     "lucide-react": "^1.40.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3",
     "vite": "^8.2.2"
   }
 }

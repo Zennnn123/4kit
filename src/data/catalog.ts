@@ -15,6 +15,7 @@ export interface MenuItem {
   diet?: string; // 'veg' | 'non-veg' | 'vegan' | 'keto' | 'high-protein'
   sugar?: string; // 'sugar-free' | 'low-sugar' | 'sweet' | 'diabetic-friendly'
   isVeg?: boolean;
+  rating?: number;
 }
 
 export interface Store {
@@ -318,8 +319,8 @@ export const STORES_BY_CATEGORY: Record<string, Store[]> = {
 export const MENU_ITEMS_BY_CATEGORY: Record<string, MenuItem[]> = {
   food: ALL_TRIVANDRUM_FOOD_DISHES,
   supermarket: [
-    { id: 'm_groc_1', name: 'Organic Almond Milk 1L', price: 180, desc: 'Unsweetened cold-pressed organic almond milk.', image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop', category: 'Dairy & Plant', diet: 'vegan', isVeg: true, sugar: 'sugar-free', storeName: 'Lulu Hypermarket', storeLoc: 'Lulu Mall' },
-    { id: 'm_groc_2', name: 'Ripe Hass Avocados (Pack of 3)', price: 190, desc: 'Handpicked creamy Hass avocados.', image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=200&h=200&fit=crop', category: 'Produce', diet: 'keto', isVeg: true, sugar: 'sugar-free', storeName: 'Margin Free Market', storeLoc: 'Palayam' },
+    { id: 'm_groc_1', name: 'Organic Almond Milk 1L', price: 180, desc: 'Unsweetened cold-pressed organic almond milk.', image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop', category: 'Beverages', diet: 'vegan', isVeg: true, sugar: 'standard', storeName: 'Lulu Hypermarket', storeLoc: 'Lulu Mall' },
+    { id: 'm_groc_2', name: 'Ripe Hass Avocados (Pack of 3)', price: 190, desc: 'Handpicked creamy Hass avocados.', image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=200&h=200&fit=crop', category: 'Produce', diet: 'vegan', isVeg: true, sugar: 'standard', storeName: 'Margin Free Market', storeLoc: 'Palayam' },
     { id: 'm_groc_3', name: 'Organic Sourdough Loaf', price: 120, desc: 'Naturally fermented 36-hour sourdough bread.', image: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=200&h=200&fit=crop', category: 'Bakery', diet: 'vegan', isVeg: true, sugar: 'sugar-free', storeName: 'Nilgiris', storeLoc: 'Kowdiar' },
     { id: 'm_groc_4', name: 'Free-Range Organic Eggs (12ct)', price: 110, desc: 'Farm-fresh pasture-raised brown eggs.', image: 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=200&h=200&fit=crop', category: 'Dairy', diet: 'high-protein', isVeg: false, sugar: 'sugar-free', storeName: 'FreshToHome', storeLoc: 'Kazhakkoottam' },
     { id: 'm_groc_5', name: 'Organic Strawberries 400g', price: 160, desc: 'Sweet locally grown organic strawberries.', image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=200&h=200&fit=crop', category: 'Produce', diet: 'vegan', isVeg: true, sugar: 'low-sugar', storeName: 'Pothys Superstore', storeLoc: 'Statue' }
@@ -338,8 +339,8 @@ export const DIET_ITEMS: MenuItem[] = [
 ];
 
 export const CRAVINGS_ITEMS: MenuItem[] = [
-  { id: 'crav_1', name: 'Warm Chocolate Lava Cake & Gelato', price: 190, desc: 'Molten dark Belgian chocolate cake served with vanilla bean gelato.', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=300&h=200&fit=crop', category: 'Cravings', badge: 'SUGAR HEAVEN', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Supreme Upper Crust', storeLoc: 'Kuravankonam' },
-  { id: 'crav_2', name: 'Royal Malabar Falooda with Kulfi', price: 160, desc: 'Layered falooda with basil seeds, rose syrup, rich malai kulfi & pistachios.', image: 'https://images.unsplash.com/photo-1560008511-11c63416e52d?w=300&h=200&fit=crop', category: 'Cravings', badge: 'SWEET CRAVING', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Falooda Nation', storeLoc: 'Kuravankonam' },
+  { id: 'crav_1', name: 'Warm Chocolate Lava Cake & Gelato', price: 190, desc: 'Molten dark Belgian chocolate cake served with vanilla bean gelato.', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=300&h=200&fit=crop', category: 'Cravings', badge: 'BESTSELLER', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Supreme Upper Crust', storeLoc: 'Kuravankonam' },
+  { id: 'crav_2', name: 'Royal Malabar Falooda with Kulfi', price: 160, desc: 'Layered falooda with basil seeds, rose syrup, rich malai kulfi & pistachios.', image: 'https://images.unsplash.com/photo-1560008511-11c63416e52d?w=300&h=200&fit=crop', category: 'Cravings', badge: 'POPULAR', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Falooda Nation', storeLoc: 'Kuravankonam' },
   { id: 'crav_3', name: 'Neyyappam & Pazham Pori Box', price: 120, desc: 'Hot sweet banana fritters and pure ghee cardamom jaggery unniyappam.', image: 'https://images.unsplash.com/photo-1624371414361-e670ef4889d5?w=300&h=200&fit=crop', category: 'Cravings', badge: 'TRIVANDRUM SPECIAL', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Sree Krishna Marry Cafe', storeLoc: 'Chalai' }
 ];
 
