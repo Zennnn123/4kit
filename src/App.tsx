@@ -470,8 +470,14 @@ const PromoCardOutlinesPattern = ({
   );
 };
 
-/* ─── 4KIT FLOATING VIEW ORDER DISHES OUTLINE TILE & CONTINUOUS LEFT-TO-RIGHT DRIFT ─── */
-const ViewOrderDishesTile = ({ strokeColor }: { strokeColor: string }) => {
+/* ─── 4KIT FLOATING VIEW ORDER OUTLINES (DISHES, GROCERIES, PHARMACY) & DRIFT ─── */
+const ViewOrderDishesTile = ({
+  category = 'food',
+  strokeColor
+}: {
+  category?: string;
+  strokeColor: string;
+}) => {
   return (
     <svg
       width="260"
@@ -482,99 +488,161 @@ const ViewOrderDishesTile = ({ strokeColor }: { strokeColor: string }) => {
       style={{ flexShrink: 0, display: 'block' }}
       aria-hidden="true"
     >
-      {/* 1. Burger outline at x: 14, y: 10 */}
-      <g
-        transform="translate(14, 10) scale(0.65)"
-        stroke={strokeColor}
-        strokeWidth="1.6"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M4 11 C4 4 24 4 24 11 Z" />
-        <path d="M3 14 C6 16 9 14 12 16 C15 14 18 16 21 14 C23 15 25 14 25 14" />
-        <line x1="4" y1="18" x2="24" y2="18" />
-        <path d="M5 21 C5 25 23 25 23 21 Z" />
-      </g>
+      {category === 'supermarket' ? (
+        <>
+          {/* 1. Milk Carton with Spout at x: 14, y: 10 */}
+          <g transform="translate(14, 10) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="6" y="8" width="16" height="20" rx="2" />
+            <path d="M9 8 L9 3 L19 3 L19 8" />
+            <line x1="6" y1="16" x2="22" y2="16" />
+            <path d="M11 12 Q14 10 17 12" />
+          </g>
 
-      {/* 2. Pizza Slice outline at x: 58, y: 24 */}
-      <g
-        transform="translate(58, 24) scale(0.62)"
-        stroke={strokeColor}
-        strokeWidth="1.6"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M4 5 Q14 2 24 5" />
-        <path d="M4 5 L14 25 L24 5" />
-        <circle cx="14" cy="11" r="1.8" />
-        <circle cx="11" cy="17" r="1.3" />
-        <circle cx="17" cy="18" r="1.3" />
-      </g>
+          {/* 2. Fresh Apple with Leaf at x: 56, y: 23 */}
+          <g transform="translate(56, 23) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 6 C8 6 4 11 4 17 C4 23 10 26 14 26 C18 26 24 23 24 17 C24 11 20 6 14 6 Z" />
+            <path d="M14 6 Q16 2 19 3" />
+            <path d="M14 6 Q12 2 10 1" />
+          </g>
 
-      {/* 3. Steaming Dum Biriyani Bowl at x: 104, y: 8 */}
-      <g
-        transform="translate(104, 8) scale(0.62)"
-        stroke={strokeColor}
-        strokeWidth="1.6"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <ellipse cx="14" cy="12" rx="11" ry="3.5" />
-        <path d="M3 12 C4 23 24 23 25 12" />
-        <path d="M9 7 C8 4 12 2 11 0" />
-        <path d="M14 7 C13 4 17 2 16 0" />
-        <path d="M19 7 C18 4 22 2 21 0" />
-      </g>
+          {/* 3. Grocery Paper Bag with Baguette & Greens at x: 102, y: 8 */}
+          <g transform="translate(102, 8) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="5" y="10" width="18" height="17" rx="2" />
+            <path d="M9 10 L9 4 L14 4 L14 10" />
+            <path d="M15 10 L18 2" />
+            <line x1="5" y1="16" x2="23" y2="16" />
+          </g>
 
-      {/* 4. Cold Drink Cup with Straw at x: 148, y: 23 */}
-      <g
-        transform="translate(148, 23) scale(0.62)"
-        stroke={strokeColor}
-        strokeWidth="1.6"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M5 9 L8 25 L18 25 L21 9 Z" />
-        <line x1="3" y1="9" x2="23" y2="9" />
-        <path d="M13 9 L15 2 L20 1" />
-        <path d="M7 16 Q13 18 19 16" />
-      </g>
+          {/* 4. Fresh Carrot with Greens at x: 146, y: 24 */}
+          <g transform="translate(146, 24) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M7 8 Q14 26 14 26 Q14 26 21 8 Z" />
+            <path d="M11 8 Q14 3 13 0 M17 8 Q14 3 15 0" />
+            <line x1="10" y1="13" x2="16" y2="13" />
+            <line x1="11" y1="18" x2="15" y2="18" />
+          </g>
 
-      {/* 5. Crossed Cutlery at x: 192, y: 9 */}
-      <g
-        transform="translate(192, 9) scale(0.62)"
-        stroke={strokeColor}
-        strokeWidth="1.6"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M6 3 L6 10 M10 3 L10 10 M8 3 L8 10 M5 10 C5 13 11 13 11 10 L8 23" />
-        <path d="M19 3 C22 5 22 10 19 12 L19 23" />
-      </g>
+          {/* 5. Crusty Bread Loaf at x: 190, y: 9 */}
+          <g transform="translate(190, 9) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <ellipse cx="14" cy="15" rx="13" ry="8" />
+            <path d="M7 12 L11 18 M12 10 L16 18 M17 11 L21 17" />
+          </g>
 
-      {/* 6. Taco / Roll at x: 232, y: 24 */}
-      <g
-        transform="translate(232, 24) scale(0.62)"
-        stroke={strokeColor}
-        strokeWidth="1.6"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M3 18 C3 7 23 7 23 18" />
-        <path d="M6 15 C9 12 17 12 20 15" />
-        <line x1="3" y1="18" x2="23" y2="18" />
-      </g>
+          {/* 6. Honey / Jam Jar at x: 232, y: 24 */}
+          <g transform="translate(232, 24) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="6" y="8" width="16" height="18" rx="3" />
+            <rect x="8" y="4" width="12" height="4" rx="1" />
+            <rect x="9" y="13" width="10" height="7" rx="1" />
+          </g>
+        </>
+      ) : category === 'pharmacy' ? (
+        <>
+          {/* 1. Capsule Pill at x: 14, y: 10 */}
+          <g transform="translate(14, 10) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="4" y="6" width="20" height="12" rx="6" transform="rotate(-30 14 12)" />
+            <line x1="14" y1="6" x2="14" y2="18" transform="rotate(-30 14 12)" />
+            <circle cx="10" cy="11" r="1" fill={strokeColor} />
+          </g>
+
+          {/* 2. Medicine Syrup Bottle at x: 56, y: 23 */}
+          <g transform="translate(56, 23) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="7" y="8" width="14" height="18" rx="3" />
+            <rect x="10" y="3" width="8" height="5" rx="1" />
+            <path d="M14 12 L14 20" />
+            <path d="M10 16 L18 16" />
+          </g>
+
+          {/* 3. First Aid Cross Kit at x: 102, y: 8 */}
+          <g transform="translate(102, 8) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="4" y="6" width="20" height="18" rx="3" />
+            <path d="M9 6 L9 3 L19 3 L19 6" />
+            <line x1="14" y1="11" x2="14" y2="19" />
+            <line x1="10" y1="15" x2="18" y2="15" />
+          </g>
+
+          {/* 4. Stethoscope at x: 146, y: 24 */}
+          <g transform="translate(146, 24) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 3 L6 11 C6 16 11 20 16 20 C21 20 23 16 23 11 L23 3" />
+            <circle cx="16" cy="24" r="3" />
+            <line x1="16" y1="20" x2="16" y2="21" />
+          </g>
+
+          {/* 5. Clinical Thermometer at x: 190, y: 9 */}
+          <g transform="translate(190, 9) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="11" y="2" width="6" height="18" rx="3" />
+            <circle cx="14" cy="21" r="4.5" />
+            <line x1="14" y1="7" x2="14" y2="17" />
+            <line x1="15" y1="10" x2="17" y2="10" />
+            <line x1="15" y1="14" x2="17" y2="14" />
+          </g>
+
+          {/* 6. Heartbeat ECG Pulse Wave at x: 232, y: 24 */}
+          <g transform="translate(232, 24) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 14 L6 14 L9 7 L13 21 L16 10 L19 14 L24 14" />
+            <circle cx="24" cy="14" r="1.5" fill={strokeColor} />
+          </g>
+        </>
+      ) : (
+        <>
+          {/* 1. Burger outline at x: 14, y: 10 */}
+          <g transform="translate(14, 10) scale(0.65)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 11 C4 4 24 4 24 11 Z" />
+            <path d="M3 14 C6 16 9 14 12 16 C15 14 18 16 21 14 C23 15 25 14 25 14" />
+            <line x1="4" y1="18" x2="24" y2="18" />
+            <path d="M5 21 C5 25 23 25 23 21 Z" />
+          </g>
+
+          {/* 2. Pizza Slice outline at x: 58, y: 24 */}
+          <g transform="translate(58, 24) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 5 Q14 2 24 5" />
+            <path d="M4 5 L14 25 L24 5" />
+            <circle cx="14" cy="11" r="1.8" />
+            <circle cx="11" cy="17" r="1.3" />
+            <circle cx="17" cy="18" r="1.3" />
+          </g>
+
+          {/* 3. Steaming Dum Biriyani Bowl at x: 104, y: 8 */}
+          <g transform="translate(104, 8) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <ellipse cx="14" cy="12" rx="11" ry="3.5" />
+            <path d="M3 12 C4 23 24 23 25 12" />
+            <path d="M9 7 C8 4 12 2 11 0" />
+            <path d="M14 7 C13 4 17 2 16 0" />
+            <path d="M19 7 C18 4 22 2 21 0" />
+          </g>
+
+          {/* 4. Cold Drink Cup with Straw at x: 148, y: 23 */}
+          <g transform="translate(148, 23) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 9 L8 25 L18 25 L21 9 Z" />
+            <line x1="3" y1="9" x2="23" y2="9" />
+            <path d="M13 9 L15 2 L20 1" />
+            <path d="M7 16 Q13 18 19 16" />
+          </g>
+
+          {/* 5. Crossed Cutlery at x: 192, y: 9 */}
+          <g transform="translate(192, 9) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 3 L6 10 M10 3 L10 10 M8 3 L8 10 M5 10 C5 13 11 13 11 10 L8 23" />
+            <path d="M19 3 C22 5 22 10 19 12 L19 23" />
+          </g>
+
+          {/* 6. Taco / Roll at x: 232, y: 24 */}
+          <g transform="translate(232, 24) scale(0.62)" stroke={strokeColor} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 18 C3 7 23 7 23 18" />
+            <path d="M6 15 C9 12 17 12 20 15" />
+            <line x1="3" y1="18" x2="23" y2="18" />
+          </g>
+        </>
+      )}
     </svg>
   );
 };
 
-const ViewOrderDishesPattern = () => {
+const ViewOrderDishesPattern = ({ category = 'food' }: { category?: string }) => {
+  const darkStrokeColor =
+    category === 'supermarket'
+      ? '#022416'
+      : category === 'pharmacy'
+      ? '#081638'
+      : '#260404';
+
   return (
     <div
       style={{
@@ -589,7 +657,7 @@ const ViewOrderDishesPattern = () => {
       }}
       aria-hidden="true"
     >
-      {/* Light Side (Left): Crisp translucent white dish outlines */}
+      {/* Light Side (Left): Crisp translucent white outlines */}
       <div
         style={{
           position: 'absolute',
@@ -617,14 +685,14 @@ const ViewOrderDishesPattern = () => {
             repeat: Infinity
           }}
         >
-          <ViewOrderDishesTile strokeColor="#FFFFFF" />
-          <ViewOrderDishesTile strokeColor="#FFFFFF" />
-          <ViewOrderDishesTile strokeColor="#FFFFFF" />
-          <ViewOrderDishesTile strokeColor="#FFFFFF" />
+          <ViewOrderDishesTile category={category} strokeColor="#FFFFFF" />
+          <ViewOrderDishesTile category={category} strokeColor="#FFFFFF" />
+          <ViewOrderDishesTile category={category} strokeColor="#FFFFFF" />
+          <ViewOrderDishesTile category={category} strokeColor="#FFFFFF" />
         </motion.div>
       </div>
 
-      {/* Dark Side (Right): Deep crimson/burgundy dark dish outlines */}
+      {/* Dark Side (Right): Deep category-tailored dark outlines */}
       <div
         style={{
           position: 'absolute',
@@ -652,10 +720,10 @@ const ViewOrderDishesPattern = () => {
             repeat: Infinity
           }}
         >
-          <ViewOrderDishesTile strokeColor="#260404" />
-          <ViewOrderDishesTile strokeColor="#260404" />
-          <ViewOrderDishesTile strokeColor="#260404" />
-          <ViewOrderDishesTile strokeColor="#260404" />
+          <ViewOrderDishesTile category={category} strokeColor={darkStrokeColor} />
+          <ViewOrderDishesTile category={category} strokeColor={darkStrokeColor} />
+          <ViewOrderDishesTile category={category} strokeColor={darkStrokeColor} />
+          <ViewOrderDishesTile category={category} strokeColor={darkStrokeColor} />
         </motion.div>
       </div>
     </div>
@@ -1237,6 +1305,17 @@ export default function App() {
   const cartSubtotal = useMemo(() => {
     return cartItems.reduce((acc, i) => acc + i.price * i.qty, 0);
   }, [cartItems]);
+
+  const cartCategory = useMemo(() => {
+    if (cartItems.length > 0) {
+      const hasPharm = cartItems.some(i => i.id.startsWith('pharm') || /pharm|med|care|pill|supplement/i.test(i.store || ''));
+      if (hasPharm) return 'pharmacy';
+      const hasGroc = cartItems.some(i => i.id.startsWith('groc') || /market|fresh|super|grocery|pantry/i.test(i.store || ''));
+      if (hasGroc) return 'supermarket';
+      return 'food';
+    }
+    return activeCategory || 'food';
+  }, [cartItems, activeCategory]);
 
   // Unique stores in cart for multi-store delivery fee calculation
   const distinctStoresInCart = useMemo(() => {
@@ -2019,28 +2098,37 @@ export default function App() {
                     onMouseUp={handleMouseLeaveOrUp}
                     onMouseMove={handleMouseMove}
                   >
-                    {infiniteSpecials.map((banner) => (
-                      <div
-                        key={banner.uniqueKey}
-                        className="category-promo-card"
-                        style={{
-                          background: banner.bg,
-                          color: banner.textColor || '#FFFFFF'
-                        }}
-                        onClick={() => {
-                          if (banner.id.includes('food_3')) {
-                            setCurrentScreen('multiorder');
-                          } else {
-                            setCurrentScreen('home');
-                          }
-                        }}
-                      >
-                        {/* ─── Vector Outlines Pattern on Background ─── */}
-                        <PromoCardOutlinesPattern
-                          category={activeCategory}
-                          textColor={banner.textColor || '#FFFFFF'}
-                          patternId={`pat_${banner.uniqueKey}`}
-                        />
+                    {infiniteSpecials.map((banner) => {
+                      const bannerCategory = banner.id.includes('groc')
+                        ? 'supermarket'
+                        : banner.id.includes('pharm')
+                        ? 'pharmacy'
+                        : banner.id.includes('food')
+                        ? 'food'
+                        : activeCategory;
+
+                      return (
+                        <div
+                          key={banner.uniqueKey}
+                          className="category-promo-card"
+                          style={{
+                            background: banner.bg,
+                            color: banner.textColor || '#FFFFFF'
+                          }}
+                          onClick={() => {
+                            if (banner.id.includes('food_3')) {
+                              setCurrentScreen('multiorder');
+                            } else {
+                              setCurrentScreen('home');
+                            }
+                          }}
+                        >
+                          {/* ─── Vector Outlines Pattern on Background (Distinct for groceries, pharmacy, food) ─── */}
+                          <PromoCardOutlinesPattern
+                            category={bannerCategory}
+                            textColor={banner.textColor || '#FFFFFF'}
+                            patternId={`pat_${banner.uniqueKey}`}
+                          />
 
                         <div className="category-promo-left">
                           <div className="category-promo-title" style={{ color: banner.textColor || '#FFFFFF' }}>
@@ -2061,7 +2149,8 @@ export default function App() {
                         </div>
                         <img src={banner.image} alt={banner.title} className="category-promo-img" />
                       </div>
-                    ))}
+                    );
+                  })}
                   </div>
 
                   {/* ─── FOOD MOOD & CRAVINGS ROULETTE SLOT MACHINE HERO BANNER (FOOD ONLY) ─── */}
@@ -3186,8 +3275,8 @@ export default function App() {
             style={{ background: activeTheme.gradient, boxShadow: activeTheme.glow }}
             onClick={() => setCurrentScreen('cart')}
           >
-            {/* Animated Outlined Dishes (Lighter on left, darker on right, slow left-to-right drift) */}
-            <ViewOrderDishesPattern />
+            {/* Animated Outlined Dishes/Groceries/Pharmacy (Lighter on left, darker on right, slow left-to-right drift) */}
+            <ViewOrderDishesPattern category={cartCategory} />
 
             <div className="cart-left-wrap">
               <div className="cart-badge-yellow" style={{ color: activeTheme.primary }}>
