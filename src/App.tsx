@@ -757,25 +757,31 @@ const TopEcosystemOutlinesBackground = ({
         </defs>
 
         {/* ═══════════════════════════════════════════════════════════════
+            CONTINUOUS GROUND BASELINE (y: 62) - ALL ELEMENTS REST FIRMLY ON THE GROUND
+           ═══════════════════════════════════════════════════════════════ */}
+        <line x1="8" y1="62" x2="472" y2="62" stroke={primaryColor} strokeWidth="1.8" opacity={0.45} />
+
+        {/* ═══════════════════════════════════════════════════════════════
             UPPER HERO STAGE (y: 2 to 62) - PROMINENTLY VISIBLE ABOVE & AROUND 4KIT LOGO
-            - Left: The Local 4Kit Partner Shop & Merchant
-            - Center (Above 4Kit): Fast Delivery Guy on Scooter
-            - Right: Customer at Home Doorstep Waving Welcoming the Order
+            - Left: The Local 4Kit Partner Shop (x: 10 to 110, on ground y: 62)
+            - Left-Center: Authentic Delivery Rider on Scooter (x: 125 to 195, wheels on ground y: 62)
+            - Center Sky (Above 4Kit): Delivery Trajectory, Clouds & Birds
+            - Right: Customer at Home Doorstep Waving (x: 345 to 470, on ground y: 62)
            ═══════════════════════════════════════════════════════════════ */}
 
-        {/* ─── A. LOCAL 4KIT SHOP & MERCHANT (LEFT OF 4KIT LOGO) ─── */}
+        {/* ─── A. LOCAL 4KIT SHOP & MERCHANT (LEFT, ON GROUND) ─── */}
         <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.44}>
           {/* Store rooftop cornice */}
-          <line x1="12" y1="18" x2="115" y2="18" strokeWidth="1.6" />
+          <line x1="12" y1="18" x2="108" y2="18" strokeWidth="1.6" />
           <circle cx="15" cy="15" r="1.8" strokeWidth="1.2" />
-          <circle cx="112" cy="15" r="1.8" strokeWidth="1.2" />
+          <circle cx="105" cy="15" r="1.8" strokeWidth="1.2" />
 
           {/* Store Signboard */}
-          <rect x="28" y="6" width="70" height="11" rx="2.5" strokeWidth="1.3" />
-          <circle cx="31" cy="9" r="0.6" strokeWidth="0.6" />
-          <circle cx="95" cy="9" r="0.6" strokeWidth="0.6" />
+          <rect x="25" y="6" width="66" height="11" rx="2.5" strokeWidth="1.3" />
+          <circle cx="28" cy="9" r="0.6" strokeWidth="0.6" />
+          <circle cx="88" cy="9" r="0.6" strokeWidth="0.6" />
           <text
-            x="63"
+            x="58"
             y="14"
             fontSize="6.5"
             fontWeight="900"
@@ -790,122 +796,141 @@ const TopEcosystemOutlinesBackground = ({
 
           {/* Striped Storefront Awning */}
           <path
-            d="M 10 19 L 117 19 L 118 33 C 109 38 101 38 92 33 C 83 38 75 38 66 33 C 57 38 49 38 40 33 C 31 38 23 38 10 33 Z"
+            d="M 10 19 L 110 19 L 111 33 C 103 38 95 38 87 33 C 79 38 71 38 63 33 C 55 38 47 38 39 33 C 31 38 23 38 10 33 Z"
             strokeWidth="1.6"
           />
-          <line x1="40" y1="19" x2="40" y2="33" strokeWidth="1.1" />
-          <line x1="66" y1="19" x2="66" y2="33" strokeWidth="1.1" />
-          <line x1="92" y1="19" x2="92" y2="33" strokeWidth="1.1" />
+          <line x1="39" y1="19" x2="39" y2="33" strokeWidth="1.1" />
+          <line x1="63" y1="19" x2="63" y2="33" strokeWidth="1.1" />
+          <line x1="87" y1="19" x2="87" y2="33" strokeWidth="1.1" />
 
-          {/* Shop walls & pavement baseline */}
-          <line x1="16" y1="33" x2="16" y2="62" strokeWidth="1.6" />
-          <line x1="112" y1="33" x2="112" y2="62" strokeWidth="1.6" />
-          <line x1="10" y1="62" x2="120" y2="62" strokeWidth="1.8" />
+          {/* Shop walls down to ground y: 62 */}
+          <line x1="14" y1="33" x2="14" y2="62" strokeWidth="1.6" />
+          <line x1="106" y1="33" x2="106" y2="62" strokeWidth="1.6" />
 
           {/* Shop Display Window with fresh goods */}
-          <rect x="22" y="38" width="40" height="20" rx="2.5" strokeWidth="1.4" />
-          <line x1="42" y1="38" x2="42" y2="58" strokeWidth="1" />
-          <rect x="26" y="44" width="5" height="9" rx="1" strokeWidth="1.1" />
-          <circle cx="36" cy="49" r="3" strokeWidth="1.1" />
-          <ellipse cx="51" cy="50" rx="5" ry="3" strokeWidth="1.1" />
+          <rect x="18" y="38" width="38" height="20" rx="2.5" strokeWidth="1.4" />
+          <line x1="37" y1="38" x2="37" y2="58" strokeWidth="1" />
+          <rect x="22" y="44" width="5" height="9" rx="1" strokeWidth="1.1" />
+          <circle cx="31" cy="49" r="2.8" strokeWidth="1.1" />
+          <ellipse cx="46" cy="50" rx="5" ry="3" strokeWidth="1.1" />
 
           {/* Shop Entrance Door */}
-          <rect x="68" y="36" width="38" height="26" rx="2" strokeWidth="1.4" />
-          <rect x="73" y="39" width="14" height="13" rx="1.5" strokeWidth="1" />
-          <line x1="84" y1="52" x2="84" y2="56" strokeWidth="1.6" />
+          <rect x="62" y="36" width="38" height="26" rx="2" strokeWidth="1.4" />
+          <rect x="67" y="39" width="14" height="13" rx="1.5" strokeWidth="1" />
+          <line x1="77" y1="52" x2="77" y2="56" strokeWidth="1.6" />
 
           {/* Merchant at the entrance holding out an order */}
-          <circle cx="97" cy="43" r="3.8" strokeWidth="1.3" />
-          <path d="M 93 40 Q 97 35 101 40" strokeWidth="1.2" />
-          <path d="M 93 47 L 91 62 L 103 62 L 101 47 Z" strokeWidth="1.3" />
-          <path d="M 93 49 L 88 54" strokeWidth="1.3" />
+          <circle cx="89" cy="43" r="3.8" strokeWidth="1.3" />
+          <path d="M 85 40 Q 89 35 93 40" strokeWidth="1.2" />
+          <path d="M 85 47 L 83 62 L 95 62 L 93 47 Z" strokeWidth="1.3" />
+          <path d="M 85 49 L 80 54" strokeWidth="1.3" />
           {/* Order bag */}
-          <rect x="84" y="54" width="7" height="8" rx="1" strokeWidth="1.2" />
-          <path d="M 86 54 Q 87.5 51 89 54" strokeWidth="1" />
+          <rect x="76" y="54" width="7" height="8" rx="1" strokeWidth="1.2" />
+          <path d="M 78 54 Q 79.5 51 81 54" strokeWidth="1" />
 
-          {/* Produce crate outside */}
-          <rect x="122" y="50" width="15" height="12" rx="1.5" strokeWidth="1.2" />
-          <line x1="122" y1="55" x2="137" y2="55" strokeWidth="0.9" />
-          <path d="M 125 50 Q 127 43 130 46" strokeWidth="1.1" />
-
-          {/* Vintage streetlamp */}
-          <line x1="144" y1="20" x2="144" y2="62" strokeWidth="1.5" />
-          <path d="M 144 26 C 153 22 153 14 140 12" strokeWidth="1.3" />
-          <path d="M 137 15 L 143 15 L 145 22 L 135 22 Z" strokeWidth="1.1" />
+          {/* Produce crate on ground */}
+          <rect x="110" y="50" width="13" height="12" rx="1.5" strokeWidth="1.2" />
+          <line x1="110" y1="55" x2="123" y2="55" strokeWidth="0.9" />
+          <path d="M 113 50 Q 115 43 118 46" strokeWidth="1.1" />
         </g>
 
-        {/* ─── B. FAST DELIVERY RIDER ON SCOOTER (CENTER, DIRECTLY ABOVE 4KIT LOGO) ─── */}
-        <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.48}>
-          {/* Scooter road track above logo */}
-          <line x1="182" y1="28" x2="265" y2="28" strokeWidth="1.4" strokeDasharray="5 3" opacity={0.35} />
+        {/* ─── B. AUTHENTIC DELIVERY RIDER ON SCOOTER / MOTORBIKE (ON GROUND y: 62) ─── */}
+        <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.52}>
+          {/* Speed wind trails behind scooter */}
+          <line x1="102" y1="28" x2="122" y2="28" strokeWidth="1.3" strokeDasharray="4 3" opacity={0.35} />
+          <line x1="108" y1="35" x2="124" y2="35" strokeWidth="1.5" opacity={0.4} />
+          <line x1="104" y1="42" x2="123" y2="42" strokeWidth="1.3" strokeDasharray="5 3" opacity={0.35} />
+          <line x1="114" y1="54" x2="126" y2="54" strokeWidth="1.4" opacity={0.4} />
+          {/* Ground dust puff behind rear tire */}
+          <path d="M 127 60 Q 123 57 127 54 Q 123 51 120 54" strokeWidth="1.1" opacity={0.3} />
 
-          {/* Rear Wheel */}
-          <circle cx="204" cy="22" r="6.5" strokeWidth="1.8" />
-          <circle cx="204" cy="22" r="2" strokeWidth="1" />
+          {/* Rear Wheel (r: 8, cy: 54 -> bottom touches ground at y: 62!) */}
+          <circle cx="140" cy="54" r="8" strokeWidth="2.2" />
+          <circle cx="140" cy="54" r="3.2" strokeWidth="1.3" />
+          <circle cx="140" cy="54" r="1.2" strokeWidth="1.4" />
 
-          {/* Front Wheel */}
-          <circle cx="244" cy="22" r="6.5" strokeWidth="1.8" />
-          <circle cx="244" cy="22" r="2" strokeWidth="1" />
+          {/* Front Wheel (r: 8, cy: 54 -> bottom touches ground at y: 62!) */}
+          <circle cx="184" cy="54" r="8" strokeWidth="2.2" />
+          <circle cx="184" cy="54" r="3.2" strokeWidth="1.3" />
+          <circle cx="184" cy="54" r="1.2" strokeWidth="1.4" />
 
-          {/* Scooter Frame & Floorboard */}
-          <line x1="211" y1="22" x2="233" y2="22" strokeWidth="1.8" />
-          <path d="M 197 20 C 197 12 208 12 212 18" strokeWidth="1.4" />
-          <path d="M 211 18 L 211 11 C 215 6 225 6 229 12 L 229 22" strokeWidth="1.4" />
-          <path d="M 212 7 C 218 5 226 6 229 8" strokeWidth="1.6" />
+          {/* Rear Curved Mudguard / Fender */}
+          <path d="M 130 54 C 130 42 150 42 150 52" strokeWidth="1.6" />
 
-          {/* Steering column, fork & handlebars */}
-          <path d="M 244 22 L 238 4 L 233 4" strokeWidth="1.6" />
-          <line x1="230" y1="3" x2="236" y2="4" strokeWidth="1.6" />
+          {/* Front Curved Mudguard / Fender */}
+          <path d="M 176 52 C 176 43 192 43 192 52" strokeWidth="1.6" />
 
-          {/* Aerodynamic headlight & illumination beam */}
-          <path d="M 239 7 L 244 6 L 243 11 L 238 11 Z" strokeWidth="1.2" />
-          <line x1="247" y1="7" x2="256" y2="5" strokeWidth="1" opacity={0.35} />
-          <line x1="248" y1="9" x2="260" y2="9" strokeWidth="1" opacity={0.4} />
-          <line x1="247" y1="11" x2="256" y2="13" strokeWidth="1" opacity={0.35} />
+          {/* Scooter Low Flat Footboard (between wheels) */}
+          <line x1="148" y1="55" x2="174" y2="55" strokeWidth="2.6" />
 
-          {/* Delivery Box mounted on rear carrier */}
-          <rect x="194" y="5" width="15" height="13" rx="2.5" strokeWidth="1.6" />
-          <line x1="194" y1="9" x2="209" y2="9" strokeWidth="1" />
-          <path d="M 199 5 L 199 3 L 204 3 L 204 5" strokeWidth="1" />
+          {/* Scooter Body Fairing & Engine Cowl */}
+          <path d="M 144 50 L 144 38 C 150 32 163 32 169 41 L 172 55" strokeWidth="1.8" />
+
+          {/* Scooter Ergonomic Seat Cushion */}
+          <path d="M 141 38 C 150 35 164 36 169 39" strokeWidth="2.2" />
+
+          {/* Front Apron Shield & Steering Column */}
+          <path d="M 174 54 L 180 30 L 176 24" strokeWidth="2.2" />
+          {/* Handlebar & Grips */}
+          <line x1="171" y1="23" x2="181" y2="23" strokeWidth="2.2" />
+          {/* Side Mirror */}
+          <path d="M 178 23 L 176 18 C 174 18 174 15 176 15 C 178 15 178 18 176 18" strokeWidth="1.2" />
+
+          {/* Modern Headlight on Handlebar */}
+          <path d="M 180 25 L 185 24 L 185 28 L 180 28 Z" strokeWidth="1.4" />
+          {/* Headlight Forward Beam Rays */}
+          <line x1="188" y1="24" x2="198" y2="22" strokeWidth="1.2" opacity={0.35} />
+          <line x1="189" y1="26" x2="204" y2="26" strokeWidth="1.2" opacity={0.4} />
+          <line x1="188" y1="29" x2="199" y2="31" strokeWidth="1.2" opacity={0.35} />
+
+          {/* 4Kit Insulated Delivery Box (Mounted securely on rear rack) */}
+          <rect x="125" y="21" width="18" height="17" rx="3" strokeWidth="1.8" />
+          <line x1="125" y1="26" x2="143" y2="26" strokeWidth="1.2" />
+          <path d="M 131 21 L 131 18 L 137 18 L 137 21" strokeWidth="1.2" />
+          {/* "4" Logo embossed on delivery box */}
           <text
-            x="201.5"
-            y="15"
-            fontSize="6.5"
+            x="134"
+            y="34"
+            fontSize="8"
             fontWeight="900"
             textAnchor="middle"
             fill={primaryColor}
             stroke="none"
-            opacity={0.65}
+            opacity={0.7}
           >
             4
           </text>
 
-          {/* Delivery Rider */}
-          {/* Aerodynamic helmet with visor */}
-          <path
-            d="M 221 -1 C 221 -7 232 -7 233 -1 C 233 3 229 6 224 6 C 221 6 221 3 221 -1 Z"
-            strokeWidth="1.5"
-          />
-          <path d="M 228 -2 C 233 -1 232 3 227 3" strokeWidth="1.2" />
-          {/* Rider jacket leaning forward */}
-          <path d="M 223 6 C 220 10 216 14 213 20" strokeWidth="1.6" />
-          <path d="M 225 6 C 228 10 231 13 234 16" strokeWidth="1.6" />
-          {/* Arm holding handlebars */}
-          <path d="M 225 9 L 231 11 L 234 4" strokeWidth="1.4" />
-          {/* Leg & boot */}
-          <path d="M 222 17 L 226 20 L 231 22" strokeWidth="1.5" />
+          {/* Delivery Rider on the Scooter */}
+          {/* Full-face helmet with visor */}
+          <circle cx="158" cy="18" r="6.8" strokeWidth="1.8" />
+          <path d="M 161 16 C 167 17 167 21 161 21" strokeWidth="1.4" />
 
-          {/* Speed wind trails */}
-          <line x1="168" y1="9" x2="190" y2="9" strokeWidth="1.3" strokeDasharray="4 3" opacity={0.35} />
-          <line x1="172" y1="14" x2="190" y2="14" strokeWidth="1.4" opacity={0.4} />
-          <line x1="165" y1="19" x2="188" y2="19" strokeWidth="1.3" strokeDasharray="5 3" opacity={0.35} />
+          {/* Rider body leaning forward in sporty posture */}
+          <path d="M 156 24 C 151 30 148 35 146 40" strokeWidth="2" />
+          <path d="M 159 24 C 163 29 166 34 168 40" strokeWidth="2" />
 
-          {/* Sky soaring birds */}
-          <path d="M 148 5 Q 151 2 154 5 Q 157 2 160 5" strokeWidth="1.2" opacity={0.35} />
-          <path d="M 295 5 Q 298 2 301 5 Q 304 2 307 5" strokeWidth="1.2" opacity={0.35} />
+          {/* Arm extending forward to handlebar */}
+          <path d="M 158 27 L 167 30 L 175 24" strokeWidth="1.8" />
+
+          {/* Leg & boot firmly on footboard */}
+          <path d="M 154 40 L 162 45 L 164 54" strokeWidth="2" />
         </g>
 
-        {/* ─── C. HAPPY CUSTOMER & HOME (RIGHT OF 4KIT LOGO) ─── */}
+        {/* ─── C. CENTER SKY (DIRECTLY ABOVE 4KIT LOGO) ─── */}
+        <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.35}>
+          {/* Dashed delivery journey trajectory over the sky */}
+          <path d="M 90 22 Q 240 -3 390 22" strokeDasharray="4 4" strokeWidth="1.3" />
+
+          {/* Fluffy clouds in the sky */}
+          <path d="M 222 10 C 222 5 231 3 236 7 C 241 3 252 5 252 10 Z" strokeWidth="1.2" />
+
+          {/* Soaring birds */}
+          <path d="M 214 15 Q 217 11 220 14 Q 223 11 226 14" strokeWidth="1.2" />
+          <path d="M 256 14 Q 259 10 262 13 Q 265 10 268 13" strokeWidth="1.2" />
+        </g>
+
+        {/* ─── D. HAPPY CUSTOMER & HOME (RIGHT, ON GROUND) ─── */}
         <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.44}>
           {/* Traditional Kerala pitched roof */}
           <path d="M 345 32 L 385 10 L 425 32" strokeWidth="1.8" />
@@ -922,15 +947,14 @@ const TopEcosystemOutlinesBackground = ({
           <line x1="385" y1="17" x2="385" y2="29" strokeWidth="0.9" />
           <line x1="379" y1="23" x2="391" y2="23" strokeWidth="0.9" />
 
-          {/* House walls & baseline */}
+          {/* House walls down to ground y: 62 */}
           <line x1="348" y1="33" x2="348" y2="62" strokeWidth="1.6" />
           <line x1="422" y1="33" x2="422" y2="62" strokeWidth="1.6" />
-          <line x1="340" y1="62" x2="435" y2="62" strokeWidth="1.8" />
 
-          {/* Front door & porch steps */}
+          {/* Front door & porch steps on ground */}
           <rect x="358" y="38" width="28" height="24" rx="2" strokeWidth="1.3" />
           <circle cx="363" cy="51" r="1.2" strokeWidth="1" />
-          <rect x="354" y="60" width="36" height="2.5" rx="1" strokeWidth="1.1" />
+          <rect x="354" y="60" width="36" height="2" rx="1" strokeWidth="1.1" />
 
           {/* Picture Window with Flower Planter Box */}
           <rect x="392" y="42" width="22" height="15" rx="1.5" strokeWidth="1.2" />
@@ -940,7 +964,7 @@ const TopEcosystemOutlinesBackground = ({
           <circle cx="403" cy="55.5" r="1.8" strokeWidth="0.9" />
           <circle cx="411" cy="56" r="1.5" strokeWidth="0.9" />
 
-          {/* Customer standing on porch step waving eagerly */}
+          {/* Customer standing on porch step on ground waving eagerly */}
           <circle cx="368" cy="43" r="3.8" strokeWidth="1.3" />
           <path d="M 364 42 C 364 38 372 38 372 42" strokeWidth="1.2" />
           <path d="M 364 47 L 372 47 L 374 61 L 362 61 Z" strokeWidth="1.3" />
@@ -953,7 +977,7 @@ const TopEcosystemOutlinesBackground = ({
           {/* Phone in other hand */}
           <rect x="372" y="51" width="3" height="5" rx="0.8" strokeWidth="0.9" />
 
-          {/* Kerala Coconut Palm Tree */}
+          {/* Kerala Coconut Palm Tree rooted on ground y: 62 */}
           <path d="M 436 62 Q 430 35 435 8" strokeWidth="2.2" />
           <line x1="433" y1="46" x2="437" y2="47" strokeWidth="1.1" />
           <line x1="431" y1="32" x2="435" y2="33" strokeWidth="1.1" />
