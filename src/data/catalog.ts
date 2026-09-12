@@ -339,9 +339,9 @@ export const DIET_ITEMS: MenuItem[] = [
 ];
 
 export const CRAVINGS_ITEMS: MenuItem[] = [
-  { id: 'crav_1', name: 'Warm Chocolate Lava Cake & Gelato', price: 190, desc: 'Molten dark Belgian chocolate cake served with vanilla bean gelato.', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=300&h=200&fit=crop', category: 'Cravings', badge: 'BESTSELLER', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Supreme Upper Crust', storeLoc: 'Kuravankonam' },
-  { id: 'crav_2', name: 'Royal Malabar Falooda with Kulfi', price: 160, desc: 'Layered falooda with basil seeds, rose syrup, rich malai kulfi & pistachios.', image: 'https://images.unsplash.com/photo-1560008511-11c63416e52d?w=300&h=200&fit=crop', category: 'Cravings', badge: 'POPULAR', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Falooda Nation', storeLoc: 'Kuravankonam' },
-  { id: 'crav_3', name: 'Neyyappam & Pazham Pori Box', price: 120, desc: 'Hot sweet banana fritters and pure ghee cardamom jaggery unniyappam.', image: 'https://images.unsplash.com/photo-1624371414361-e670ef4889d5?w=300&h=200&fit=crop', category: 'Cravings', badge: 'TRIVANDRUM SPECIAL', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Sree Krishna Marry Cafe', storeLoc: 'Chalai' }
+  { id: 'crav_1', name: 'Warm Chocolate Lava Cake & Gelato', price: 190, desc: 'Molten dark Belgian chocolate cake served with vanilla bean gelato.', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=300&h=300&fit=crop', category: 'Cravings', badge: 'BESTSELLER', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Supreme Upper Crust', storeLoc: 'Kuravankonam' },
+  { id: 'crav_2', name: 'Royal Malabar Falooda with Kulfi', price: 160, desc: 'Layered falooda with basil seeds, rose syrup, rich malai kulfi & pistachios.', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=300&fit=crop', category: 'Cravings', badge: 'POPULAR', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Falooda Nation', storeLoc: 'Kuravankonam' },
+  { id: 'crav_3', name: 'Neyyappam & Pazham Pori Box', price: 120, desc: 'Hot sweet banana fritters and pure ghee cardamom jaggery unniyappam.', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=300&h=300&fit=crop', category: 'Cravings', badge: 'TRIVANDRUM SPECIAL', diet: 'veg', isVeg: true, sugar: 'sweet', storeName: 'Sree Krishna Marry Cafe', storeLoc: 'Chalai' }
 ];
 
 export const CUISINE_COLLECTIONS: CuisineCollection[] = [

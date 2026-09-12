@@ -40,6 +40,7 @@ import {
   Cake,
   Soup,
   Pizza,
+  Dices,
   type LucideIcon
 } from 'lucide-react';
 
@@ -150,6 +151,324 @@ const PHARMACY_MIND_CATEGORIES = [
 ];
 
 const SAMPLE_SEARCHES = ['Biriyani', 'Porotta', 'Fish Nirvana', 'Alfaham', 'Beef', 'Puttu', 'Dosa'];
+
+const PromoCardOutlinesPattern = ({
+  category = 'food',
+  textColor = '#FFFFFF',
+  patternId = 'promo_pat'
+}: {
+  category?: string;
+  textColor?: string;
+  patternId?: string;
+}) => {
+  const isWhite = textColor === '#FFFFFF';
+  const strokeColor = isWhite ? '#FFFFFF' : textColor;
+  const strokeOpacity = isWhite ? 0.18 : 0.13;
+
+  return (
+    <svg
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 1
+      }}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <pattern
+          id={patternId}
+          width="110"
+          height="90"
+          patternUnits="userSpaceOnUse"
+        >
+          {category === 'food' ? (
+            <>
+              {/* Row 1: Burger outline at (20, 15) */}
+              <g
+                transform="translate(20, 15) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <path d="M4 13 C4 5 26 5 26 13 Z" />
+                <path d="M2 16 C5 18 8 16 11 18 C14 16 17 18 20 16 C23 18 26 16 28 16" />
+                <line x1="3" y1="20" x2="27" y2="20" />
+                <path d="M5 23 C5 27 25 27 25 23 Z" />
+              </g>
+
+              {/* Row 1: Steaming Bowl outline at (75, 15) */}
+              <g
+                transform="translate(75, 15) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <ellipse cx="15" cy="11" rx="12" ry="3.5" />
+                <path d="M3 11 C4 22 26 22 27 11" />
+                <path d="M10 7 C9 3 13 1 12 -2" />
+                <path d="M15 7 C14 3 18 1 17 -2" />
+                <path d="M20 7 C19 3 23 1 22 -2" />
+              </g>
+
+              {/* Row 2: Pizza Slice at (45, 45) */}
+              <g
+                transform="translate(45, 45) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <path d="M4 6 Q15 3 26 6" />
+                <path d="M4 6 L15 28 L26 6" />
+                <circle cx="15" cy="12" r="2" />
+                <circle cx="12" cy="18" r="1.5" />
+                <circle cx="18" cy="19" r="1.5" />
+              </g>
+
+              {/* Row 2: Taco outline at (100, 45) */}
+              <g
+                transform="translate(100, 45) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <path d="M3 18 C3 7 25 7 25 18" />
+                <path d="M6 15 C9 12 19 12 22 15" />
+                <line x1="3" y1="18" x2="25" y2="18" />
+              </g>
+
+              {/* Row 3: Cold Drink Cup at (20, 75) */}
+              <g
+                transform="translate(20, 75) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <path d="M6 9 L9 26 L21 26 L24 9 Z" />
+                <path d="M4 9 L26 9" />
+                <path d="M14 9 L17 2 L22 0.5" />
+              </g>
+
+              {/* Row 3: Crossed Cutlery at (75, 75) */}
+              <g
+                transform="translate(75, 75) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <path d="M6 4 L6 11 M10 4 L10 11 M8 4 L8 11 M5 11 C5 14 11 14 11 11 L8 24" />
+                <path d="M20 4 C23 6 23 11 20 13 L20 24" />
+              </g>
+            </>
+          ) : category === 'supermarket' ? (
+            <>
+              {/* Row 1: Milk Carton at (20, 15) */}
+              <g
+                transform="translate(20, 15) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <rect x="6" y="8" width="16" height="20" rx="2" />
+                <path d="M9 8 L9 3 L19 3 L19 8" />
+                <line x1="6" y1="15" x2="22" y2="15" />
+              </g>
+
+              {/* Row 1: Fresh Apple at (75, 15) */}
+              <g
+                transform="translate(75, 15) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <circle cx="14" cy="15" r="9" />
+                <path d="M14 6 Q16 2 19 3" />
+                <path d="M14 6 Q10 2 11 0" />
+              </g>
+
+              {/* Row 2: Grocery Bag at (45, 45) */}
+              <g
+                transform="translate(45, 45) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <rect x="5" y="9" width="18" height="17" rx="2" />
+                <path d="M9 9 C9 4 19 4 19 9" />
+                <line x1="9" y1="15" x2="19" y2="15" />
+              </g>
+
+              {/* Row 2: Carrot at (100, 45) */}
+              <g
+                transform="translate(100, 45) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <path d="M7 8 Q14 26 14 26 Q14 26 21 8 Z" />
+                <path d="M11 8 Q14 3 13 0 M17 8 Q14 3 15 0" />
+              </g>
+
+              {/* Row 3: Bread Loaf at (20, 75) */}
+              <g
+                transform="translate(20, 75) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <ellipse cx="14" cy="14" rx="13" ry="7" />
+                <path d="M8 11 L11 17 M14 10 L17 17 M20 11 L23 17" />
+              </g>
+
+              {/* Row 3: Beverage Can at (75, 75) */}
+              <g
+                transform="translate(75, 75) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <rect x="7" y="5" width="14" height="20" rx="3" />
+                <ellipse cx="14" cy="5" rx="7" ry="2" />
+                <ellipse cx="14" cy="25" rx="7" ry="2" />
+              </g>
+            </>
+          ) : (
+            <>
+              {/* Row 1: Capsule Pill at (20, 15) */}
+              <g
+                transform="translate(20, 15) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <rect x="4" y="6" width="20" height="12" rx="6" transform="rotate(-30 14 12)" />
+                <line x1="14" y1="6" x2="14" y2="18" transform="rotate(-30 14 12)" />
+              </g>
+
+              {/* Row 1: Medicine Bottle at (75, 15) */}
+              <g
+                transform="translate(75, 15) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <rect x="7" y="8" width="14" height="18" rx="3" />
+                <rect x="10" y="3" width="8" height="5" rx="1" />
+                <line x1="14" y1="12" x2="14" y2="20" />
+                <line x1="10" y1="16" x2="18" y2="16" />
+              </g>
+
+              {/* Row 2: First Aid Cross at (45, 45) */}
+              <g
+                transform="translate(45, 45) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <rect x="4" y="6" width="20" height="18" rx="3" />
+                <path d="M9 6 L9 3 L19 3 L19 6" />
+                <line x1="14" y1="11" x2="14" y2="19" />
+                <line x1="10" y1="15" x2="18" y2="15" />
+              </g>
+
+              {/* Row 2: Thermometer at (100, 45) */}
+              <g
+                transform="translate(100, 45) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <rect x="11" y="2" width="6" height="18" rx="3" />
+                <circle cx="14" cy="21" r="4.5" />
+                <line x1="14" y1="8" x2="14" y2="18" />
+              </g>
+
+              {/* Row 3: Heartbeat Pulse at (20, 75) */}
+              <g
+                transform="translate(20, 75) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <path d="M2 14 L7 14 L10 7 L14 21 L17 11 L20 14 L25 14" />
+              </g>
+
+              {/* Row 3: Syringe / Dropper at (75, 75) */}
+              <g
+                transform="translate(75, 75) scale(0.55)"
+                stroke={strokeColor}
+                strokeWidth="1.7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={strokeOpacity}
+              >
+                <rect x="8" y="6" width="8" height="16" rx="1" transform="rotate(45 12 14)" />
+                <line x1="12" y1="2" x2="12" y2="6" transform="rotate(45 12 14)" />
+                <line x1="12" y1="22" x2="12" y2="26" transform="rotate(45 12 14)" />
+              </g>
+            </>
+          )}
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#${patternId})`} />
+    </svg>
+  );
+};
 
 const CommunityFooterWatermark = ({ 
   activeCategory = 'food',
@@ -891,7 +1210,7 @@ export default function App() {
           cta: 'SHOP FRESH',
           image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=320&h=220&fit=crop',
           textColor: '#022C22',
-          btnBg: '#022C22',
+          btnBg: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
           btnColor: '#FFFFFF'
         },
         {
@@ -913,8 +1232,8 @@ export default function App() {
           cta: 'EXPLORE',
           image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=320&h=220&fit=crop',
           textColor: '#FFFFFF',
-          btnBg: '#FFFFFF',
-          btnColor: '#047857'
+          btnBg: 'linear-gradient(180deg, #FEF08A 0%, #FACC15 100%)',
+          btnColor: '#022C22'
         },
         {
           id: 'spec_groc_4',
@@ -924,7 +1243,7 @@ export default function App() {
           cta: 'GRAB DEALS',
           image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=320&h=220&fit=crop',
           textColor: '#FFFFFF',
-          btnBg: '#FFFFFF',
+          btnBg: 'linear-gradient(135deg, #6EE7B7 0%, #34D399 100%)',
           btnColor: '#022C22'
         },
         {
@@ -935,21 +1254,19 @@ export default function App() {
           cta: 'VIEW SNACKS',
           image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=320&h=220&fit=crop',
           textColor: '#022C22',
-          btnBg: '#022C22',
+          btnBg: '#064E3B',
           btnColor: '#FFFFFF'
         },
         {
           id: 'spec_groc_6',
           title: 'Household & Cleaning',
           subtitle: 'Up to 50% OFF Top Hygiene Brands',
-          bg: '#FFFFFF',
+          bg: 'linear-gradient(135deg, #047857 0%, #064E3B 100%)',
           cta: 'STOCK UP',
           image: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=320&h=220&fit=crop',
-          textColor: '#022C22',
-          btnBg: '#022C22',
-          btnColor: '#FFFFFF',
-          isAnimatedLoop: true,
-          loopDarkColor: '#022C22'
+          textColor: '#FFFFFF',
+          btnBg: 'linear-gradient(180deg, #FEF3C7 0%, #FDE68A 100%)',
+          btnColor: '#064E3B'
         }
       ];
     }
@@ -963,7 +1280,7 @@ export default function App() {
           cta: 'ORDER MEDS',
           image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=320&h=220&fit=crop',
           textColor: '#172554',
-          btnBg: '#172554',
+          btnBg: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
           btnColor: '#FFFFFF'
         },
         {
@@ -974,7 +1291,7 @@ export default function App() {
           cta: 'EXPLORE',
           image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=320&h=220&fit=crop',
           textColor: '#172554',
-          btnBg: '#172554',
+          btnBg: '#0F172A',
           btnColor: '#FFFFFF'
         },
         {
@@ -985,8 +1302,8 @@ export default function App() {
           cta: 'SHOP CARE',
           image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=320&h=220&fit=crop',
           textColor: '#FFFFFF',
-          btnBg: '#FFFFFF',
-          btnColor: '#1D4ED8'
+          btnBg: 'linear-gradient(180deg, #93C5FD 0%, #60A5FA 100%)',
+          btnColor: '#0F172A'
         },
         {
           id: 'spec_pharm_4',
@@ -996,8 +1313,8 @@ export default function App() {
           cta: 'VIEW BABY',
           image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=320&h=220&fit=crop',
           textColor: '#FFFFFF',
-          btnBg: '#FFFFFF',
-          btnColor: '#172554'
+          btnBg: 'linear-gradient(135deg, #38BDF8 0%, #0284C7 100%)',
+          btnColor: '#FFFFFF'
         },
         {
           id: 'spec_pharm_5',
@@ -1014,14 +1331,12 @@ export default function App() {
           id: 'spec_pharm_6',
           title: 'Senior Care & Monitors',
           subtitle: 'BP Monitors, Glucometers & Wellness Tools',
-          bg: '#FFFFFF',
+          bg: 'linear-gradient(135deg, #1E40AF 0%, #172554 100%)',
           cta: 'CARE NOW',
           image: 'https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=320&h=220&fit=crop',
-          textColor: '#172554',
-          btnBg: '#172554',
-          btnColor: '#FFFFFF',
-          isAnimatedLoop: true,
-          loopDarkColor: '#172554'
+          textColor: '#FFFFFF',
+          btnBg: 'linear-gradient(180deg, #E0E7FF 0%, #C7D2FE 100%)',
+          btnColor: '#1E1B4B'
         }
       ];
     }
@@ -1034,7 +1349,7 @@ export default function App() {
         cta: 'ORDER NOW',
         image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=320&h=220&fit=crop',
         textColor: '#7F1D1D',
-        btnBg: '#7F1D1D',
+        btnBg: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
         btnColor: '#FFFFFF'
       },
       {
@@ -1044,8 +1359,8 @@ export default function App() {
         bg: 'linear-gradient(135deg, #FCA5A5 0%, #F87171 100%)',
         cta: 'GRAB DEAL',
         image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=320&h=220&fit=crop',
-        textColor: '#7F1D1D',
-        btnBg: '#7F1D1D',
+        textColor: '#450A0A',
+        btnBg: '#0F172A',
         btnColor: '#FFFFFF'
       },
       {
@@ -1056,8 +1371,8 @@ export default function App() {
         cta: 'BUILD BUNDLE',
         image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=320&h=220&fit=crop',
         textColor: '#FFFFFF',
-        btnBg: '#FFFFFF',
-        btnColor: '#DC2626'
+        btnBg: 'linear-gradient(180deg, #FDE047 0%, #EAB308 100%)',
+        btnColor: '#1C1917'
       },
       {
         id: 'spec_food_4',
@@ -1067,8 +1382,8 @@ export default function App() {
         cta: 'ORDER LATE',
         image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=320&h=220&fit=crop',
         textColor: '#FFFFFF',
-        btnBg: '#FFFFFF',
-        btnColor: '#7F1D1D'
+        btnBg: 'linear-gradient(135deg, #FB923C 0%, #F97316 100%)',
+        btnColor: '#431407'
       },
       {
         id: 'spec_food_5',
@@ -1077,20 +1392,20 @@ export default function App() {
         bg: 'linear-gradient(135deg, #F87171 0%, #FCA5A5 100%)',
         cta: 'TREAT YOURSELF',
         image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=320&h=220&fit=crop',
-        textColor: '#7F1D1D',
-        btnBg: '#7F1D1D',
+        textColor: '#450A0A',
+        btnBg: '#450A0A',
         btnColor: '#FFFFFF'
       },
       {
         id: 'spec_food_6',
         title: 'Healthy Bowls & Salads',
         subtitle: 'Keto, Vegan & High-Protein Meal Kits',
-        bg: '#FFFFFF',
+        bg: 'linear-gradient(135deg, #BE123C 0%, #881337 100%)',
         cta: 'EAT CLEAN',
         image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=320&h=220&fit=crop',
-        btnColor: '#FFFFFF',
-        isAnimatedLoop: true,
-        loopDarkColor: '#7F1D1D'
+        textColor: '#FFFFFF',
+        btnBg: 'linear-gradient(180deg, #FEF3C7 0%, #FDE68A 100%)',
+        btnColor: '#78350F'
       }
     ];
   }, [activeCategory]);
@@ -1528,6 +1843,13 @@ export default function App() {
                           }
                         }}
                       >
+                        {/* ─── Vector Outlines Pattern on Background ─── */}
+                        <PromoCardOutlinesPattern
+                          category={activeCategory}
+                          textColor={banner.textColor || '#FFFFFF'}
+                          patternId={`pat_${banner.uniqueKey}`}
+                        />
+
                         <div className="category-promo-left">
                           <div className="category-promo-title" style={{ color: banner.textColor || '#FFFFFF' }}>
                             {banner.title}
@@ -1542,7 +1864,7 @@ export default function App() {
                               color: banner.btnColor || '#1F2937'
                             }}
                           >
-                            {banner.cta} &gt;
+                            {banner.cta}
                           </button>
                         </div>
                         <img src={banner.image} alt={banner.title} className="category-promo-img" />
@@ -1550,48 +1872,110 @@ export default function App() {
                     ))}
                   </div>
 
-                  {/* ─── FOOD MOOD & CRAVINGS ROULETTE SLOT MACHINE BANNER (FOOD ONLY) ─── */}
+                  {/* ─── FOOD MOOD & CRAVINGS ROULETTE SLOT MACHINE HERO BANNER (FOOD ONLY) ─── */}
                   {activeCategory === 'food' && (
-                    <div style={{ padding: '0 14px', margin: '4px 0 6px' }}>
-                      <div style={{ background: 'linear-gradient(135deg, #DC2626 0%, #991B1B 100%)', borderRadius: 16, padding: '12px 14px', border: '1.5px solid rgba(255, 255, 255, 0.25)', boxShadow: '0 4px 14px rgba(0,0,0,0.12)', color: '#FFFFFF', textAlign: 'center' }}>
-                        <div style={{ fontSize: 16, fontFamily: 'var(--font-caacupe)', color: '#FFE600', letterSpacing: '0.4px', lineHeight: 1.25, filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))', marginBottom: 2 }}>
-                          Can't decide what to eat? Let's make a Gamble
-                        </div>
-                        
-                        <div style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.92)', fontWeight: 600, fontFamily: "'Plus Jakarta Sans', sans-serif", lineHeight: 1.3, maxWidth: 360, margin: '0 auto 6px' }}>
-                          Spin IT &amp; let US randomly pick the perfect dish for your cravings!
-                        </div>
-
-                        <button
-                          className="quick-filter-btn"
-                          style={{
-                            width: '100%',
-                            padding: '9px',
-                            fontSize: 13.5,
-                            fontWeight: 900,
-                            background: '#FFE600',
-                            color: '#000000',
-                            border: 'none',
-                            borderRadius: 12,
-                            boxShadow: '0 4px 12px rgba(255, 230, 0, 0.4)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer'
-                          }}
-                          onClick={() => {
-                            setShowSlotMachineModal(true);
-                            triggerCravingsRoulette('spicy');
-                          }}
+                    <div style={{ padding: '0 14px', margin: '6px 0 10px' }}>
+                      <div className="gamble-hero-card">
+                        {/* ─── Vector Dish Outlines Pattern & Corner Watermarks ─── */}
+                        <svg
+                          className="gamble-dishes-pattern-bg"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 400 180"
+                          preserveAspectRatio="xMidYMid slice"
+                          aria-hidden="true"
                         >
-                          GAMBLE
-                        </button>
+                          <defs>
+                            <pattern id="gambleDishPattern" width="90" height="90" patternUnits="userSpaceOnUse">
+                              {/* Mini Burger Outline */}
+                              <g transform="translate(10, 10) scale(0.65)" stroke="#FFFFFF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.75">
+                                <path d="M4 14 C4 6 26 6 26 14 Z" />
+                                <path d="M2 17 C5 19 8 17 11 19 C14 17 17 19 20 17 C23 19 26 17 28 17" />
+                                <line x1="3" y1="21" x2="27" y2="21" />
+                                <path d="M5 24 C5 28 25 28 25 24 Z" />
+                              </g>
+                              {/* Mini Biriyani/Soup Pot Outline */}
+                              <g transform="translate(55, 10) scale(0.65)" stroke="#FFFFFF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.75">
+                                <ellipse cx="15" cy="11" rx="12" ry="3.5" />
+                                <path d="M3 11 C4 22 26 22 27 11" />
+                                <path d="M10 7 C9 3 13 1 12 -2" />
+                                <path d="M15 7 C14 3 18 1 17 -2" />
+                                <path d="M20 7 C19 3 23 1 22 -2" />
+                              </g>
+                              {/* Mini Pizza Slice Outline */}
+                              <g transform="translate(10, 55) scale(0.65)" stroke="#FFFFFF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.75">
+                                <path d="M4 6 Q15 3 26 6" />
+                                <path d="M4 6 L15 28 L26 6" />
+                                <circle cx="15" cy="12" r="2" />
+                                <circle cx="12" cy="18" r="1.5" />
+                                <circle cx="18" cy="19" r="1.5" />
+                              </g>
+                              {/* Mini Drink Cup with Straw Outline */}
+                              <g transform="translate(55, 55) scale(0.65)" stroke="#FFFFFF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.75">
+                                <path d="M6 9 L9 26 L21 26 L24 9 Z" />
+                                <path d="M4 9 L26 9" />
+                                <path d="M14 9 L17 2 L22 0.5" />
+                              </g>
+                            </pattern>
+                          </defs>
 
-                        {isRouletteSpinning && !showSlotMachineModal && (
-                          <div style={{ textAlign: 'center', padding: '8px 0 0', color: '#FFE600', fontWeight: 900 }}>
-                             Rolling the Trivandrum Cravings Gamble Slot...
+                          {/* Background Repeating Dishes Pattern */}
+                          <rect width="100%" height="100%" fill="url(#gambleDishPattern)" />
+
+                          {/* Large Left Watermark: Steaming Handi Pot with Lid Outline */}
+                          <g transform="translate(-8, 16) scale(1.35)" stroke="#FFFFFF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.9">
+                            <ellipse cx="28" cy="30" rx="22" ry="6" />
+                            <path d="M6 30 C7 54 49 54 50 30" />
+                            <path d="M2 28 Q6 28 7 32 Q6 34 2 33" />
+                            <path d="M54 28 Q50 28 49 32 Q50 34 54 33" />
+                            {/* Steam curls */}
+                            <path d="M18 22 C16 14 22 10 20 2" strokeDasharray="3 2" />
+                            <path d="M28 20 C26 12 32 8 30 0" strokeDasharray="3 2" />
+                            <path d="M38 22 C36 14 42 10 40 2" strokeDasharray="3 2" />
+                          </g>
+
+                          {/* Large Right Watermark: Gourmet Burger & Melting Cheese Outline */}
+                          <g transform="translate(325, 20) scale(1.3)" stroke="#FFFFFF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.9">
+                            <path d="M4 22 C4 8 40 8 40 22 Z" />
+                            <circle cx="16" cy="14" r="0.8" />
+                            <circle cx="24" cy="13" r="0.8" />
+                            <circle cx="28" cy="17" r="0.8" />
+                            <path d="M2 25 Q7 28 12 25 Q17 28 22 25 Q27 28 32 25 Q37 28 42 25" />
+                            <path d="M6 28 L38 28 L32 34 L26 28" />
+                            <rect x="4" y="28" width="36" height="6" rx="3" />
+                            <path d="M6 36 C6 44 38 44 38 36 Z" />
+                          </g>
+
+                        </svg>
+
+                        {/* Foreground Hero Content */}
+                        <div className="gamble-hero-content">
+                          <div className="gamble-hero-title">
+                            Can't decide what to eat? Let's make a Gamble
                           </div>
-                        )}
+                          
+                          <div className="gamble-hero-subtitle">
+                            Spin IT &amp; let US randomly pick the perfect dish for your cravings!
+                          </div>
+
+                          <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="gamble-hero-btn"
+                            onClick={() => {
+                              setShowSlotMachineModal(true);
+                              triggerCravingsRoulette('spicy');
+                            }}
+                          >
+                            <Dices size={20} strokeWidth={2.5} />
+                            <span>GAMBLE</span>
+                          </motion.button>
+
+                          {isRouletteSpinning && !showSlotMachineModal && (
+                            <div style={{ textAlign: 'center', padding: '8px 0 0', color: '#FFE600', fontWeight: 900, fontSize: 13 }}>
+                              Rolling the Trivandrum Cravings Gamble Slot...
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   )}
@@ -1660,13 +2044,13 @@ export default function App() {
                     {renderCategorizedStoreSections(filteredStores)}
                   </div>
 
-                  {/* ─── GLOBAL CUISINE EXPLORER ─── */}
-                  <div style={{ margin: '18px 0 16px', padding: '0 16px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-                      <div style={{ fontSize: 16, fontFamily: 'var(--font-title)', color: activeTheme.primary }}>
+                  {/* ─── GLOBAL CUISINE EXPLORER (High-Density, Compact) ─── */}
+                  <div style={{ margin: '12px 0 10px', padding: '0 16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+                      <div style={{ fontSize: 15, fontFamily: 'var(--font-title)', color: activeTheme.primary }}>
                         Cuisine Explorer (Trivandrum)
                       </div>
-                      <span style={{ fontSize: 12, fontWeight: 800, color: activeTheme.primary, cursor: 'pointer' }} onClick={() => setCurrentScreen('stores')}>
+                      <span style={{ fontSize: 11, fontWeight: 800, color: activeTheme.primary, cursor: 'pointer' }} onClick={() => setCurrentScreen('stores')}>
                         Explore All
                       </span>
                     </div>
@@ -1674,11 +2058,19 @@ export default function App() {
                       {CUISINE_COLLECTIONS.map((cuis) => (
                         <motion.div
                           key={cuis.id}
-                          whileHover={{ scale: 1.04, y: -3 }}
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          whileTap={{ scale: 0.98 }}
                           className="cuisine-pill-card"
                           onClick={() => setCurrentScreen('stores')}
                         >
-                          <img src={cuis.image} alt={cuis.name} className="cuisine-cover" />
+                          <img
+                            src={cuis.image}
+                            alt={cuis.name}
+                            className="cuisine-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=300&h=200&fit=crop';
+                            }}
+                          />
                           <div className="cuisine-info">
                             <div className="cuisine-title">{cuis.name}</div>
                             <div className="cuisine-tagline">{cuis.tagline}</div>
@@ -1688,34 +2080,77 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* ─── POPULAR DESSERTS & SWEET TREATS (INR) ─── */}
-                  <div style={{ padding: '0 16px', marginBottom: 24 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                      <div style={{ fontSize: 16, fontFamily: 'var(--font-title)', color: activeTheme.primary }}>
+                  {/* ─── POPULAR DESSERTS & SWEET TREATS (INR) (High-Density, Compact, Neat) ─── */}
+                  <div style={{ padding: '0 16px', marginBottom: 16 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                      <div style={{ fontSize: 15, fontFamily: 'var(--font-title)', color: activeTheme.primary }}>
                         Popular Desserts &amp; Sweet Treats
                       </div>
-                      <span className="distance-pill-badge" style={{ color: '#BE185D', borderColor: '#FBCFE8' }}>Desserts</span>
+                      <span className="distance-pill-badge" style={{ color: '#BE185D', borderColor: '#FBCFE8', fontSize: 10, padding: '2px 8px' }}>Desserts</span>
                     </div>
-                    {CRAVINGS_ITEMS.map((item) => (
-                      <motion.div
-                        key={item.id}
-                        whileHover={{ y: -4, scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="cravings-card"
-                        onClick={() => setSelectedDish(item)}
-                      >
-                        <img src={item.image} alt={item.name} className="cravings-img" />
-                        <div style={{ flex: 1 }}>
-                          <span className="cravings-badge-pink">{item.badge}</span>
-                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 15, color: activeTheme.primary }}>{item.name}</div>
-                          <div style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '2px 0 6px' }}>{item.desc}</div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontSize: 11, color: '#BE185D', fontWeight: 800 }}>Hot Sweet Craving</span>
-                            <span style={{ fontWeight: 900, color: '#BE185D', fontSize: 16 }}>₹{item.price}</span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      {CRAVINGS_ITEMS.map((item) => {
+                        const qty = getItemQty(item.id);
+                        return (
+                          <motion.div
+                            key={item.id}
+                            whileHover={{ y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="cravings-card"
+                            onClick={() => setSelectedDish(item)}
+                          >
+                            <div className="cravings-img-wrap">
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                className="cravings-img"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=300&h=300&fit=crop';
+                                }}
+                              />
+                            </div>
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                                <span className="cravings-badge-pink">{item.badge}</span>
+                                {item.storeName && (
+                                  <span style={{ fontSize: 10, color: '#64748B', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                    {item.storeName}
+                                  </span>
+                                )}
+                              </div>
+                              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13.5, color: '#0F172A', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {item.name}
+                              </div>
+                              <div style={{ fontSize: 11, color: '#64748B', margin: '2px 0 4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {item.desc}
+                              </div>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                                  <span style={{ fontWeight: 900, color: '#BE123C', fontSize: 14.5 }}>₹{item.price}</span>
+                                  <span style={{ fontSize: 10, color: '#9F1239', fontWeight: 700 }}>• Sweet Treat</span>
+                                </div>
+                                <div onClick={(e) => e.stopPropagation()}>
+                                  {qty === 0 ? (
+                                    <button
+                                      className="cravings-add-btn"
+                                      onClick={() => updateItemQty(item, 1)}
+                                    >
+                                      ADD +
+                                    </button>
+                                  ) : (
+                                    <div className="cravings-counter-pill">
+                                      <button className="cravings-counter-btn" onClick={() => updateItemQty(item, -1)}><Minus size={12} /></button>
+                                      <span className="cravings-counter-qty">{qty}</span>
+                                      <button className="cravings-counter-btn" onClick={() => updateItemQty(item, 1)}><Plus size={12} /></button>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </>
               )}
