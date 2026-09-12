@@ -901,20 +901,53 @@ const TopEcosystemOutlinesBackground = ({
             4
           </text>
 
-          {/* Delivery Rider on the Scooter */}
-          {/* Full-face helmet with visor */}
-          <circle cx="158" cy="18" r="6.8" strokeWidth="1.8" />
-          <path d="M 161 16 C 167 17 167 21 161 21" strokeWidth="1.4" />
+          {/* Anatomical Volumetric Delivery Man on the Scooter */}
+          {/* Full-face aerodynamic motorcycle helmet with visor & chin guard */}
+          <path
+            d="M 148 16 C 148 8 165 7 167 16 C 167 21 163 24 156 24 C 150 24 148 20 148 16 Z"
+            strokeWidth="1.8"
+          />
+          {/* Aerodynamic helmet visor */}
+          <path d="M 156 12 C 165 13 165 19 157 19" strokeWidth="1.4" />
+          {/* Helmet chin strap & neck collar */}
+          <path d="M 152 24 L 151 26" strokeWidth="1.4" />
+          <path d="M 156 24 L 157 26" strokeWidth="1.4" />
 
-          {/* Rider body leaning forward in sporty posture */}
-          <path d="M 156 24 C 151 30 148 35 146 40" strokeWidth="2" />
-          <path d="M 159 24 C 163 29 166 34 168 40" strokeWidth="2" />
+          {/* Volumetric Rider Jacket (Athletic torso leaning into ride) */}
+          {/* Jacket Back line curving forward */}
+          <path d="M 149 26 C 143 30 141 35 143 40" strokeWidth="1.8" />
+          {/* Jacket Front / Chest line with muscular arch */}
+          <path d="M 157 26 C 161 29 162 34 160 40" strokeWidth="1.8" />
+          {/* Jacket bottom hem resting on saddle */}
+          <path d="M 143 40 C 149 41 155 41 160 40" strokeWidth="1.5" />
+          {/* Jacket central zipper */}
+          <line x1="154" y1="26" x2="152" y2="40" strokeWidth="1.1" strokeDasharray="2 1.5" />
 
-          {/* Arm extending forward to handlebar */}
-          <path d="M 158 27 L 167 30 L 175 24" strokeWidth="1.8" />
+          {/* Volumetric Arm reaching to handlebar (Bicep + Forearm + Gloved Hand) */}
+          {/* Upper arm (bicep sleeve) */}
+          <path d="M 156 27 L 165 30" strokeWidth="1.6" />
+          <path d="M 154 31 L 163 34" strokeWidth="1.6" />
+          {/* Forearm angled down to handlebar grip */}
+          <path d="M 165 30 L 174 24" strokeWidth="1.6" />
+          <path d="M 163 34 L 172 27" strokeWidth="1.6" />
+          {/* Wrist cuff */}
+          <line x1="172" y1="27" x2="174" y2="24" strokeWidth="1.2" />
+          {/* Gloved hand firmly gripping handlebar */}
+          <path d="M 173 23 C 176 22 177 25 174 26 Z" strokeWidth="1.4" />
 
-          {/* Leg & boot firmly on footboard */}
-          <path d="M 154 40 L 162 45 L 164 54" strokeWidth="2" />
+          {/* Volumetric Leg & Sneaker (Thigh + Knee + Calf + Riding Shoe on footboard) */}
+          {/* Thigh resting on scooter cushion */}
+          <path d="M 147 40 C 153 39 160 39 166 42" strokeWidth="1.8" />
+          <path d="M 144 42 C 150 43 157 44 164 46" strokeWidth="1.8" />
+          {/* Knee contour */}
+          <path d="M 166 42 C 168 44 167 46 164 46" strokeWidth="1.6" />
+          {/* Lower leg / Shin & Calf in trousers */}
+          <path d="M 166 44 L 164 54" strokeWidth="1.7" />
+          <path d="M 163 46 C 163 49 160 52 160 54" strokeWidth="1.7" />
+          {/* Pant leg cuff */}
+          <line x1="160" y1="54" x2="164" y2="54" strokeWidth="1.2" />
+          {/* Riding shoe / Sneaker planted flat on footboard (y: 55) */}
+          <path d="M 158 55 L 158 53 L 167 53 C 169 53 170 55 167 55 Z" strokeWidth="1.4" />
         </g>
 
         {/* ─── C. CENTER SKY (DIRECTLY ABOVE 4KIT LOGO) ─── */}
