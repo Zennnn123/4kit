@@ -739,7 +739,7 @@ const TopEcosystemOutlinesBackground = ({
   return (
     <div className="top-ecosystem-outlines-wrapper" aria-hidden="true">
       <svg
-        viewBox="0 0 480 260"
+        viewBox="0 0 480 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMin slice"
@@ -756,6 +756,7 @@ const TopEcosystemOutlinesBackground = ({
           </linearGradient>
         </defs>
 
+        <g transform="translate(0, -14)">
         {/* ─── 1. SKY & DISTANT AMBIENCE (TOP) ─── */}
         <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.32}>
           {/* Left clouds */}
@@ -1026,6 +1027,7 @@ const TopEcosystemOutlinesBackground = ({
           <path d="M 462 60 Q 478 50 486 58" strokeWidth="1.8" />
           <path d="M 430 52 L 426 58 M 438 51 L 435 57 M 446 52 L 444 58" strokeWidth="1.2" />
           <path d="M 432 38 L 428 44 M 440 34 L 438 41 M 448 31 L 446 38" strokeWidth="1.2" />
+        </g>
         </g>
       </svg>
     </div>
@@ -2209,7 +2211,7 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2 }}
-          style={{ width: '100%' }}
+          style={{ width: '100%', position: 'relative', zIndex: 10 }}
         >
           {/* ═════════ 1. HOME SCREEN ═════════ */}
           {currentScreen === 'home' && (
@@ -2242,13 +2244,14 @@ export default function App() {
                 })}
               </div>
 
-              {/* Search Bar + Quick Veg Toggle (Swiggy Native Style) */}
-              <div className="glovo-search-container" style={{ padding: '3px 14px 4px' }}>
+              {/* Search Bar + Quick Veg Toggle (Swiggy Native Style - Opaque Solid White) */}
+              <div className="glovo-search-container" style={{ padding: '4px 14px 4px', background: '#FFFFFF', position: 'relative', zIndex: 20 }}>
                 <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-                  <div className="glovo-search-bar" style={{ flex: 1, padding: '7px 12px' }}>
+                  <div className="glovo-search-bar" style={{ flex: 1, padding: '7px 12px', background: '#FFFFFF', position: 'relative', zIndex: 21 }}>
                     <Search size={16} color="var(--text-muted)" />
                     <input
                       className="search-input-field"
+                      style={{ background: '#FFFFFF' }}
                       placeholder={categoryPlaceholders[placeholderIndex]}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
@@ -2278,7 +2281,7 @@ export default function App() {
               </div>
 
               {/* Quick Trending Cravings Discovery Strip */}
-              <div className="trending-cravings-strip">
+              <div className="trending-cravings-strip" style={{ background: '#FFFFFF', position: 'relative', zIndex: 20 }}>
                 {(activeCategory === 'food'
                   ? ['Biriyani', 'Porotta', 'Al Faham', 'Burgers', 'Shawarma', 'Dosa', 'Falooda', 'Ice Cream']
                   : activeCategory === 'supermarket'
