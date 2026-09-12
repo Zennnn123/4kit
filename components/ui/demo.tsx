@@ -1,13 +1,15 @@
-// This is file with demos of your component
-// Each export is one usecase for your component
-
 import React, { useState } from 'react';
+import { SignIn1 } from "@/components/ui/modern-stunning-sign-in";
 import { 
   Component, 
   SpotlightFilterButton, 
   SpotlightFilter, 
   SpotlightNav 
 } from "./spotlight-button";
+
+function Demo() {
+  return <SignIn1 />;
+}
 
 const DemoOne = () => {
   return <Component />;
@@ -48,5 +50,5 @@ export const DemoFilterButton = () => {
   );
 };
 
-export { DemoOne };
-export default DemoOne;
+export { Demo, DemoOne, SignIn1 };
+export default Demo;
