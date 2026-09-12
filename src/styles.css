@@ -255,6 +255,18 @@ h1, h2, h3, h4, .title-text {
 
 
 
+/* ─── APP-WIDE SUBTLE WATERMARK OUTLINES (BARELY NOTICEABLE BESPOKE TEXTURE) ─── */
+.app-subtle-outlines-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  user-select: none;
+}
+
 /* ─── TOP APP ECOSYSTEM OUTLINES (FADING TOP-TO-BOTTOM) ─── */
 .top-ecosystem-outlines-wrapper {
   position: absolute;

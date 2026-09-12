@@ -1034,6 +1034,190 @@ const TopEcosystemOutlinesBackground = ({
   );
 };
 
+/* ─── APP-WIDE SUBTLE WATERMARK OUTLINES BACKGROUND (Very little noticeable, elegant lifestyle outlines) ─── */
+const AppSubtleOutlinesBackground = ({
+  strokeColor = '#0F172A'
+}: {
+  strokeColor?: string;
+}) => {
+  return (
+    <div className="app-subtle-outlines-layer" aria-hidden="true">
+      <svg
+        width="100%"
+        height="100%"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ width: '100%', height: '100%', display: 'block' }}
+      >
+        <defs>
+          <pattern
+            id="app_subtle_wallpaper_pattern"
+            width="160"
+            height="160"
+            patternUnits="userSpaceOnUse"
+          >
+            {/* 1. Delivery Scooter */}
+            <g
+              transform="translate(18, 15) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <circle cx="8" cy="22" r="5.5" />
+              <circle cx="28" cy="22" r="5.5" />
+              <path d="M 13 22 L 23 22" />
+              <path d="M 28 22 L 24 10 L 21 10" />
+              <path d="M 25 12 L 28 12" />
+              <path d="M 14 18 C 17 14 21 14 23 18" />
+              <rect x="5" y="10" width="10" height="9" rx="2" />
+              <line x1="10" y1="10" x2="10" y2="7" />
+              <line x1="8" y1="7" x2="12" y2="7" />
+            </g>
+
+            {/* 2. Hot Steaming Coffee / Tea Mug */}
+            <g
+              transform="translate(74, 16) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <path d="M 5 10 L 7 24 C 7 27 21 27 21 24 L 23 10 Z" />
+              <path d="M 23 13 C 27 13 27 20 23 20" />
+              <line x1="3" y1="27" x2="25" y2="27" />
+              <path d="M 9 7 C 9 4 12 3 11 0" />
+              <path d="M 14 7 C 14 4 17 3 16 0" />
+              <path d="M 19 7 C 19 4 22 3 21 0" />
+            </g>
+
+            {/* 3. Grocery Shopping Tote Bag */}
+            <g
+              transform="translate(128, 16) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <rect x="5" y="10" width="20" height="20" rx="3" />
+              <path d="M 10 10 C 10 4 20 4 20 10" />
+              <path d="M 15 17 L 15 23 M 12 20 L 18 20" strokeWidth="1.2" />
+            </g>
+
+            {/* 4. Bakery Croissant */}
+            <g
+              transform="translate(34, 68) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <path d="M 4 22 C 3 14 11 7 18 7 C 25 7 33 14 32 22 C 29 18 25 15 18 15 C 11 15 7 18 4 22 Z" />
+              <path d="M 12 11 C 13 14 13 17 12 20" />
+              <path d="M 18 7 C 18 11 18 15 18 19" />
+              <path d="M 24 11 C 23 14 23 17 24 20" />
+            </g>
+
+            {/* 5. Restaurant Cloche (Food Cover Platter) */}
+            <g
+              transform="translate(94, 68) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <circle cx="16" cy="7" r="2.5" />
+              <path d="M 5 21 C 5 12 27 12 27 21 Z" />
+              <line x1="2" y1="23" x2="30" y2="23" />
+            </g>
+
+            {/* 6. Crossed Cutlery (Fork & Spoon) */}
+            <g
+              transform="translate(138, 72) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <path d="M 4 5 L 8 13 L 18 26" />
+              <path d="M 4 5 L 6 9 M 8 5 L 8 9 M 12 5 L 10 9" />
+              <path d="M 18 5 C 15 5 14 9 17 12 L 5 26" />
+            </g>
+
+            {/* 7. Health Capsule & Plus */}
+            <g
+              transform="translate(18, 120) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <rect x="4" y="6" width="22" height="12" rx="6" transform="rotate(-35 15 12)" />
+              <line x1="15" y1="6" x2="15" y2="18" transform="rotate(-35 15 12)" />
+              <path d="M 24 20 L 24 26 M 21 23 L 27 23" strokeWidth="1.2" />
+            </g>
+
+            {/* 8. Fresh Organic Apple */}
+            <g
+              transform="translate(74, 122) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <path d="M 14 7 C 9 7 5 11 5 17 C 5 24 10 27 14 27 C 18 27 23 24 23 17 C 23 11 19 7 14 7 Z" />
+              <path d="M 14 7 C 14 3 17 2 17 2" />
+              <path d="M 16 3 C 19 3 20 5 18 6" />
+            </g>
+
+            {/* 9. Store Awning / Kirana Shop */}
+            <g
+              transform="translate(126, 122) scale(0.65)"
+              stroke={strokeColor}
+              strokeWidth="1.4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={0.045}
+            >
+              <path d="M 4 10 L 26 10 L 28 16 C 24 19 22 19 19 16 C 16 19 14 19 11 16 C 8 19 6 19 2 16 Z" />
+              <line x1="11" y1="10" x2="11" y2="16" strokeWidth="1" />
+              <line x1="19" y1="10" x2="19" y2="16" strokeWidth="1" />
+              <line x1="5" y1="16" x2="5" y2="27" />
+              <line x1="25" y1="16" x2="25" y2="27" />
+              <rect x="11" y="19" width="8" height="8" rx="1" />
+              <line x1="3" y1="27" x2="27" y2="27" />
+            </g>
+
+            {/* 10. Subtle Micro Sparks */}
+            <path d="M 58 46 L 58 50 M 56 48 L 60 48" stroke={strokeColor} strokeWidth="1" opacity={0.035} />
+            <path d="M 116 48 L 116 52 M 114 50 L 118 50" stroke={strokeColor} strokeWidth="1" opacity={0.035} />
+            <path d="M 15 95 L 15 99 M 13 97 L 17 97" stroke={strokeColor} strokeWidth="1" opacity={0.035} />
+            <path d="M 72 96 L 72 100 M 70 98 L 74 98" stroke={strokeColor} strokeWidth="1" opacity={0.035} />
+            <path d="M 152 142 L 152 146 M 150 144 L 154 144" stroke={strokeColor} strokeWidth="1" opacity={0.035} />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#app_subtle_wallpaper_pattern)" />
+      </svg>
+    </div>
+  );
+};
+
 const CommunityFooterWatermark = ({ 
   activeCategory = 'food',
   primaryColor = '#DC2626' 
@@ -2135,6 +2319,9 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ─── APP-WIDE SUBTLE WATERMARK OUTLINES (Very little noticeable, elegant background pattern) ─── */}
+      <AppSubtleOutlinesBackground strokeColor={activeTheme.primary} />
 
       {/* ─── TOP APP ECOSYSTEM OUTLINES BACKGROUND (Fading from top to search bar) ─── */}
       <TopEcosystemOutlinesBackground primaryColor={activeTheme.primary} />
