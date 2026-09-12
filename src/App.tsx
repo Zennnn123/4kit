@@ -163,7 +163,7 @@ const PromoCardOutlinesPattern = ({
 }) => {
   const isWhite = textColor === '#FFFFFF';
   const strokeColor = isWhite ? '#FFFFFF' : textColor;
-  const strokeOpacity = isWhite ? 0.18 : 0.13;
+  const strokeOpacity = isWhite ? 0.25 : 0.22;
 
   return (
     <svg
@@ -3276,7 +3276,7 @@ export default function App() {
             onClick={() => setCurrentScreen('cart')}
           >
             {/* Animated Outlined Dishes/Groceries/Pharmacy (Lighter on left, darker on right, slow left-to-right drift) */}
-            <ViewOrderDishesPattern category={cartCategory} />
+            <ViewOrderDishesPattern category={activeCategory} />
 
             <div className="cart-left-wrap">
               <div className="cart-badge-yellow" style={{ color: activeTheme.primary }}>
