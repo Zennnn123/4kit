@@ -2178,9 +2178,11 @@ h1, h2, h3, h4, .title-text {
 .gamble-hero-btn {
   width: 100%;
   height: 46px;
-  font-size: 14.5px;
-  font-weight: 900;
-  letter-spacing: 1.2px;
+  font-family: 'Righteous', 'Archivo Black', cursive, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
   background: linear-gradient(180deg, #FFF566 0%, #FFE600 50%, #F59E0B 100%);
   color: #1A0505;
   border: none;
@@ -2189,11 +2191,15 @@ h1, h2, h3, h4, .title-text {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   cursor: pointer;
   outline: none;
   user-select: none;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.gamble-hero-btn span {
+  font-family: 'Righteous', 'Archivo Black', cursive, sans-serif;
+  letter-spacing: 2.8px;
 }
 
 .gamble-hero-btn:active {

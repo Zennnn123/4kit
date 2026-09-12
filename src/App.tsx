@@ -2806,7 +2806,6 @@ export default function App() {
                               triggerCravingsRoulette('spicy');
                             }}
                           >
-                            <Dices size={20} strokeWidth={2.5} />
                             <span>GAMBLE</span>
                           </motion.button>
 
@@ -4085,7 +4084,9 @@ export default function App() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 10,
-                    cursor: isRouletteSpinning ? 'not-allowed' : 'pointer'
+                    cursor: isRouletteSpinning ? 'not-allowed' : 'pointer',
+                    fontFamily: "'Righteous', 'Archivo Black', cursive, sans-serif",
+                    letterSpacing: '2px'
                   }}
                   disabled={isRouletteSpinning}
                   onClick={() => triggerCravingsRoulette(rouletteMood || 'spicy')}
