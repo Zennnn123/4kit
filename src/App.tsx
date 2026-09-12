@@ -4085,8 +4085,9 @@ export default function App() {
                     justifyContent: 'center',
                     gap: 10,
                     cursor: isRouletteSpinning ? 'not-allowed' : 'pointer',
-                    fontFamily: "'Righteous', 'Archivo Black', cursive, sans-serif",
-                    letterSpacing: '2px'
+                    fontFamily: "'Faster One', cursive, sans-serif",
+                    letterSpacing: '2.5px',
+                    fontSize: 19
                   }}
                   disabled={isRouletteSpinning}
                   onClick={() => triggerCravingsRoulette(rouletteMood || 'spicy')}
