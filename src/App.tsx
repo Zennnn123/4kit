@@ -470,6 +470,198 @@ const PromoCardOutlinesPattern = ({
   );
 };
 
+/* ─── 4KIT FLOATING VIEW ORDER DISHES OUTLINE TILE & CONTINUOUS LEFT-TO-RIGHT DRIFT ─── */
+const ViewOrderDishesTile = ({ strokeColor }: { strokeColor: string }) => {
+  return (
+    <svg
+      width="260"
+      height="52"
+      viewBox="0 0 260 52"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ flexShrink: 0, display: 'block' }}
+      aria-hidden="true"
+    >
+      {/* 1. Burger outline at x: 14, y: 10 */}
+      <g
+        transform="translate(14, 10) scale(0.65)"
+        stroke={strokeColor}
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M4 11 C4 4 24 4 24 11 Z" />
+        <path d="M3 14 C6 16 9 14 12 16 C15 14 18 16 21 14 C23 15 25 14 25 14" />
+        <line x1="4" y1="18" x2="24" y2="18" />
+        <path d="M5 21 C5 25 23 25 23 21 Z" />
+      </g>
+
+      {/* 2. Pizza Slice outline at x: 58, y: 24 */}
+      <g
+        transform="translate(58, 24) scale(0.62)"
+        stroke={strokeColor}
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M4 5 Q14 2 24 5" />
+        <path d="M4 5 L14 25 L24 5" />
+        <circle cx="14" cy="11" r="1.8" />
+        <circle cx="11" cy="17" r="1.3" />
+        <circle cx="17" cy="18" r="1.3" />
+      </g>
+
+      {/* 3. Steaming Dum Biriyani Bowl at x: 104, y: 8 */}
+      <g
+        transform="translate(104, 8) scale(0.62)"
+        stroke={strokeColor}
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <ellipse cx="14" cy="12" rx="11" ry="3.5" />
+        <path d="M3 12 C4 23 24 23 25 12" />
+        <path d="M9 7 C8 4 12 2 11 0" />
+        <path d="M14 7 C13 4 17 2 16 0" />
+        <path d="M19 7 C18 4 22 2 21 0" />
+      </g>
+
+      {/* 4. Cold Drink Cup with Straw at x: 148, y: 23 */}
+      <g
+        transform="translate(148, 23) scale(0.62)"
+        stroke={strokeColor}
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M5 9 L8 25 L18 25 L21 9 Z" />
+        <line x1="3" y1="9" x2="23" y2="9" />
+        <path d="M13 9 L15 2 L20 1" />
+        <path d="M7 16 Q13 18 19 16" />
+      </g>
+
+      {/* 5. Crossed Cutlery at x: 192, y: 9 */}
+      <g
+        transform="translate(192, 9) scale(0.62)"
+        stroke={strokeColor}
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M6 3 L6 10 M10 3 L10 10 M8 3 L8 10 M5 10 C5 13 11 13 11 10 L8 23" />
+        <path d="M19 3 C22 5 22 10 19 12 L19 23" />
+      </g>
+
+      {/* 6. Taco / Roll at x: 232, y: 24 */}
+      <g
+        transform="translate(232, 24) scale(0.62)"
+        stroke={strokeColor}
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3 18 C3 7 23 7 23 18" />
+        <path d="M6 15 C9 12 17 12 20 15" />
+        <line x1="3" y1="18" x2="23" y2="18" />
+      </g>
+    </svg>
+  );
+};
+
+const ViewOrderDishesPattern = () => {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        borderRadius: 'inherit',
+        pointerEvents: 'none',
+        zIndex: 1
+      }}
+      aria-hidden="true"
+    >
+      {/* Light Side (Left): Crisp translucent white dish outlines */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0.36) 0%, rgba(0,0,0,0.26) 38%, rgba(0,0,0,0.06) 65%, transparent 88%)',
+          maskImage: 'linear-gradient(to right, rgba(0,0,0,0.36) 0%, rgba(0,0,0,0.26) 38%, rgba(0,0,0,0.06) 65%, transparent 88%)',
+          pointerEvents: 'none'
+        }}
+      >
+        <motion.div
+          style={{
+            display: 'flex',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: 'auto'
+          }}
+          animate={{ x: [-260, 0] }}
+          transition={{
+            duration: 26,
+            ease: 'linear',
+            repeat: Infinity
+          }}
+        >
+          <ViewOrderDishesTile strokeColor="#FFFFFF" />
+          <ViewOrderDishesTile strokeColor="#FFFFFF" />
+          <ViewOrderDishesTile strokeColor="#FFFFFF" />
+          <ViewOrderDishesTile strokeColor="#FFFFFF" />
+        </motion.div>
+      </div>
+
+      {/* Dark Side (Right): Deep crimson/burgundy dark dish outlines */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 18%, rgba(0,0,0,0.12) 48%, rgba(0,0,0,0.46) 75%, rgba(0,0,0,0.68) 100%)',
+          maskImage: 'linear-gradient(to right, transparent 18%, rgba(0,0,0,0.12) 48%, rgba(0,0,0,0.46) 75%, rgba(0,0,0,0.68) 100%)',
+          pointerEvents: 'none'
+        }}
+      >
+        <motion.div
+          style={{
+            display: 'flex',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: 'auto'
+          }}
+          animate={{ x: [-260, 0] }}
+          transition={{
+            duration: 26,
+            ease: 'linear',
+            repeat: Infinity
+          }}
+        >
+          <ViewOrderDishesTile strokeColor="#260404" />
+          <ViewOrderDishesTile strokeColor="#260404" />
+          <ViewOrderDishesTile strokeColor="#260404" />
+          <ViewOrderDishesTile strokeColor="#260404" />
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
 const CommunityFooterWatermark = ({ 
   activeCategory = 'food',
   primaryColor = '#DC2626' 
@@ -2994,6 +3186,9 @@ export default function App() {
             style={{ background: activeTheme.gradient, boxShadow: activeTheme.glow }}
             onClick={() => setCurrentScreen('cart')}
           >
+            {/* Animated Outlined Dishes (Lighter on left, darker on right, slow left-to-right drift) */}
+            <ViewOrderDishesPattern />
+
             <div className="cart-left-wrap">
               <div className="cart-badge-yellow" style={{ color: activeTheme.primary }}>
                 {totalCartCount}

@@ -1045,6 +1045,7 @@ h1, h2, h3, h4, .title-text {
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
 }
 
 .glovo-cart-float-bar:hover {
@@ -1083,6 +1084,8 @@ h1, h2, h3, h4, .title-text {
   display: flex;
   align-items: center;
   gap: 12px;
+  position: relative;
+  z-index: 2;
 }
 
 .cart-badge-yellow {
@@ -1117,6 +1120,8 @@ h1, h2, h3, h4, .title-text {
   display: flex;
   align-items: center;
   gap: 6px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ─── Item Customization Drawer (21st.dev Modal Template) ─── */
