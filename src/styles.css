@@ -255,14 +255,29 @@ h1, h2, h3, h4, .title-text {
 
 
 
-/* ─── 4KIT HERO LANDING SECTION (PURE WHITE CLEAN) ─── */
+/* ─── TOP APP ECOSYSTEM OUTLINES (FADING TOP-TO-BOTTOM) ─── */
+.top-ecosystem-outlines-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 290px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 35%, rgba(0,0,0,0.38) 68%, rgba(0,0,0,0.08) 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 35%, rgba(0,0,0,0.38) 68%, rgba(0,0,0,0.08) 88%, transparent 100%);
+  transition: opacity 0.4s ease;
+}
+
+/* ─── 4KIT HERO LANDING SECTION (TRANSPARENT FOR OUTLINE ECOSYSTEM) ─── */
 .kit4-hero-header {
-  background: #FFFFFF;
+  background: transparent;
   padding: 6px 14px 6px;
-  border-bottom: 1px solid #F3F4F6;
+  border-bottom: 1px solid rgba(243, 244, 246, 0.65);
   color: #111827;
   position: relative;
-  overflow: hidden;
+  z-index: 1;
 }
 
 .ios-status-bar {
@@ -340,12 +355,17 @@ h1, h2, h3, h4, .title-text {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #F9FAFB;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 5px 12px;
   border-radius: var(--radius-pill);
   border: 1px solid #E5E7EB;
   cursor: pointer;
   transition: all 0.25s ease;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .header-location-box:hover {

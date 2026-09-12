@@ -730,6 +730,308 @@ const ViewOrderDishesPattern = ({ category = 'food' }: { category?: string }) =>
   );
 };
 
+/* ─── TOP APP ECOSYSTEM OUTLINES BACKGROUND (Delivery Rider on Scooter, Shops & Customers) ─── */
+const TopEcosystemOutlinesBackground = ({
+  primaryColor = '#DC2626'
+}: {
+  primaryColor?: string;
+}) => {
+  return (
+    <div className="top-ecosystem-outlines-wrapper" aria-hidden="true">
+      <svg
+        viewBox="0 0 480 260"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMin slice"
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'block'
+        }}
+      >
+        <defs>
+          <linearGradient id="ecosystemGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={primaryColor} stopOpacity="0.38" />
+            <stop offset="100%" stopColor={primaryColor} stopOpacity="0.22" />
+          </linearGradient>
+        </defs>
+
+        {/* ─── 1. SKY & DISTANT AMBIENCE (TOP) ─── */}
+        <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.32}>
+          {/* Left clouds */}
+          <path d="M 32 24 C 32 17 44 14 50 18 C 56 12 68 14 70 22 C 76 22 79 26 77 30 C 75 34 35 34 32 24 Z" strokeWidth="1.3" />
+          {/* Right clouds */}
+          <path d="M 382 22 C 382 15 394 12 400 16 C 406 10 418 13 420 20 C 425 20 428 24 426 28 C 424 32 385 32 382 22 Z" strokeWidth="1.3" />
+          {/* Swift soaring birds */}
+          <path d="M 120 18 Q 124 13 128 17 Q 132 13 136 17" strokeWidth="1.4" />
+          <path d="M 132 25 Q 135 21 138 24 Q 141 21 144 24" strokeWidth="1.2" />
+          <path d="M 328 19 Q 332 14 336 18 Q 340 14 344 18" strokeWidth="1.4" />
+          <path d="M 342 26 Q 345 22 348 25 Q 351 22 354 25" strokeWidth="1.2" />
+        </g>
+
+        {/* ─── 2. CONNECTING DELIVERY FLIGHT ROUTE & GPS PIN ─── */}
+        <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round">
+          {/* Dashed trajectory linking merchant -> rider -> customer */}
+          <path
+            d="M 95 62 Q 235 15 365 65"
+            strokeDasharray="4 4"
+            strokeWidth="1.4"
+            opacity={0.3}
+          />
+          {/* Floating GPS Location Pin marker */}
+          <g opacity={0.45}>
+            <path
+              d="M 235 16 C 230 16 226 20 226 25 C 226 31 235 41 235 41 C 235 41 244 31 244 25 C 244 20 240 16 235 16 Z"
+              strokeWidth="1.6"
+            />
+            <circle cx="235" cy="24" r="2.5" strokeWidth="1.4" />
+            <path
+              d="M 221 25 C 221 17 249 17 249 25"
+              strokeDasharray="2 3"
+              strokeWidth="1.1"
+              opacity={0.32}
+            />
+          </g>
+        </g>
+
+        {/* ─── 3. LOCAL SHOPS / STOREFRONTS & MERCHANT (LEFT) ─── */}
+        <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.38}>
+          {/* Store rooftop cornice */}
+          <line x1="12" y1="56" x2="142" y2="56" strokeWidth="1.8" />
+          <circle cx="16" cy="52" r="2" strokeWidth="1.4" />
+          <circle cx="138" cy="52" r="2" strokeWidth="1.4" />
+
+          {/* Store Signboard */}
+          <rect x="34" y="39" width="86" height="15" rx="3" strokeWidth="1.5" />
+          <circle cx="37" cy="42" r="0.8" strokeWidth="0.8" />
+          <circle cx="117" cy="42" r="0.8" strokeWidth="0.8" />
+          <text
+            x="77"
+            y="50"
+            fontSize="7"
+            fontWeight="900"
+            letterSpacing="0.8"
+            fill={primaryColor}
+            stroke="none"
+            textAnchor="middle"
+            opacity={0.52}
+          >
+            4KIT STORE
+          </text>
+
+          {/* Striped Storefront Awning */}
+          <path
+            d="M 10 58 L 144 58 L 146 80 C 134 88 124 88 112 80 C 100 88 90 88 78 80 C 66 88 56 88 44 80 C 32 88 22 88 10 80 Z"
+            strokeWidth="1.8"
+          />
+          <line x1="44" y1="58" x2="44" y2="80" strokeWidth="1.4" />
+          <line x1="78" y1="58" x2="78" y2="80" strokeWidth="1.4" />
+          <line x1="112" y1="58" x2="112" y2="80" strokeWidth="1.4" />
+
+          {/* Store walls */}
+          <line x1="18" y1="80" x2="18" y2="190" strokeWidth="1.8" />
+          <line x1="136" y1="80" x2="136" y2="190" strokeWidth="1.8" />
+
+          {/* Shop Display Window with fresh goods */}
+          <rect x="24" y="92" width="50" height="62" rx="4" strokeWidth="1.6" />
+          <line x1="49" y1="92" x2="49" y2="154" strokeWidth="1.2" />
+          <line x1="24" y1="123" x2="74" y2="123" strokeWidth="1.2" />
+          {/* Goods on top shelf */}
+          <rect x="29" y="106" width="7" height="13" rx="1.5" strokeWidth="1.3" />
+          <rect x="39" y="104" width="6" height="15" rx="1.5" strokeWidth="1.3" />
+          <circle cx="56" cy="113" r="4.5" strokeWidth="1.3" />
+          <circle cx="66" cy="113" r="4" strokeWidth="1.3" />
+          {/* Bread & fruits on bottom shelf */}
+          <ellipse cx="37" cy="140" rx="8" ry="4.5" strokeWidth="1.3" />
+          <circle cx="55" cy="141" r="4" strokeWidth="1.3" />
+          <circle cx="65" cy="141" r="4" strokeWidth="1.3" />
+
+          {/* Shop Entrance Door */}
+          <rect x="82" y="92" width="48" height="98" rx="3" strokeWidth="1.6" />
+          <rect x="87" y="97" width="38" height="24" rx="2" strokeWidth="1.2" />
+          <rect x="87" y="127" width="38" height="42" rx="2" strokeWidth="1.2" />
+          <line x1="120" y1="148" x2="120" y2="160" strokeWidth="2" />
+          <rect x="78" y="190" width="56" height="4" rx="2" strokeWidth="1.4" />
+
+          {/* Merchant at the entrance holding out an order */}
+          <circle cx="106" cy="115" r="5.5" strokeWidth="1.4" />
+          <path d="M 100 110 Q 106 104 112 110" strokeWidth="1.4" />
+          <path d="M 99 121 L 96 150 L 116 150 L 113 121 Z" strokeWidth="1.4" />
+          <path d="M 99 125 L 85 136" strokeWidth="1.5" />
+          {/* Order bag */}
+          <path d="M 80 136 L 90 136 L 89 151 L 81 151 Z" strokeWidth="1.4" />
+          <path d="M 83 136 Q 85 131 87 136" strokeWidth="1.2" />
+
+          {/* Produce crate outside */}
+          <rect x="8" y="166" width="20" height="14" rx="2" strokeWidth="1.3" />
+          <line x1="8" y1="173" x2="28" y2="173" strokeWidth="1.2" />
+          <path d="M 13 166 Q 15 154 18 158" strokeWidth="1.3" />
+          <path d="M 21 166 Q 23 156 25 159" strokeWidth="1.3" />
+
+          {/* Street lamp post */}
+          <line x1="148" y1="190" x2="158" y2="190" strokeWidth="1.4" />
+          <line x1="153" y1="190" x2="153" y2="72" strokeWidth="1.7" />
+          <path d="M 153 140 C 158 144 158 150 153 154" strokeWidth="1.3" />
+          <path d="M 153 82 C 166 76 166 60 148 58" strokeWidth="1.5" />
+          <path d="M 144 62 L 152 62 L 155 74 L 141 74 Z" strokeWidth="1.3" />
+          <circle cx="148" cy="68" r="2.5" strokeWidth="1.2" />
+        </g>
+
+        {/* ─── 4. FAST DELIVERY GUY ON SCOOTER (CENTER) ─── */}
+        <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.42}>
+          {/* Ground road line */}
+          <line x1="148" y1="190" x2="338" y2="190" strokeWidth="1.8" />
+          {/* Road lane dashes */}
+          <line x1="172" y1="198" x2="194" y2="198" strokeWidth="1.8" strokeDasharray="6 6" opacity={0.25} />
+          <line x1="220" y1="198" x2="242" y2="198" strokeWidth="1.8" strokeDasharray="6 6" opacity={0.25} />
+          <line x1="268" y1="198" x2="290" y2="198" strokeWidth="1.8" strokeDasharray="6 6" opacity={0.25} />
+          <line x1="314" y1="198" x2="336" y2="198" strokeWidth="1.8" strokeDasharray="6 6" opacity={0.25} />
+
+          {/* Speed & Motion trails */}
+          <line x1="142" y1="128" x2="174" y2="128" strokeWidth="1.6" strokeDasharray="6 4" opacity={0.3} />
+          <line x1="146" y1="138" x2="174" y2="138" strokeWidth="1.8" opacity={0.35} />
+          <line x1="136" y1="148" x2="172" y2="148" strokeWidth="1.6" strokeDasharray="8 4" opacity={0.3} />
+          <line x1="150" y1="162" x2="176" y2="162" strokeWidth="1.6" opacity={0.35} />
+          <path d="M 178 176 Q 173 171 178 167 Q 173 163 169 167" strokeWidth="1.2" opacity={0.25} />
+
+          {/* Rear Wheel */}
+          <circle cx="198" cy="176" r="14" strokeWidth="2.2" />
+          <circle cx="198" cy="176" r="6" strokeWidth="1.4" />
+          <circle cx="198" cy="176" r="1.5" strokeWidth="1.5" />
+
+          {/* Front Wheel */}
+          <circle cx="282" cy="176" r="14" strokeWidth="2.2" />
+          <circle cx="282" cy="176" r="6" strokeWidth="1.4" />
+          <circle cx="282" cy="176" r="1.5" strokeWidth="1.5" />
+
+          {/* Scooter Chassis & Floorboard */}
+          <line x1="212" y1="176" x2="260" y2="176" strokeWidth="2.4" />
+          <path d="M 184 172 C 184 158 208 156 214 168" strokeWidth="1.8" />
+          <path d="M 212 168 L 212 152 C 220 142 240 142 248 155 L 248 176" strokeWidth="1.8" />
+          <path d="M 214 144 C 226 141 242 143 248 147" strokeWidth="2.2" />
+
+          {/* Steering column, fork & handlebars */}
+          <path d="M 282 176 L 270 128 L 262 128" strokeWidth="2.2" />
+          <path d="M 258 126 L 268 128 L 264 122" strokeWidth="2" />
+
+          {/* Aerodynamic headlight & illumination beam */}
+          <path d="M 272 134 L 280 133 L 278 142 L 270 142 Z" strokeWidth="1.6" />
+          <line x1="286" y1="133" x2="302" y2="130" strokeWidth="1.3" opacity={0.3} />
+          <line x1="288" y1="138" x2="308" y2="138" strokeWidth="1.3" opacity={0.35} />
+          <line x1="286" y1="143" x2="302" y2="147" strokeWidth="1.3" opacity={0.3} />
+
+          {/* Delivery Box mounted on rear carrier */}
+          <rect x="180" y="120" width="30" height="28" rx="4" strokeWidth="2" />
+          <line x1="180" y1="127" x2="210" y2="127" strokeWidth="1.4" />
+          <path d="M 190 120 L 190 115 L 200 115 L 200 120" strokeWidth="1.4" />
+          <text
+            x="195"
+            y="141"
+            fontSize="12"
+            fontWeight="900"
+            textAnchor="middle"
+            fill={primaryColor}
+            stroke="none"
+            opacity={0.52}
+          >
+            4
+          </text>
+
+          {/* Delivery Rider */}
+          {/* Helmet with tinted visor */}
+          <path
+            d="M 235 96 C 235 84 253 84 255 96 C 255 104 249 108 239 108 C 234 108 235 102 235 96 Z"
+            strokeWidth="1.8"
+          />
+          <path d="M 247 94 C 255 96 254 103 246 103" strokeWidth="1.5" />
+          {/* Rider jacket */}
+          <path d="M 237 108 C 232 118 226 128 220 142" strokeWidth="2" />
+          <path d="M 241 108 C 248 116 254 122 260 128" strokeWidth="2" />
+          {/* Arms holding handlebars */}
+          <path d="M 241 114 L 254 122 L 262 127" strokeWidth="1.8" />
+          {/* Leg & boot */}
+          <path d="M 236 144 L 244 154 L 254 172 L 248 174" strokeWidth="2" />
+        </g>
+
+        {/* ─── 5. CUSTOMER AT HOME DOORSTEP & WELCOMING GREETING (RIGHT) ─── */}
+        <g stroke={primaryColor} strokeLinecap="round" strokeLinejoin="round" opacity={0.38}>
+          {/* Pavement and grass */}
+          <line x1="338" y1="190" x2="476" y2="190" strokeWidth="1.8" />
+          <path d="M 340 190 L 343 184 L 346 190" strokeWidth="1.3" />
+          <path d="M 348 190 L 351 185 L 354 190" strokeWidth="1.3" />
+
+          {/* Customer House Roof (Gabled Kerala roof) */}
+          <path d="M 346 102 L 400 58 L 454 102" strokeWidth="2.2" />
+          <line x1="400" y1="58" x2="400" y2="52" strokeWidth="1.8" />
+          <circle cx="400" cy="51" r="2" strokeWidth="1.4" />
+          <line x1="342" y1="104" x2="458" y2="104" strokeWidth="1.6" />
+
+          {/* Chimney & gentle smoke puff */}
+          <path d="M 428 78 L 428 58 L 439 58 L 439 88" strokeWidth="1.6" />
+          <path d="M 433 54 Q 436 46 442 48 Q 446 40 440 34" strokeWidth="1.3" strokeDasharray="3 3" opacity={0.3} />
+
+          {/* House walls */}
+          <line x1="352" y1="104" x2="352" y2="190" strokeWidth="1.8" />
+          <line x1="448" y1="104" x2="448" y2="190" strokeWidth="1.8" />
+
+          {/* Upper circular attic window */}
+          <circle cx="400" cy="82" r="11" strokeWidth="1.6" />
+          <line x1="400" y1="71" x2="400" y2="93" strokeWidth="1.2" />
+          <line x1="389" y1="82" x2="411" y2="82" strokeWidth="1.2" />
+
+          {/* Front Door & Steps */}
+          <rect x="364" y="118" width="40" height="68" rx="3" strokeWidth="1.7" />
+          <rect x="370" y="124" width="28" height="24" rx="2" strokeWidth="1.3" />
+          <circle cx="372" cy="155" r="2.2" strokeWidth="1.4" />
+          <rect x="358" y="186" width="52" height="4" rx="2" strokeWidth="1.4" />
+          <rect x="354" y="190" width="60" height="4" rx="2" strokeWidth="1.4" />
+
+          {/* Porch wall lantern */}
+          <path d="M 408 124 L 413 124 L 415 132 L 406 132 Z" strokeWidth="1.3" />
+          <line x1="410" y1="120" x2="410" y2="124" strokeWidth="1.3" />
+
+          {/* Picture Window with Flower Planter Box */}
+          <rect x="410" y="136" width="30" height="32" rx="3" strokeWidth="1.5" />
+          <path d="M 410 142 Q 418 148 418 166" strokeWidth="1.2" />
+          <rect x="408" y="168" width="34" height="8" rx="2" strokeWidth="1.4" />
+          <circle cx="414" cy="166" r="2.5" strokeWidth="1.2" />
+          <circle cx="425" cy="165" r="3" strokeWidth="1.2" />
+          <circle cx="436" cy="166" r="2.5" strokeWidth="1.2" />
+
+          {/* Customer standing on porch step waving */}
+          <circle cx="380" cy="130" r="5.5" strokeWidth="1.5" />
+          <path d="M 374 128 C 374 122 386 122 386 128" strokeWidth="1.5" />
+          <path d="M 375 136 L 385 136 L 388 165 L 372 165 Z" strokeWidth="1.6" />
+          {/* Raised arm waving */}
+          <path d="M 375 139 L 362 130 L 358 118" strokeWidth="1.8" />
+          <path d="M 358 118 C 354 115 360 110 363 114" strokeWidth="1.4" />
+          {/* Waving sparkle lines */}
+          <path d="M 352 110 Q 350 106 354 106" strokeWidth="1.3" />
+          <path d="M 362 108 Q 366 106 364 110" strokeWidth="1.3" />
+          {/* Hand with phone */}
+          <path d="M 384 140 L 390 148 L 387 154" strokeWidth="1.5" />
+          <rect x="386" y="145" width="4" height="7" rx="1" strokeWidth="1.2" />
+
+          {/* Kerala Coconut Palm Tree */}
+          <path d="M 464 190 Q 456 125 462 60" strokeWidth="2.8" />
+          <line x1="460" y1="160" x2="466" y2="162" strokeWidth="1.3" />
+          <line x1="458" y1="135" x2="464" y2="137" strokeWidth="1.3" />
+          <line x1="457" y1="110" x2="463" y2="112" strokeWidth="1.3" />
+          <line x1="458" y1="85" x2="464" y2="87" strokeWidth="1.3" />
+          {/* Palm Fronds */}
+          <path d="M 462 60 Q 438 50 418 56" strokeWidth="1.8" />
+          <path d="M 462 60 Q 435 38 420 30" strokeWidth="1.8" />
+          <path d="M 462 60 Q 452 25 448 15" strokeWidth="1.8" />
+          <path d="M 462 60 Q 476 30 484 20" strokeWidth="1.8" />
+          <path d="M 462 60 Q 478 50 486 58" strokeWidth="1.8" />
+          <path d="M 430 52 L 426 58 M 438 51 L 435 57 M 446 52 L 444 58" strokeWidth="1.2" />
+          <path d="M 432 38 L 428 44 M 440 34 L 438 41 M 448 31 L 446 38" strokeWidth="1.2" />
+        </g>
+      </svg>
+    </div>
+  );
+};
+
 const CommunityFooterWatermark = ({ 
   activeCategory = 'food',
   primaryColor = '#DC2626' 
@@ -1832,7 +2134,10 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* ─── 4KIT HERO HEADER (PURE WHITE CLEAN) ─── */}
+      {/* ─── TOP APP ECOSYSTEM OUTLINES BACKGROUND (Fading from top to search bar) ─── */}
+      <TopEcosystemOutlinesBackground primaryColor={activeTheme.primary} />
+
+      {/* ─── 4KIT HERO HEADER ─── */}
       <div className="kit4-hero-header">
         <div className="ios-status-bar">
           <span>9:41</span>
